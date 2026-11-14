@@ -1,0 +1,13 @@
+Netlist pin assertions: 34 PASS
+U1 footprint pad set: PASS (11 checked)
+U2 footprint pad set: PASS (6 checked)
+U3 footprint pad set: PASS (9 checked)
+U4 footprint pad set: PASS (3 checked)
+D1 footprint pad set: PASS (2 checked)
+J4 footprint pad set: PASS (17 checked)
+Q1 footprint pad set: PASS (3 checked)
+Q2 footprint pad set: PASS (3 checked)
+Q3 footprint pad set: PASS (3 checked)
+Q4 footprint pad set: PASS (3 checked)
+Q5 footprint pad set: PASS (3 checked)
+Q6 footprint pad set: PASS (3 checked)
