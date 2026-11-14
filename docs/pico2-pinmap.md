@@ -49,7 +49,7 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 | BQ_STAT1, BQ_STAT2 | PWR→CTRL | 充電状態 | 3.3V側プルアップ、電源ドメイン間対策 |
 | ADC_BAT, ADC_SYS, ADC_5V | PWR→CTRL | 安全な分圧後の監視信号 | **生BAT/SYS/5VをそのままADCへ送らない**。分圧回路をどちらのPCBに置くか未決定 |
 | HV_EN_REQ | CTRL→PWR→HV | HV起動要求をPWR経由でパススルーする構成案 | PWR-HVコネクタ3極(+5V/GND/EN)との整合。PWR未接続・CTRL抜去ではOFF |
-| HV_FAULT_N | HV→CTRL | OVP/PowerFaultの状態 | **現状の3極PWR-HVコネクタには入らない**。4極化または独立信号経路、もしくは観測方法変更が必要 |
+| HV_FAULT_N | HV→CTRL | OVP/PowerFaultの状態 | **PWR-HVの4極案に追加済み**。PWR経由でCTRLに通知する想定。部品型番と配線は別途検証 |
 | PWR_5V_OK | PWR→CTRL | 5Vレールの妥当性 | PWR上の比較器/PG方式が確定するまでオプション |
 - **コネクタのピン番号、極数、部品型番は未確定**。HV_FAULTを採用する場合はJST XH 3極をそのまま確定しない。電源・GNDの帰路、圧着品質、接続方向、誤挿入対策を先に確定。
 - 高圧出力HV_OUT/HV_RETURNは別系統で、低圧コネクタに混在させない。
@@ -58,6 +58,8 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 1. GPIO番号とPico基板の**物理pin番号**をKiCadに転記し、GP23/24/25/29を外部I/Oとして誤使用しない。
 2. 74AHCT125とHV5524の電源投入順・BL極性を確認し、MCUリセットでも全消灯が維持されるようにする。
 3. BQ STAT、I²CとADCの**異電源間逆給電**を確認する。3V3_PERIPHとPico 3V3(OUT)は直結禁止。
-4. PWR→HVの起動信号をPWR経由で配線するか、CTRL→HV直結にするかを基板位置から決める。3極コネクタとHV_FAULT追加要件を両立させる。
+4. PWR→HVの起動信号をPWR経由で配線するか、CTRL→HV直結にするかを基板位置から決める。4極コネクタ案(+5V/GND/EN/FAULT)と各端子の安全動作を確認する。
 5. 最低電池電圧からUSBデバッグ併用まで、SYS→外付けダイオード→Pico VSYSの電圧範囲とパワーシーケンスを確認。
 6. 合計GPIO、コネクタ極数、台座内の配線・5V電源能力、余剰GPIOのアクセス方法を設計レビュー。
+
+詳細なJ1/J2/J3/J4基板間配線案: [board-interconnects.md](board-interconnects.md)。
