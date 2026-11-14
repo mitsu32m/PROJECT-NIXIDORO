@@ -1,4 +1,6 @@
 # HV5524フェイルセーフ表示・RV-3028-C7時刻保持 — Draft v0.1
+
+**実ピン番号・TSSOP-14配線・RTC用47µF MLCCの初回比較候補:** [CTRL回路図接続ドラフト](ctrl-driver-rtc-schematic.md)。こちらが最新の具体接続案。
 Updated: 2026-11-14 JST
 Status: PROPOSED / TO_VERIFY — **未実装、未発注。高電圧出力の安全性をハードウェア/実機試験で証明するまで「安全確定」としない。**
 
