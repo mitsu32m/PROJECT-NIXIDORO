@@ -1,5 +1,8 @@
 # PWRモジュール回路図設計ノート — Draft v0.1
 
+> **2026-11-14 Rev.A電源構成の第一候補更新:** RTC・OLEDはPico 2の3V3(OUT)へ統合、アンプはSYS給電＋SHUTDOWNとし、TPS63031とI²C分離ICを削減する案を追加。**実測/発注前検証未了**。詳細：[CTRL電源ドメイン統合案](ctrl-power-domains.md)。以下に残る3V3_PERIPHや分離構成は従来案・比較対象。
+
+
 **ピン番号まで展開したKiCad転記用接続表:** [PWR Rev.A 回路図ドラフト](pwr-schematic-nets.md)（未完成・未発注）
 Updated: 2026-11-14 JST
 Status: PROPOSED / TO_VERIFY — **KiCad実配線前のブロック接続設計**。メーカー定数、熱、電池規格、充電動作、電源切替、PCBは未検証。
