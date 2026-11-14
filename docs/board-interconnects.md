@@ -8,11 +8,11 @@ Status: PROPOSED / TO_VERIFY。**接続関係と必要ネットを定義した�
 ## 接続トポロジー
 ```mermaid
 flowchart TB
- P[PWR: BQ25185 / 5V / 3.3V]
+ P[PWR: BQ25185 / 5V]
  H[HV: MAX668 / 独立OVP]
  C[CTRL: Pico 2 / HV5524]
  P <-->|J1: LV 4c +5V_HV GND HV_EN HV_FAULT_N| H
- P <-->|J2/J3: SYS_TO_MCU GND 5V_LOGIC 3V3_PERIPH STATx ADCx PGOOD EN/FAULT routing| C
+ P <-->|J2/J3: SYS GND 5V_LOGIC STATx ADCx 5V_EN EN/FAULT routing| C
  H -->|J4: HV_OUT / HV_RETURN, HV用別系統| C
 ```
 - 3**論理**モジュールのまま。PWR上でHV_ENとHV_FAULT_NをCTRL↔HV間でパススルーする方針。後でレイアウト/ノイズ上の問題があれば、信号専用のCTRL↔HV接続に変更可。
@@ -33,14 +33,16 @@ flowchart TB
 - HV_FAULT_Nは3.3VのCTRL入力プルアップを基本案とし、5V直結しない。PWR/CTRL未給電時のGPIOからの逆給電、配線断時の状態（フェイルセーフかどうか）、ノイズ耐性をレビュー。
 - ENとFAULTは**安全機能を分担**。HV_ENはソフトウェア許可、独立OVPが硬件停止を優先。ソフトウェアのみのOVPは不可。
 
-## J2 PWR ↔ CTRL：電源専用（ネット案）
+## J2 PWR ↔ CTRL：電源専用（Rev.A更新案）
 | ネット | 備考 |
 |---|---|
 | SYS_TO_MCU | BQ25185 SYS→外部ショットキー→Pico VSYSへ。USBのPico内蔵ダイオードORと併用（電圧降下・逆流・USB切替を要検証） |
 | GND_LOGIC | 電源の帰路 |
 | +5V_LOGIC | HV5524/74AHCT125など5Vロジック用。**Pico 2 VBUSには接続しない** |
-| +3V3_PERIPH | RTC/OLED等。**Pico 2 3V3(OUT)と直結しない** |
+| SYS_TO_AMP（任意） | SYS_TO_MCUと同一SYS_BUSをCTRLのアンプ負荷用に分岐する場合のピン。電流・ノイズ次第で一本化可能 |
+| GND_SIGNAL/RETURN（追加帰路） | 音声/ロジックのリターンを考慮した追加GNDピン候補 |
 - **Pico 2をUSBでデバッグする場合**、Picoの3V3と周辺3V3が異なる電源系になり得る。I²C/SPI/GPIOが電源OFFの周辺ICを経由して逆給電しない回路を設計するまで、「常時USB併用可能」としない。
+- Rev.Aは**5ピン候補：SYS_TO_MCU, SYS_TO_AMP(optional), +5V_LOGIC, GND_MAIN, GND_RETURN**。Pico 3V3(OUT)がRTC/OLEDへ給電するためPWR→CTRLに3V3_PERIPHを配線しない。
 - 4本のネットが1コネクタに収まるとは限らない。デジタル/アナログGNDのリターン、電流、シーケンスでGNDを複数ピンにする場合あり。
 
 ## J3 PWR ↔ CTRL：監視・信号専用（ネット案）
@@ -48,11 +50,12 @@ flowchart TB
 |---|---|
 | CHG_STAT1 / CHG_STAT2 | BQ25185 status。オープンドレインを3.3V系で受ける案 |
 | ADC_BAT / ADC_SYS / ADC_5V | **分圧・保護済みの測定電圧**をCTRL ADC GP26/27/28へ（生電圧を直結しない） |
-| PWR_5V_OK | 5V valid通知（比較器/PGの有無は未決定） |
+| PWR_5V_EN | GP16→TPS61023 EN、PWR側LOW既定 |
+| PWR_5V_OK | 5V valid通知（比較器/PGの有無は未決定、オプション） |
 | HV_EN_REQ | CTRLからPWR経由でJ1へ |
 | HV_FAULT_N | J1からPWR経由でCTRLへ |
-- 8信号に加えてGND基準を確保するので、**J3は9極以上が必要な可能性あり**。5V_OKなどオプションを除外/統合して、実際の極数を減らすのは可。
-- **PWR→CTRL合計12ネット（J2の4＋J3の8）に、J3の信号GNDを別途必要とする可能性**。コネクタ極数はまだ固定しない。
+- 8信号に加えてGND基準を確保するので、**Rev.Aは最低9極（8信号＋GND）。PWR_5V_OKを加えると10極**。5V_OKなどオプションを除外/統合して、実際の極数を減らすのは可。
+- **J2は5ピン候補、J3は9〜10ピン候補**。コネクタ極数はまだ固定しない。
 - JST PHは2mmピッチ、2A/100V級の**低電圧小信号**向け比較候補。XH 4極と似た形状の複数コネクタが筐体内にあるため、長さ/極数/異シリーズを選び、誤接続を防止。製造/圧着工具・個別購入価格を確認。
 
 ## HW停止の最低要件
@@ -74,3 +77,5 @@ flowchart TB
 - JST公式XH https://www.jst.com/wp-content/uploads/2025/06/eXH.pdf
 - JST公式PH https://www.jst.co.uk/productSeries.php?pid=2944
 - Microchip HV5524 https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/HV5524-32-Channel-Serial-to-Parallel-Converter-Data-Sheet-DS20006850.pdf
+
+**2026-11-14 正本扱いのRev.A統合表:** [reva-integrated-net-spec.md](reva-integrated-net-spec.md)。この文書中の従来の3V3_PERIPH記述・旧極数は比較履歴。
