@@ -28,7 +28,7 @@ Updated: 2026-11-14 (JST)
 | 08 | スモーク窓 | スモークPMMA（透過率候補 27/38/49%） | 小片3種類 | PROPOSED | A | 表示OFFの隠蔽と点灯時の可読性、反射・加工 |
 | 09 | MCU 試作用 | Seeed Studio XIAO RP2350 | 1–2 | PROPOSED | A | 3.3V入出力、ピン数、開発環境 |
 | 10 | MCU 最終基板 | STM32U073K8 | 1+予備 | PROPOSED | C | 実際に移行する必要性、パッケージ/開発負荷 |
-| 11 | RTC | Micro Crystal RV-3028-C7 | 1+予備 | PROPOSED | B | モジュールの有無、配線、バックアップ、実装容易性 |
+| 11 | RTC | **Micro Crystal RV-3028-C7 32.768kHz 1ppm-TA-QA（第一候補）** | 1+予備 | PROPOSED | B | 3.2×1.5×0.8mm、I²C、45nA typ @3V、±1ppm @25°C。DigiKey約¥487税込（価格変動、送料別）。バックアップ電源・切替回路の構成、I²C、極小8端子の実装を確認。時計モードに有用、単なるポモドーロ計測では必須ではない |
 | 12 | 高耐圧シンクドライバ | **Microchip HV5524K7-G ×1（第一候補）** | 1+予備 | PROPOSED | B | メーカー現行生産、32ch・220V推奨動作上限・5Vロジック。ネオン12+数字20で32ch（IN-12Bのコンマ不使用）。**44ピン7×7mm WQFN実装は学校のリフロー炉借用を検討中**。Mouser Japan参考単価¥1,703（変動）。[メーカー](https://www.microchip.com/en-us/product/hv5524) / [Mouser](https://www.mouser.jp/ja/ProductDetail/Microchip-Technology/HV5524K7-G) |
 | 13 | ロジック変換 | 74AHCT125（5V動作の4chバッファ） | 1+予備 | PROPOSED | B | HV5524のVIH≥0.8×VDDより3.3V直接駆動は不可。CLK/DATA/LE/BLを変換、POL固定。 |
 | 14 | 5V電源 | TPS61023など単セルから5V生成 | 1+予備 | PROPOSED | C | 各負荷の動作/停止条件、効率、電流 |
@@ -48,6 +48,13 @@ Updated: 2026-11-14 (JST)
 | 28 | 造形素材 | PETG等（試作）/最終ASA等を比較 | 適量 | PROPOSED | A/B | Bambu Lab A1での印刷適合性、耐熱・難燃性。ASAは適切な設備が必要 |
 | 29 | 透光・固定 | 拡散板、遮光材、ネジ、スペーサー、配線コネクタ | 小分け一式 | TO_VERIFY | A/B | 球体の開口と保守設計ができてからサイズ決定 |
 | 30 | PCB | 表示/ドライバ/UI/電源の複数基板案。HV5524等QFN用ステンシルも検討 | 試作数回 | TO_VERIFY | C | CAD外形、分割、熱・絶縁・実装確認、学校のリフロー炉借用可否、適切なリフロー条件と検査 |
+
+## RTC選定メモ (2026-11-14)
+- 第一候補: Micro Crystal RV-3028-C7 32.768kHz 1ppm-TA-QA。メーカー https://www.microcrystal.com/en/products/real-time-clock-rtc-modules/rv-3028-c7/ 、DigiKey https://www.digikey.jp/ja/products/detail/micro-crystal-ag/RV-3028-C7-32-768KHZ-1PPM-TA-QA/10499248
+- 25°Cで±1ppm（約2.6秒/30日相当）。45nA @3V typ、1.1–5.5V、I²C、アラーム、VBACKUP自動切替。
+- CLOCKモードと電源断後の時刻保持には利点があるが、Pomodoroの短時間計測はMCU側でも実装可能。
+- VBACKUPとバックアップ素子（スーパーキャパシタ等）を適切に組み合わせ、トリクルチャージ設定と漏れ電流を検証。バックアップの時刻保持時間は未計算。
+- 極小パッケージなのでリフロー、フットプリント確認、検査方法が必要。最終発注前に在庫再確認。
 
 ## 1Sバッテリー検討メモ（2026-11-14）
 - 第一候補: Keeppower P2150R **protected** 21700 5000mAh。メーカー: https://www.keeppower.com/product/p2150r-keeppower-21700-5000mah-protected-li-ion-rechargeable-battery-max-15a/ 。公称3.6/3.7V、約18Wh、最大φ21.6×74.5mm、70g、過充電/過放電/過電流/短絡保護あり。
