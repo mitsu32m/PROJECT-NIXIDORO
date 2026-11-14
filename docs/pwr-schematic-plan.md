@@ -1,4 +1,6 @@
 # PWRモジュール回路図設計ノート — Draft v0.1
+
+**ピン番号まで展開したKiCad転記用接続表:** [PWR Rev.A 回路図ドラフト](pwr-schematic-nets.md)（未完成・未発注）
 Updated: 2026-11-14 JST
 Status: PROPOSED / TO_VERIFY — **KiCad実配線前のブロック接続設計**。メーカー定数、熱、電池規格、充電動作、電源切替、PCBは未検証。
 
