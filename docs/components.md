@@ -49,6 +49,14 @@ Updated: 2026-11-14 (JST)
 | 29 | 透光・固定 | 拡散板、遮光材、ネジ、スペーサー、配線コネクタ | 小分け一式 | TO_VERIFY | A/B | 球体の開口と保守設計ができてからサイズ決定 |
 | 30 | PCB | 表示/ドライバ/UI/電源の複数基板案。HV5524等QFN用ステンシルも検討 | 試作数回 | TO_VERIFY | C | CAD外形、分割、熱・絶縁・実装確認、学校のリフロー炉借用可否、適切なリフロー条件と検査 |
 
+## MAX668用トランスの型番調査（2026-11-14、Rev.A前の検証候補）
+- **TTRN-060S-013-T（東京コイルエンジニアリング）**を具体的比較候補に追加。別作者によるMAX668/5V→200V級ニキシー電源の製作例で採用され、巻数比1:10.5・一次最大スイッチ電流3.2Aという値が製作例と小売表記にある。**メーカー個別枝番の確定データシートをまだ確認できていないためこれらはメーカー保証値ではない**。製作例 https://ehbtj.com/electronics/redesign-of-boost-converter-for-nixie-tube/
+- TTRN-060Sシリーズのメーカー文書に寸法・推奨ランド・ピン配置・リフロー対応があるが、公開PDF例は**別枝番 TTRN-060S-055-T**。その10.8µH、最大2.7A、1:18等を013品へ流用しないこと。シリーズPDF https://www.tokyocoil.com/wp-content/themes/tokyo_coil/pdf/ttrn/TTRN-060S.pdf
+- JLCPCB部品リストには TTRN-060S-013-T, C9900124494 が存在するが**PCBAの保管部品であり単品発送不可、在庫・価格・ロット正規性の証明でもない**。https://jlcpcb.com/partdetail/JLCPCBAssembly-TTRN_060S_013T/C9900124494
+- **元のkohacraft 2023記事のトランスと同一と確認したわけではない。** 参照記事は別系統。https://kohacraft.com/archives/202304120917.html
+- Rev.A前にメーカーに013枝番の一次インダクタンス、公差、飽和特性、DCR、漏れL、耐圧、定格温度、実際のピン配置と正規小口調達可否を確認。200–205V/10–12mA出力の成立性はMOSFET・周波数・スナバ・温度を含め未検証。**BOMへの確定採用/発注は保留**。
+- 追加比較: ADI旧資料でMAX668にSumida CMD-8LN 6313-T036 (1:9, Lp5.6µH, peak2.3A)を使った150V実例あり。ただし現行入手性・200V負荷・実装サイズは別途評価。https://www.analog.com/en/products/MAX668.html
+
 ## 低価格表示部品の調査（2026-11-14、未採用）
 - **OLED代替第一比較候補: Office-K 白色1.3インチ SH1106 / I²C / 128x64、¥1,300**（販売ページで国内在庫ありと記載）。https://store.shopping.yahoo.co.jp/officek-diga/oled-module-130.html 。Adafruit #938の128x64白と実用上近いが、SH1106/SSD1306のドライバ差とPCB寸法は要確認。AdafruitのDigiKey参考価格¥3,616.80。マルツにSH1106 1.3インチ I²C ¥1,471.81の掲載例もあり。https://po.marutsu.co.jp/RatedList.jsp?goodsClassCode1=19&goodsClassCode2=0054&goodsClassCode3=0004
 - **ネオン球低価格比較候補: aitendo NL513V65**：5本¥110税込、直径5mm×13mm、点灯開始63V〜、推奨電流0.3〜0.7mA、リード30mm。20本4袋¥440税込（送料別）。https://www.aitendo.com/product-list/1321?available=1&img=120&num=100&sort=price-desc 。対RS PRO 655-9413 (4mm/0.25mA/2袋20本¥2,416税込) で¥1,976節約だが、**寿命・長期供給・直流発光特性・ばらつき・ガラス寸法・200V電源との電流制限抵抗は未検証**。
