@@ -30,14 +30,14 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 | GP16 | 21 | PWR_5V_EN | TPS61023のENをPWRへ | 電源OFFデフォルト、PWRプルダウン |
 | GP17 | 22 | I2C_ISO_EN (option) | RTC/OLEDの異電源I2C分離 | 使わなければ予備 |
 | GP18 | 24 | PWR_3V3_EN (option) | 周辺3.3V制御 | RTCの保持電源方針決定まで予備 |
-| GP19 | 25 | SPARE | 予備 | 将来拡張 |
+| GP19 | 25 | AUDIO_AMP_EN (option) | TPA2005D1 SHUTDOWN | LOW=停止、アンプ省略時は予備 |
 | GP20 | 26 | I2C_SDA | OLED+RTC | I2C0 SDA |
 | GP21 | 27 | I2C_SCL | OLED+RTC | I2C0 SCL |
 | GP22 | 29 | SPARE | 予備1本 | 電源保持/MCUリセット拡張候補 |
 | GP26 | 31 | ADC_BAT | 電池電圧監視 | 分圧/保護/逆給電防止/セル保護との整合 |
 | GP27 | 32 | ADC_SYS | BQ25185 SYS監視 | 分圧/ノイズ/保護 |
 | GP28 | 34 | ADC_5V | 5Vブースト監視 | 分圧/逆給電防止 |
-- **既存21本+GP16の5V_ENで22本/26本を使用する方向**。GP17/GP18はオプション、GP19/GP22は予備。オプション全実装なら24本使用、予備2本。GP15の5V_OKは選択部品の有無で削減可能。
+- **既存21本+GP16の5V_ENで22本/26本を使用する方向**。GP17/GP18はオプション、GP19/GP22は予備。オプション全実装かつGP19を音声アンプに割り当てるなら25本使用、予備1本（GP22）。GP15の5V_OKは選択部品の有無で削減可能。
 - GPIOの機能割当はRP2350の利用可能ペリフェラルと重複していない。ただしPCB配置・信号品質・実装しやすさで変更可能。
 - GP26–GP28の外部ADCは3.3V範囲のピン入力定格・ADC精度を厳守。分圧器は未給電時のGPIOクランプ経由の逆給電と常時損失を防ぐ構造で設計。入力低抵抗化で常時電池消費を増やさない。
 - GP29内部のVSYS監視をADC_SYSとして流用すると、**外付けショットキー後のVSYS**でありBQ25185 SYSそのものではない。測り分けるのでGP27を確保する。
@@ -68,3 +68,5 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 詳細なJ1/J2/J3/J4基板間配線案: [board-interconnects.md](board-interconnects.md)。
 
 電源OFF時のバス保護とレベルシフタ候補の更新: [pwr-sequencing.md](pwr-sequencing.md)。HV5524 POL=HIGH/BL=LOWの全消灯案とRTCバックアップは[hv-blanking-rtc-backup.md](hv-blanking-rtc-backup.md)、**実ピン番号の接続案**は[ctrl-driver-rtc-schematic.md](ctrl-driver-rtc-schematic.md)を参照。
+
+**OLED・スイッチ・エンコーダ・通知音の接続ドラフト:** [ctrl-ui-audio-schematic.md](ctrl-ui-audio-schematic.md)。
