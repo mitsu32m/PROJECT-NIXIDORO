@@ -38,9 +38,9 @@ Updated: 2026-11-14 (JST)
 | 18 | USB-C | USB-C 5Vシンク、ESD/入力保護と適切なCC実装 | 1+予備 | PROPOSED | B | 端子実装、基板位置、必要なUSB電流 |
 | 19 | 高電圧電源 | 可変/調整可能な昇圧系。**kohacraft MAX668 + 1:10トランスのSEPIC参考設計（5V→高電圧）**を候補に追加 | 1評価系 | TO_VERIFY | C | **2023-04-12の原記事PDF確認済み**。MAX668のFB分圧式 Vout=1.25×(1+R1/R2); R1=2MΩ、R2=14.3kΩで約176V。抵抗変更で目標電圧は設計変更可能だが実出力保証ではない。5V入力前提、スイッチング/トランス/安全定格/無負荷保護/リップル/軽負荷効率/ENとIN-12B着火を要検証。記事 https://kohacraft.com/archives/202304120917.html |
 | 20 | HV最終制御IC候補 | LT3757Aを使うトランス結合Flyback案 | 1+予備 | PROPOSED | C | トランス・FET・基板の実現性とレビュー前提 |
-| 21 | ACTION | 大型非照光モーメンタリ押しボタン、22–30mm級を比較 | 1+予備 | PROPOSED | A | 押下荷重、厚さ、固定、操作感、価格 |
-| 22 | NEXT | スプリングリターンレバー/パドル+マイクロスイッチ | 1式+予備 | PROPOSED | A | 誤操作防止、サイズ、戻りの感触 |
-| 23 | Encoder | 押し込み式 Alps Alpine EC11E18244AUなど | 1+予備 | PROPOSED | A | クリック数、軸径・長さ、ノブ、チャタリング |
+| 21 | ACTION | **三和電子 OBSF-30（30mm級モーメンタリ）第一候補** | 1+予備 | PROPOSED | A | マルツ参考¥301税込（色別）。ボタン部φ25mm、取り付けスペース・ケース高さ、色/3Dキャップ、押下音と感触を3D実寸模型で確認。https://www.marutsu.co.jp/pc/i/9604/ |
+| 22 | NEXT | **NKK M-N18S1W（(ON)-OFF-(ON)中央ばね戻り）第一候補**。パドル自作も代替 | 1式+予備 | PROPOSED | A | フルタカ参考¥861税込。両側独立信号ならGPIO2本（従来見積りNEXT1本→合計+1本）。片方向のみ使うか、両側別機能かをUI設計で決定。レバー位置、低電流GPIO接点適合を確認。https://www.furutaka-netsel.co.jp/maker/nkk/m-n18s1w |
+| 23 | Encoder | **Alps Alpine EC11E15244G1（30クリック/15パルス・押し込み）第一候補** | 1+予備 | PROPOSED | A | 6mm D軸・20mm軸長・THT。RS参考¥855税込、マルツ約¥1,230-1,306税込（価格変動）。金属ノブ/樹脂ノブ、台座厚、チャタリングとGPIOプルアップを確認。https://tech.alpsalpine.com/j/products/detail/EC11E15244G1/ |
 | 24 | 通知音 | **直径約28mm・8Ω・0.5〜1Wの小型スピーカー（仕様第一候補、型番未選定）** | 1–2 | PROPOSED | A | 筐体内での音質、取り付け穴・厚み、実音量、保護グリル、過大入力防止を確認 |
 | 25 | 音声アンプ | **TI TPA2005D1（第一候補）** | 1+予備 | PROPOSED | B | 2.5〜5.5V、8Ω負荷、1.4W max @5V、shutdown約0.5µA typ、通常IQ約2.8mA @3.6V。3.3V動作候補。PWM+LPFまたはDACなど音声入力とミュート制御、スピーカー定格を検証。TI https://www.ti.com/product/TPA2005D1 |
 | 26 | LED UI試作 | 橙色LED ×12、電流制限抵抗、配線材 | 12+予備 | PROPOSED | A | 高電圧抜きのUI評価で使用 |
@@ -48,6 +48,13 @@ Updated: 2026-11-14 (JST)
 | 28 | 造形素材 | PETG等（試作）/最終ASA等を比較 | 適量 | PROPOSED | A/B | Bambu Lab A1での印刷適合性、耐熱・難燃性。ASAは適切な設備が必要 |
 | 29 | 透光・固定 | 拡散板、遮光材、ネジ、スペーサー、配線コネクタ | 小分け一式 | TO_VERIFY | A/B | 球体の開口と保守設計ができてからサイズ決定 |
 | 30 | PCB | 表示/ドライバ/UI/電源の複数基板案。HV5524等QFN用ステンシルも検討 | 試作数回 | TO_VERIFY | C | CAD外形、分割、熱・絶縁・実装確認、学校のリフロー炉借用可否、適切なリフロー条件と検査 |
+
+## 操作部品候補 (2026-11-14)
+- ACTION: 三和電子 OBSF-30 30mm級、モーメンタリ。参考 https://www.marutsu.co.jp/pc/i/9604/
+- NEXT: NKK M-N18S1W、(ON)-OFF-(ON) 2方向ばね戻り。参考 https://www.furutaka-netsel.co.jp/maker/nkk/m-n18s1w 。NEXTを一方向だけ使うならGPIO1本、左右両方使うならGPIO2本。レバーを手前/奥に倒す形に変更する機構も検討可。
+- Encoder: Alps Alpine EC11E15244G1、30クリック/15パルス、0.5mm押下、6mm D軸、20mm長。参考 https://tech.alpsalpine.com/j/products/detail/EC11E15244G1/
+- 概算価格(税込、送料別、変動): ACTION約¥300、NEXT約¥860、Encoder約¥850、ノブ/装着材¥500-1000 → 合計約¥2,500-3,000。
+- これらは**ユーザー承認前の第一候補**であり購入確定ではない。ケース内の物理干渉と操作感を実寸3Dプリント/紙型で確認。機械スイッチ端子はリフロー工程に同時投入しない前提で組み立て工程を検討。
 
 ## 通知音・アンプ選定メモ（2026-11-14）
 - 第一候補: TPA2005D1、8Ω/0.5–1W級の直径約28mmスピーカー（スピーカー型番は未選定）。TI https://www.ti.com/product/TPA2005D1
