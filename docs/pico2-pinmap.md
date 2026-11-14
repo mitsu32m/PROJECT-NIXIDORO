@@ -67,4 +67,4 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 
 詳細なJ1/J2/J3/J4基板間配線案: [board-interconnects.md](board-interconnects.md)。
 
-電源OFF時のバス保護とレベルシフタ候補の更新: [pwr-sequencing.md](pwr-sequencing.md)。HV5524 POL=HIGH/BL=LOWの全消灯案とRTCバックアップは[hv-blanking-rtc-backup.md](hv-blanking-rtc-backup.md)を参照。
+電源OFF時のバス保護とレベルシフタ候補の更新: [pwr-sequencing.md](pwr-sequencing.md)。HV5524 POL=HIGH/BL=LOWの全消灯案とRTCバックアップは[hv-blanking-rtc-backup.md](hv-blanking-rtc-backup.md)、**実ピン番号の接続案**は[ctrl-driver-rtc-schematic.md](ctrl-driver-rtc-schematic.md)を参照。
