@@ -41,7 +41,8 @@ flowchart TD
 | CTRL→HV EN（PWR経由） | HV_EN_REQ | GP4。HV側LOW既定・独立OVPが遮断優先 |
 | HV→CTRL FAULT（PWR経由） | HV_FAULT_N | GP5。active-low/open-drainは候補、プルアップの電源ドメインと断線状態を検証 |
 | BQ→CTRL STAT | CHG_STAT1, CHG_STAT2 | GP13/GP14。Pico 3.3Vへのpull-upとBQ無通電時逆給電を確認 |
-| PWR→CTRL ADC | ADC_BAT, ADC_SYS, ADC_5V | GP26/27/28。**分圧/保護済み**、Pico停止時入力注入/分圧リーク注意 |
+| PWR→CTRL ADC | ADC_BAT, ADC_SYS, ADC_5V | GP26/27/28。PWR v3の100kΩ/47kΩ分圧とMOS遮断。Pico停止時入力注入/分圧リーク注意 |
+| CTRL→PWR ADC許可 | ADC_SENSE_EN | **GP17→J3 pin10**。PWR R24によりLOW既定。ADC読取り時だけHIGH、停止過渡と無給電逆流を実測 |
 | PWR→CTRL 5V GOOD | PWR_5V_OK | GP15、**オプション**。比較器/検出回路がなければ使用しない |
 | Pico→HV5524 | HV_DATA/CLK/LE/BL | GP0–3→SN74LV4T125→HV5524。POL固定HIGH、BLデフォルトLOW |
 | Pico→I2C | I2C_SDA, I2C_SCL | GP20/21、RTC+OLEDをPICO_3V3共通に置く |
@@ -52,12 +53,12 @@ flowchart TD
 |---|---|---:|---|
 | J1 PWR→HV | +5V_HV, GND_HV, HV_EN_REQ, HV_FAULT_N | 4 | JST XH 4極候補。FAULTの定義・5V戻りと大電流/異常耐性 |
 | J2 PWR→CTRL 電源 | SYS_TO_MCU, SYS_TO_AMP, +5V_LOGIC, GND_PWR_MAIN, GND_PWR_SIGNAL | **5**（音声アンプ未実装ならSYS_TO_AMPを共有または省略可能） | SYS_TO_AMPはSYS_BUSの分岐。電線とGNDは電流・ノイズで再検討。PICO_3V3はこのハーネスで往復させない |
-| J3 PWR↔CTRL 信号 | CHG_STAT1, CHG_STAT2, ADC_BAT, ADC_SYS, ADC_5V, PWR_5V_EN, HV_EN_REQ, HV_FAULT_N, GND_SIGNAL | **9** | +PWR_5V_OK optionalなら10。ケーブル/基板の実ピン番号・コネクタ型番未定 |
+| J3 PWR↔CTRL 信号 | CHG_STAT1, CHG_STAT2, ADC_BAT, ADC_SYS, ADC_5V, PWR_5V_EN, HV_EN_REQ, HV_FAULT_N, GND_SIGNAL, **ADC_SENSE_EN** | **10** | PWR v3案に合わせADC_SENSE_ENをGP17から入力。PWR_5V_OKを同じJ3に加えるなら11極か信号再配置が必要。実コネクタ型番・向き未定 |
 | J4 HV→CTRL/DISP 高圧 | HV_OUT, HV_RETURN | **2系統以上** | 高圧専用ハーネス・絶縁/触れ防止/沿面空間距離と帰路を決定。一般低圧コネクタ禁止 |
 - **J2とJ3でGNDを重ねているのは意図的**。ノイズと故障時リターンを検討するためで、必ず別の電気GNDネットに分断するという意味ではない。
 - J2のSYS_TO_MCUとSYS_TO_AMPは**電気的にはSYS_BUS共有**。同一コネクタで別ピンを割く利点（電流/ノイズ）がない場合は統合して、実際の負荷電流と接続部定格に応じて決定。
-- **古いJ2の4極 SYS/GND/5V/3V3 と古いJ3の9極は改訂候補**。3V3_PERIPH/PWR_3V3_EN/I2C_ISO_ENをRev.Aで配線しない。USBのCC、セルNTC、全電源とEN/FAULTは基板上の論理を別途確定する。
-- GP17/GP18は現Rev.A基準構成で未使用（予備）。GP19はアンプがある場合のみ利用、GP22は予備。
+- **旧J2の4極 SYS/GND/5V/3V3と旧J3の9極はRev.A v3第一候補に含めない**。3V3_PERIPH/PWR_3V3_EN/I2C_ISO_ENをRev.Aで配線しない。USBのCC、セルNTC、全電源とEN/FAULTは基板上の論理を別途確定する。
+- **GP17=ADC_SENSE_EN**（PWR基板R24=100kΩでLOW既定）。GP18/GP22は予備、GP19はアンプがある場合のみ利用。ファームとCTRL回路図への実配線は未実装。
 
 ## D. KiCadの階層シート案とコネクタが担う信号
 | KiCad sheet | 所属物 |
