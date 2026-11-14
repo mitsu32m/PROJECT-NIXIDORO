@@ -16,7 +16,7 @@ Status: PROPOSED / TO_VERIFY
 |---|---|---|---|
 | PWR | USB-C、BQ25185、保護付き1S Li-ion+NTC、TPS63031 3.3V、TPS61023 5V、入力保護 | 台座、充電端子付近 | **同じPCBを再利用する第一候補** |
 | HV | MAX668、個別仕様が確認できたトランス、MOSFET、整流、FB、独立OVP、bleeder、スナバ、EN | 電池から距離を取れる内部領域 | **同じPCBを再利用する第一候補** |
-| CTRL / DISP | Pico 2（完成品の暫定第一候補。XIAO RP2350は比較候補）、HV5524、74AHCT125、IN-12B×2、ネオン×12、OLED/RTC/操作・音声インターフェース | 表示球体と操作台 | 筐体制約で**制御PCB＋表示PCBに分割可** |
+| CTRL / DISP | Pico 2（完成品の暫定第一候補。XIAO RP2350は比較候補）、HV5524、SN74LV4T125（Ioff対応を検討）、IN-12B×2、ネオン×12、OLED/RTC/操作・音声インターフェース | 表示球体と操作台 | 筐体制約で**制御PCB＋表示PCBに分割可** |
 
 - 「3論理モジュール」は「物理基板が必ず3枚」という意味ではない。CTRL/DISPは実装・配線の都合で2枚になる可能性あり。
 - HV5524とニキシー管を同じ基板とするか、表示位置に合わせて分割するかは筐体CADと絶縁・配線長から決定。
@@ -146,3 +146,5 @@ Status: PROPOSED / TO_VERIFY
 - [Microchip HV5524](https://www.microchip.com/en-us/product/HV5524)
 - [ADI MAX668](https://www.analog.com/en/products/MAX668.html)
 - [Seeed XIAO RP2350](https://wiki.seeedstudio.com/xiao_rp2350_arduino/)
+
+**2026-11-14レベルシフタ更新:** 74AHCT125に代わりIoff仕様が明記されたSN74LV4T125を第一比較候補にする。起動時BLを確実に維持する回路は未確定。I2C分離/RTC保持/ADC逆給電は[pwr-sequencing.md](pwr-sequencing.md)参照。
