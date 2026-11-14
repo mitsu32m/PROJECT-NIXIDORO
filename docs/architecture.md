@@ -1,33 +1,32 @@
 # システム構成 — 提案 v0.1
 
-> このページのIC名や定格は設計候補であり、**確定回路ではない**。
+> このページのIC名や定格は設計候補であり、**確定回路ではない**。最新の基準案は[Rev.A統合ネット仕様](reva-integrated-net-spec.md)。
 
 ```mermaid
 flowchart TB
-    U[USB-C 5V] --> PP[充電・Power Path / PROPOSED: BQ25185]
-    B[保護付き1S Li-ion / PROPOSED] <--> PP
-    PP --> SYS[System rail / USB時と電池時で電圧変動]
-    SYS --> LV[3.3V regulator]
-    SYS --> V5[5V boost regulator / MAX668入力とHV driver logic]
-    V5 --> HV[高電圧昇圧 MAX668 / TO_VERIFY]
-    SYS --> MUX[external diode / ORing with Pico USB VBUS]
-    MUX --> MCU[MCU Pico 2 VSYS / PROPOSED]
-    LV --> OLED[OLED]
-    LV --> RTC[RTC]
-    MCU --> CTRL[ACTION / NEXT / Encoder]
-    MCU --> AUD[通知音]
-    MCU --> LEVEL[3.3 to 5V level shift]
-    V5 --> LEVEL
-    V5 --> DRIVER[HV cathode sink]
-    LEVEL --> DRIVER
-    HV --> LAMPS[2端子ネオン球 x12, 個別電流制限]
-    HV --> DIGITS[数字ニキシー管 x2, 個別電流制限]
-    DRIVER --> LAMPS
-    DRIVER --> DIGITS
+ U[USB-C 5V + input protection] --> PP[BQ25185 charger and power path]
+ B[protected 1S 21700 + NTC] <--> PP
+ PP --> SYS[SYS_BUS]
+ SYS --> D[external Schottky power OR]
+ D --> MCU[Pico 2 VSYS, own USB debug separate]
+ MCU --> V3[Pico 2 3V3 OUT]
+ V3 --> OLED[OLED]
+ V3 --> RTC[RV-3028-C7 and backup capacitor]
+ SYS --> AMP[optional audio amp SYS supply]
+ SYS --> V5[TPS61023 5V boost]
+ V5 --> HV[MAX668 HV with independent OVP and bleeder]
+ V5 --> LEVEL[SN74LV4T125]
+ V5 --> DRIVER[HV5524 VDD]
+ MCU --> LEVEL
+ LEVEL --> DRIVER
+ HV --> LAMPS[12 neon lamps with current limit]
+ HV --> DIGITS[2 IN-12B with current limit]
+ DRIVER --> LAMPS
+ DRIVER --> DIGITS
 ```
 
 ## 有力な基板分割 [PROPOSED]
-- **PWR（電源管理PCB）**: USB-C、BQ25185、電池・NTC、3.3V/5Vレギュレータ。試作基板を完成品へ転用する第一候補。
+- **PWR（電源管理PCB）**: USB-C、BQ25185、電池・NTC、5V TPS61023。独立3.3V TPS63031はRev.A第一候補で省略。試作基板を完成品へ転用する第一候補。
 - **HV（高電圧電源PCB）**: MAX668、トランス、OVP、放電、スナバ。試作基板を完成品へ転用する第一候補。
 - **CTRL/DISP（制御・表示モジュール）**: RP2350、HV5524、OLED、表示管・操作部接続。筐体制約に応じて制御PCBと表示PCBへ分ける可能性あり。
 - **3モジュール=3枚の物理PCBと確定した意味ではない**。コネクタ・電圧・電流・故障時動作の詳細は[モジュール間インターフェース仕様](module-interfaces.md)を参照。
@@ -36,7 +35,7 @@ flowchart TB
 - 原資料のIN-12BはDC供給電圧 **200V以上** を示す。**176Vを確定設計値にしない**。200–205Vは暫定評価目標であり、実機の点灯・電流・過渡を測定してから決定する。
 - HV5524の連続推奨HVOUTは最大220V、絶対最大230V。200V級運用は余裕が小さい。**独立過電圧監視/停止、残留電荷放電、起動時全消灯を追加**し、過渡最大215V以下という仮目標の成立を試験する。
 - **SYS→HV直接経路を廃止してSYS→TPS61023→5V→MAX668へ統一**（5Vレールの入力余裕・負荷・起動順は未検証）。
-- **XIAO RP2350の3V3はSeeed資料上は電源出力**。外部TPS63031から直接駆動すると確定しない。XIAOのUSB/VBUS/内部充電回路とBQ25185は並列接続禁止。XIAO側の独立した5V供給・逆流防止を設計、3.3V外部レールは他の3.3V周辺用。
+- **Rev.A第一候補はPico 2**。BQ25185 SYS→外付けダイオード→Pico VSYS、Pico 3V3(OUT)でRTC/OLEDを供給する案。PicoのVBUSにPWR 5Vを接続せず、独立3.3Vレールと並列化しない。XIAO RP2350は省スペース代替候補として履歴に残す。
 - BQ25185は熱試験なしに1A充電を確定しない。250/500/750/1000mAを比較、USB-Cの入力電流上限は充電+動作電流の合計へ適用されることに注意。
 - 試作を HV電源、表示ドライバ、充電低圧電源、低圧UIに分け、各Go/No-Go試験を通過してから統合する。PCBレイアウトと安全性は教員レビュー前提。
 - 詳細: [設計レビュー比較メモ](research/2026-11-14-three-report-review.md)。
