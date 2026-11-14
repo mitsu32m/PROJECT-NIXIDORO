@@ -72,3 +72,40 @@ Status: PROPOSED / TO_VERIFY。**回路方式案でありPCB発注・電気安�
 7. HV基板の独立OVP/bleederと、高電圧触れ防止・保護付き電池/温度評価を教員レビューしてから実機HV通電。
 
 関連: [PWR schematic net list](pwr-schematic-nets.md), [Pico GPIO](pico2-pinmap.md), [電源状態遷移](power-state-machine.md)
+
+## 2026-11-14更新：異電源ドメインのIoff対策と必要部品の最小化
+
+**重要変更**: HV5524制御信号4chの3.3V→5Vシフタ第一候補を**SN74AHCT125からSN74LV4T125へ変更する案**。TI SN74AHCT125はTTL互換入力(VIH≥2V @ VCC4.5–5.5V)を持つが、一般製品のdatasheetに明示された**partial-power-down Ioffの保証を現時点で確認できていない**。一方TI SN74LV4T125は3.3→5V変換とIoff動作が明示されている。
+- SN74LV4T125 VCC=+5V_LOGIC, A0..A3=Pico GP0..GP3, Y0..Y3=HV5524 DATA/CLK/LE/BL。**OEはactive-low**。電源投入/停止中に全出力を無効化できるよう、OEの既定レベルと有効化条件を回路で定義する。出力ハイインピーダンス中にもHV5524の入力は**浮かせない**。BLの極性・必要なプル抵抗/ドライバ電源OFF時動作をHV5524メーカー表で別途確定。
+- Ioffによる「VCC=0での漏れ防止」と「5V供給が立上るまで表示全消灯」は**別の要求**。後者はHV5524ブランキングのハード初期状態、OVP/ENのハードOFF既定、給電順で成立させる。
+- 旧SN74AHCT125の例を使い続ける場合は**品番個別のpowered-off input/output leakage**、Pico 3.3V→非給電5Vへの電流注入を測定・評価。単にPico GPIO=LOWのソフト制御ではMCU reset中の安全性は保証できない。
+- TI一次資料 SN74LV4T125 https://www.ti.com/lit/ds/symlink/sn74lv4t125.pdf , SN74AHCT125 https://www.ti.com/lit/ds/symlink/sn74ahct125.pdf
+
+### RTC/OLED I2Cと3.3V電源の整理
+- **基本案（安価）**: RTCとOLEDを電源OFF中もPicoからI2Cアクセスしたいなら、Pico 3V3(OUT)を周辺の基準電源とする方式と、RTCバックアップ電源の要否を比較する。ただしTPS63031の独立3.3Vと混結しない。OLEDを常時給電すると待機電力/スリープ時間が増える可能性がある。
+- **電源分離案**: Pico 3V3が生きていて3V3_PERIPHが落ちるなら、I2CのSDA/SCLに**TCA39306**などのEN付き分離素子を候補とする。EN=LOWでI2C両側がHi-Zとなるが、**その電源OFFシーケンスとENのレベル、各側pull-up位置、無電源時の内部漏れ**をICの仕様で照合する。両側3.3Vで単なるレベル変換は不要だがバス分離目的で検討可。
+- OLEDとRV-3028-C7の**基板モジュール上の内蔵プルアップ**が別電源に接続されている場合は、追加抵抗の有無で問題解決しない。OLEDの製品実機回路図/モジュールのプルアップを確認。RTC VBACKUPの供給も未確定。
+- 低コスト第一方針は**RTCをタイマー保持用の常時/バックアップ電源ドメインに置き、OLEDは表示負荷として別扱い**。RTCとOLEDを無条件に同一スイッチ式レールに乗せる旧ブロック図を確定回路として扱わない。
+
+### BQ25185充電状態 STATx
+- TI BQ25185 STAT1/STAT2は**open-drain**、1kΩ～20kΩのpull-up、pull-up最大5V。まずPico側3V3(OUT)へ例えば10kΩ pull-upする案（TI範囲内）で、Pico給電中の読み出しを成立させる。BQ側未給電時のリークと論理状態が許容されることをメーカーの絶対最大定格・電気特性で別途確認。
+- STATは充電状態通知で**安全遮断に使用しない**。BQ25185の充電許可/温度保護・電池保護はハード依存とする。open-drainの出力Highは必ずしも「充電している」の意味ではないためtruth tableに従って処理。
+- TI一次資料 https://www.ti.com/lit/ds/symlink/bq25185.pdf
+
+### ADC監視の逆給電
+- BAT/SYS/5V分圧後のGP26/27/28について、**Pico電源OFF時に入力が高いままになり得る**ことを検証。未給電Picoの絶対最大/入力注入電流を超えないよう、分圧高抵抗化、Pico側電源連動アナログスイッチ/enable、保護を比較する。
+- 3.3V GPIOの電流/保護ダイオードが耐えるから安全と**推測しない**。最終方式はPico公式の絶対最大定格と、電池常時リークから決める。
+
+### GPIO予約案
+- GP16: PWR_5V_EN（TPS61023 EN、PWR側プルダウンで既定OFF）。
+- GP17: I2C_ISO_EN（分離ICを使う場合のみ。未使用なら予約のまま）。
+- GP18: PWR_3V3_EN（周辺3.3Vをスイッチ化する場合のみ。RTC保持方針が未確定のため予約）。
+- これらはまだ正式ピン割当ではなく、**PWR→CTRL監視/制御コネクタの極数も再計算**する。保護回路が増えても予算超過するならまず電源ドメインを簡素化する。
+
+### KiCad設計の優先順位
+1. レール（Pico 3V3(OUT)、SYS、PWR 3.3V、5V LOGIC）の**電源ツリー/ドメイン**を確定。
+2. SN74LV4T125の個別型番・footprint/EN/OE挙動・Ioffの最大値・HV5524制御入力の全消灯回路をメーカー仕様と照合。
+3. RTC・OLED実物のI2C pull-upとバックアップ方式、TCA39306採否を決める。
+4. BQ_STATx/ADCのバックパワー計測と漏れ電流、USB同時電源シナリオを試験。
+5. 5V_ENと3V3_ENのGPIO/配線本数を接続表・実回路図に反映してからPCBを発注する。
+
