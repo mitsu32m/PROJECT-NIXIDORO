@@ -1,0 +1,19 @@
+# Firmware
+.pio/
+build/
+*.elf
+*.bin
+*.uf2
+# CAD transient files
+*.bak
+*.lck
+*-backups/
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+# Local secrets
+.env
+.env.*
+!.env.example
