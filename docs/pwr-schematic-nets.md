@@ -1,4 +1,6 @@
 # PWR Rev.A 回路図ドラフト：ネット接続表 — v0.1
+
+**電源レールの起動順序・逆給電試験は** [pwr-sequencing.md](pwr-sequencing.md) **を参照**。TPS61023はTI仕様上shutdown時のtrue disconnectionを持つ（ただし出力残留電荷・GPIO経由の逆流には別対策）。
 Updated: 2026-11-14 JST
 Status: **SCHEMATIC DRAFT / NOT PCB-ORDER READY**. これはKiCadへ転記するための設計用接続表で、`.kicad_sch`ではない。未検証接続を「確定」と誤記しないこと。
 
@@ -62,7 +64,7 @@ flowchart TB
 | 6 | VOUT | +5V_PWR。COUT=22µF×2 nominalをGNDへ |
 - インダクタ暫定第一候補Würth 74438357010。メーカー個別のIsat / Irms / DCR / 高さ・JLC調達情報・温度を再検証。
 - 最大負荷約1.0A時の起動・最低SYS・電流制限（典型値でなく最小値）・誘導ノイズ・温度を確認する。
-- **EN=LOW時にVOUTがどうなるか/負荷切断機能**をTIの動作記述で再確認。HV電源停止はHV基板自身のHV_EN/OVPで独立に実装する。5V昇圧をOFFにすることのみでHV安全を保証しない。
+- **EN=LOWで入力と出力が切り離される（True Disconnection）はTIの仕様で確認済み**。ただし出力コンデンサの残留電荷やGPIOなど外部経路からの逆給電は保証対象外。HV電源停止はHV基板自身のHV_EN/OVPで独立に実装する。
 
 ## 4. TPS63031 U3 — TI DSK 10-pin WSON (pin map verified)
 | U3 pin | 名前 | ネット / 外付けパーツ |
