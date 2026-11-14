@@ -30,3 +30,11 @@
 - OLED/数字管点灯時間
 - ポモドーロ完了カウント、停電復帰の仕様
 - 操作チャタリングと長押し
+
+## 2026-11-14 ハード接続ドラフト
+- ACTION: GPIO GP8、N.O.接点をGNDへ落とす案。
+- NEXT: NKK M-N18S1W `(ON)-OFF-(ON)` の中央COMをGND、両投端子をGP6/GP7に割当。
+- Encoder: Alps Alpine EC11E15244G1は**30クリック・15パルス**で押込スイッチあり。GP9/10/11を使用。クリック=1エッジと仮定しない。
+- OLED: I2C (GP20/GP21)でRTCと共有。OLEDの電源OFF時逆給電が未解決なので、実装前に電源ドメインまたはI2C分離を選ぶ。
+- AUDIO: GP12 PWM、TPA2005D1を使うならGP19をSHUTDOWNへ（LOW=停止）。アンプ出力はBTLでGND禁止。省略して圧電ブザーも比較。
+- 詳細: [CTRL UI/OLED/AUDIO接続ドラフト](ctrl-ui-audio-schematic.md)。
