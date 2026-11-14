@@ -77,6 +77,42 @@ flowchart TB
 - PWRを製品再利用モジュールとして固定したいなら、MCUモジュールの給電仕様が確認できた時点でPWR↔CTRLのコネクタ信号・USB書込方法を確定する。
 - 試作時に実際の5Vピン電圧・XIAO+3V3・USB未接続時漏れ電流・USB同時接続時電流・充電器の不意動作を測定。外部USBと外部5Vが直結しない設計を回路図と実機の両方で確認する。
 
+## 4B. MCUモジュール比較・Pico 2を第一候補に変更（2026-11-14）
+
+**判断:** 完成品の制御モジュールは**Raspberry Pi Pico 2（無線なし）を暫定第一候補**とする。XIAO RP2350は小型化代替案・手持ち開発用候補として残す。筐体寸法・購入価格・待機電流・GPIO実配線が未確定で、部品発注確定ではない。
+
+| 候補 | サイズ | 取り出せるGPIO | 電池充電IC | 外部給電/USB併用の難易度 | 評価 |
+|---|---|---|---|---|---|
+| Raspberry Pi Pico 2 | 51×21mm | 26 | なし | **VSYSがVBUSと分離済み、公式ORing回路あり** | **第一候補** |
+| Seeed XIAO RP2350 | 21×17.8mm | 19（裏パッド含む） | SGM40567 | **5Vヘッダ=VBUS、BAT=充電出力**。BQ25185と競合する | 小型代替 |
+| Waveshare RP2350-Zero | メーカー寸法図で確認 | ヘッダ20+パッド9 | なし | 3.3V LDO、USB/外部電源の逆流経路とコネクタ定格を個別確認 | 小型代替 |
+
+一次資料：Pico 2 datasheet https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf （Figure 8: External supply via diode to VSYS、Figure 9: P-MOS option）、製品概要 https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html 、XIAO https://wiki.seeedstudio.com/xiao_rp2350_arduino/ 、Waveshare https://www.waveshare.com/wiki/RP2350-Zero 。
+
+### Pico 2暫定電源接続案
+- **BQ25185 SYS → 外付けショットキー（アノードSYS/カソードPico VSYS）→ Pico 2 VSYS**。Pico 2基板に内蔵されているUSB VBUS→D1→VSYSダイオードとダイオードORとなり、USBと外部SYSの相互逆流を防ぐ（詳細は公式Pico 2 datasheet Figure 8）。
+- **Pico 2 VBUSへPWR基板5Vを接続しない**。USBコネクタはプログラミング用に残す。
+- VSYSはPico 2の動作電圧仕様（公称1.8–5.5V）と外付けダイオード降下の後でも最低電圧を満たす。BQ25185 SYSの全モードの最低・最大、USB未接続/USB接続時電源優先関係をメーカー仕様で確認。
+- **USBデータGNDと本体PWR GNDは接続する**。電源ダイオードORは絶縁ではない。USB接続中のPWRの電源補完とBQ25185 chargerの動作を別途検証する。
+- Pico 2 GPIOは3.3V。HV5524の5V入力には74AHCT125を残し、レベルシフタの電源OFF時のGPIO逆給電を確認。
+- **Pico 2の3V3出力とPWRのTPS63031 3.3Vレールを直結しない**。I²C pull-up、電源シーケンスとGPIOクランプ電流をレビュー。
+- 新しい**PWR→CTRL**電気インターフェース案は SYS_TO_MCU, GND, PWR_3V3_PERIPH（別系統）、STAT等。Picoのためだけの5V_LOGICは不要だが、74AHCT125/HV5524用5Vは引き続き必要。
+- **再試作を減らす観点**：Pico 2はPWR PCBから切り離し可能な制御PCBに装着。51mm×21mmが台座に収まるか3D模型で先に検証。厳しい場合のみRP2350-Zeroを再評価。
+
+### GPIO概算（確定配線表ではない）
+- HV5524 serial: DATA, CLK, LE, BL = 4
+- I2C OLED + RTC = 2
+- UI: ACTION 1, NEXT左右2, ENCODER A/B/SW 3 = 6
+- HV_EN 1、AUDIO 1、電源監視用GPIO/ADC 2〜4 = 計16〜18程度。Pico 2の26 GPIOに予備はあるが、機能ごとの端子配置は要検証。
+- ニキシー2桁20カソード + ネオン12カソードはHV5524側32出力であってPico 2の32 GPIOを必要としない。
+
+### 発注前の残件
+1. SYS実電圧の下限/上限とPico 2 VSYS動作範囲、ショットキー損失、PWR/GND配線。
+2. USB接続・取り外し時のVSYS/3V3波形、片方からの逆給電とGPIO逆流、MCUの誤リセット有無。
+3. 51×21mm＋USBコネクタ・ピン・曲げ半径を台座に収容できること。
+4. Pico 2の通常/休止電流とタイマー稼働時間、XIAO/Zeroとの価格差、現物調達先。
+5. PWRのスタンドアロン給電とPico 2デバッグUSB併用の正式な操作手順。
+
 ## 5. USB-Cと電池の最低限の回路検討
 - USB Type-C 5V sinkのCC1/CC2にそれぞれRd=5.1kΩ（型番/許容差とソース電流広告は別途仕様整合）、ESD/過電流/サージ・保護を検討。BQ25185への1100mA入力設定はCC広告またはUSB仕様に基づいた能力確認なしでは禁止。
 - Li-ionセルは**保護付き製品**を前提とし、充電電圧4.2Vを想定する場合はセル仕様とILIM/VSETを適合させる。BQ25185は保護付きセル自体を代替しない。
