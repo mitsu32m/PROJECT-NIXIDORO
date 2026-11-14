@@ -28,8 +28,8 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 | GP14 | 19 | BQ_STAT2 | BQ25185 STAT2 | 同上 |
 | GP15 | 20 | PWR_5V_OK | 5V PowerGood（回路は未確定） | 単純に5VをGPIOへ入力しない |
 | GP16 | 21 | PWR_5V_EN | TPS61023のENをPWRへ | 電源OFFデフォルト、PWRプルダウン |
-| GP17 | 22 | I2C_ISO_EN (option) | RTC/OLEDの異電源I2C分離 | 使わなければ予備 |
-| GP18 | 24 | PWR_3V3_EN (option) | 周辺3.3V制御 | RTCの保持電源方針決定まで予備 |
+| GP17 | 22 | SPARE | Rev.AではI2C分離を省略するため予備 | 将来OLED電源遮断に変更するなら再割当 |
+| GP18 | 24 | SPARE | Rev.Aでは独立3V3を省略するため予備 | 将来拡張 |
 | GP19 | 25 | AUDIO_AMP_EN (option) | TPA2005D1 SHUTDOWN | LOW=停止、アンプ省略時は予備 |
 | GP20 | 26 | I2C_SDA | OLED+RTC | I2C0 SDA |
 | GP21 | 27 | I2C_SCL | OLED+RTC | I2C0 SCL |
@@ -37,7 +37,7 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 | GP26 | 31 | ADC_BAT | 電池電圧監視 | 分圧/保護/逆給電防止/セル保護との整合 |
 | GP27 | 32 | ADC_SYS | BQ25185 SYS監視 | 分圧/ノイズ/保護 |
 | GP28 | 34 | ADC_5V | 5Vブースト監視 | 分圧/逆給電防止 |
-- **既存21本+GP16の5V_ENで22本/26本を使用する方向**。GP17/GP18はオプション、GP19/GP22は予備。オプション全実装かつGP19を音声アンプに割り当てるなら25本使用、予備1本（GP22）。GP15の5V_OKは選択部品の有無で削減可能。
+- **既存21本+GP16の5V_ENで22本/26本を使用する方向**。GP17/GP18/GP22は予備、GP19はアンプ実装時のみ使用。アンプ採用で23本使用・予備3本、アンプ省略なら22本使用・予備4本（GP15の5V_OKはオプション）。GP15の5V_OKは選択部品の有無で削減可能。
 - GPIOの機能割当はRP2350の利用可能ペリフェラルと重複していない。ただしPCB配置・信号品質・実装しやすさで変更可能。
 - GP26–GP28の外部ADCは3.3V範囲のピン入力定格・ADC精度を厳守。分圧器は未給電時のGPIOクランプ経由の逆給電と常時損失を防ぐ構造で設計。入力低抵抗化で常時電池消費を増やさない。
 - GP29内部のVSYS監視をADC_SYSとして流用すると、**外付けショットキー後のVSYS**でありBQ25185 SYSそのものではない。測り分けるのでGP27を確保する。
@@ -47,11 +47,11 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 |---|---|---|---|
 | SYS_TO_MCU | PWR→CTRL | BQ25185 SYSからPico VSYSの外付けORダイオードへ | **Pico VBUSには配線しない**。USBとVSYSの同時給電は公式図・実測で確認 |
 | GND_LOGIC | 共通 | MCU/周辺の基準 | 電源帰路、ADC基準、ノイズ分離 |
-| +3V3_PERIPH | PWR→CTRL | OLED/RTC等の周辺機器 | **Pico 3V3(OUT)へ直結しない**、I2C逆給電に注意 |
-| +5V_LOGIC | PWR→CTRL | HV5524/74AHCT125等のロジック | 5V耐圧、起動時BL制御、MCU未通電時の逆給電 |
+| PICO_3V3 | CTRL基板内 | Pico 3V3(OUT)→RTC/OLED | **PWR→CTRLコネクタには入れず、TPS63031と並列化しない** |
+| +5V_LOGIC | PWR→CTRL | HV5524/SN74LV4T125の5Vロジック | 5V耐圧、起動時BL制御、MCU未通電時の逆給電 |
 | BQ_STAT1, BQ_STAT2 | PWR→CTRL | 充電状態 | 3.3V側プルアップ、電源ドメイン間対策 |
 | ADC_BAT, ADC_SYS, ADC_5V | PWR→CTRL | 安全な分圧後の監視信号 | **生BAT/SYS/5VをそのままADCへ送らない**。分圧回路をどちらのPCBに置くか未決定 |
-| HV_EN_REQ | CTRL→PWR→HV | HV起動要求をPWR経由でパススルーする構成案 | PWR-HVコネクタ3極(+5V/GND/EN)との整合。PWR未接続・CTRL抜去ではOFF |
+| HV_EN_REQ | CTRL→PWR→HV | HV起動要求をPWR経由でパススルーする構成案 | **PWR-HV 4極案**。PWR未接続・CTRL抜去ではOFF |
 | HV_FAULT_N | HV→CTRL | OVP/PowerFaultの状態 | **PWR-HVの4極案に追加済み**。PWR経由でCTRLに通知する想定。部品型番と配線は別途検証 |
 | PWR_5V_OK | PWR→CTRL | 5Vレールの妥当性 | PWR上の比較器/PG方式が確定するまでオプション |
 - **コネクタのピン番号、極数、部品型番は未確定**。HV_FAULTを採用する場合はJST XH 3極をそのまま確定しない。電源・GNDの帰路、圧着品質、接続方向、誤挿入対策を先に確定。
@@ -59,7 +59,7 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 
 ## 初回作業時のチェック
 1. GPIO番号とPico基板の**物理pin番号**をKiCadに転記し、GP23/24/25/29を外部I/Oとして誤使用しない。
-2. 74AHCT125とHV5524の電源投入順・BL極性を確認し、MCUリセットでも全消灯が維持されるようにする。
+2. SN74LV4T125とHV5524の電源投入順・BL極性を確認し、MCUリセットでも全消灯が維持されるようにする。
 3. BQ STAT、I²CとADCの**異電源間逆給電**を確認する。3V3_PERIPHとPico 3V3(OUT)は直結禁止。
 4. PWR→HVの起動信号をPWR経由で配線するか、CTRL→HV直結にするかを基板位置から決める。4極コネクタ案(+5V/GND/EN/FAULT)と各端子の安全動作を確認する。
 5. 最低電池電圧からUSBデバッグ併用まで、SYS→外付けダイオード→Pico VSYSの電圧範囲とパワーシーケンスを確認。
@@ -70,3 +70,9 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 電源OFF時のバス保護とレベルシフタ候補の更新: [pwr-sequencing.md](pwr-sequencing.md)。HV5524 POL=HIGH/BL=LOWの全消灯案とRTCバックアップは[hv-blanking-rtc-backup.md](hv-blanking-rtc-backup.md)、**実ピン番号の接続案**は[ctrl-driver-rtc-schematic.md](ctrl-driver-rtc-schematic.md)を参照。
 
 **OLED・スイッチ・エンコーダ・通知音の接続ドラフト:** [ctrl-ui-audio-schematic.md](ctrl-ui-audio-schematic.md)。
+
+## Rev.A 2026-11-14統合
+- **PWR_5V_EN=GP16、AUDIO_AMP_EN=GP19（アンプを使う場合）**。GP17/GP18/GP22は予備。
+- RTC/OLEDはPico 3V3(OUT)の同一I2C電源ドメインで、外付け3V3_PERIPHとI2C分離のRev.A実装は省略候補。
+- PWR↔CTRL電源J2はSYS_TO_MCU、SYS_TO_AMP(optional)、+5V_LOGIC、GND帰路2本の5ピン候補、信号J3は8信号+GNDの9ピン（PWR_5V_OK実装なら10ピン）。
+- [Rev.A統合ネット仕様](reva-integrated-net-spec.md)を優先参照。
