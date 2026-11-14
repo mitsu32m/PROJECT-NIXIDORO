@@ -37,7 +37,7 @@ Status: PROPOSED / TO_VERIFY
 | CTRL→DISP | SHIFT_DATA, SHIFT_CLK, LE, BL (POL固定候補) | 3.3→5V変換したHV5524制御 | 74AHCT125 / 5V未投入時の逆給電防止、起動時全OFF |
 | CTRL→UI | I2C_SCL/SDA, ACTION, NEXT_L/R, ENC_A/B/SW, AUDIO | 低電圧の表示と操作 | 全GPIO数、GPIO割当、入力保護、ケーブル長は後で確認 |
 
-**Pico 2の具体GPIO割当とPWR↔CTRLネット定義**: [pico2-pinmap.md](pico2-pinmap.md)。
+**Pico 2の具体GPIO割当とPWR↔CTRLネット定義**: [pico2-pinmap.md](pico2-pinmap.md)。**基板間コネクタと配線トポロジー**: [board-interconnects.md](board-interconnects.md)。
 
 ### MCU選定更新（2026-11-14）
 - 完成品のMCU第一候補を**Raspberry Pi Pico 2（51×21mm）**へ変更。XIAO RP2350は小型化比較候補、Waveshare RP2350-Zeroは代替候補。
@@ -68,7 +68,7 @@ Status: PROPOSED / TO_VERIFY
 - 上表はMAX668のみ。仮に5V系のロジック等0.5Wを追加すると、16mA時の5V合計は約5.07W=1.014A。TPS61023効率85%仮定ならSYS入力約5.97W。SYS 3.3Vで**約1.81A**、SYS 4.5Vで**約1.33A**。USB電流とSYS電流は異なる。その他の3.3V負荷と各IC損失、過渡は未算入。
 - TPS61023公式は3.6V→5V/1.5A時94%の参考効率、スイッチ valley current limit 3.7A typと規定。3.7Aを「保証出力電流」と誤認しない。データシートで3V台低電池の電流制限最小値・熱を確認。https://www.ti.com/product/TPS61023
 - BQ25185はUSB入力制限100/500/1100mAのいずれか。**USB入力500mAで最大HV負荷+充電を同時に賄えるとは考えない**。SYS負荷優先→充電電流低下→電池補完が起こり得る。1100mA設定もUSB-CソースのCC電流広告や規格適合・追加充電余力を自動で保証するわけではない。https://www.ti.com/lit/ds/symlink/bq25185.pdf
-- **PWR→HV低電圧専用候補:** JST XH 3極 2.5mmピッチ、定格3A AC/DC (AWG22使用時)・250V AC/DC（メーカーシリーズ値）。信号例 Pin1=+5V_HV、Pin2=GND、Pin3=HV_EN。ただし**ピン配列と部品型番は暫定**、ワイヤ径・圧着工具・ハウジング・header、耐久/温度、筐体の干渉を確認。https://www.jst-mfg.com/product/index.php?series=277
+- **PWR→HV低電圧専用候補（2026-11-14更新: HV_FAULT_Nを追加した4極構成を優先）:** JST XH 4極 2.5mmピッチ、定格3A AC/DC (AWG22使用時)・250V AC/DC（メーカーシリーズ値）。信号例 Pin1=+5V_HV、Pin2=GND、Pin3=HV_EN、Pin4=HV_FAULT_N。ただし**ピン配列と部品型番は暫定**、ワイヤ径・圧着工具・ハウジング・header、耐久/温度、筐体の干渉を確認。https://www.jst-mfg.com/product/index.php?series=277
 - **JST XHをHV出力用として採用した意味ではない。** 高電圧側は物理形状の異なる専用品を選び、接続事故防止、残留電荷、絶縁距離、装着中の接触防止を満たす。『250V定格』だけでHV出力用安全性を保証しない。
 - HV_ENはHV基板側でハードウェアOFFをデフォルト（プルダウン/必要な論理極性）とする。5V/HVの立上り、切断・再接続、MCUの未起動/不意のリセット時もOFFを確認。
 - **次のGo/No-Go:** MAX668の通常・軽負荷・最大負荷効率、TPS61023の最低電池電圧における入力電流・インダクタピーク・接合温度、BQ25185の入力制限/電池補完と充電熱を数値モデルおよびベンチ試験で検証する。
