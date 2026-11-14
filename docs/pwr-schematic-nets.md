@@ -4,8 +4,10 @@
 Updated: 2026-11-14 JST
 Status: **SCHEMATIC DRAFT / NOT PCB-ORDER READY**. これはKiCadへ転記するための設計用接続表で、`.kicad_sch`ではない。未検証接続を「確定」と誤記しないこと。
 
+**Rev.A統合の優先ソース:** [reva-integrated-net-spec.md](reva-integrated-net-spec.md)。以下のTPS63031章は**代替案の履歴**であり、Rev.A基準実装では省略候補。
+
 ## 0. 分割・基本ブロック
-- **PWR PCB**: USB-C入力→保護→BQ25185→SYS→TPS61023(+5V) / TPS63031(+3V3)；保護付き21700＋NTC。外部Pico 2のVSYSへはSYS経由で供給。
+- **PWR PCB**: USB-C入力→保護→BQ25185→SYS→TPS61023(+5V)；TPS63031(+3V3)はRev.A省略候補；保護付き21700＋NTC。外部Pico 2のVSYSへはSYS経由で供給。
 - **HV PCB**: MAX668・トランス・独立OVP・放電・HV基板側フェイルセーフEN。PWR上には200Vを引き込まない。
 - **CTRL PCB**: Pico 2・レベルシフタ・HV5524/表示・UI。B2B接続は[board-interconnects.md](board-interconnects.md)。Pico 2の内蔵USBは書込み・デバッグ用。
 
@@ -16,11 +18,10 @@ flowchart TB
  CELL[保護付き1S 21700+NTC] <--> BQ
  BQ --> SYS[SYS_BUS]
  SYS --> BOOST[TPS61023 5V]
- SYS --> BUCK[TPS63031 3V3 peripheral]
- SYS --> D[外付けORダイオード] --> VSYS[Pico 2 VSYS]
+ SYS --> D[外付けORダイオード] --> VSYS[Pico 2 VSYS] --> V3[Pico 3V3 OUT]
  BOOST --> H[HV PCB 5V input]
- BOOST --> LOGIC[HV5524+74AHCT125 5V]
- BUCK --> PER[OLED/RTC]
+ BOOST --> LOGIC[HV5524+SN74LV4T125 5V]
+ V3 --> PER[OLED/RTC]
 ```
 
 ## 1. Net names (設計候補)
@@ -31,9 +32,9 @@ flowchart TB
 | CELL_BAT | **保護済みセルの出力**→BQ25185 BAT=2。PicoのBAT端子は使用しない |
 | SYS_BUS | BQ25185 SYS=1。電池・USBで変動する。PicoへのSYS_TO_MCUはここから分岐 |
 | +5V_PWR | TPS61023 VOUT=6、HVへ/5Vロジックへ供給（負荷スイッチ/保護の検討余地） |
-| +3V3_PERIPH | TPS63031 VOUT=1、OLED/RTC用。**Pico 2の3V3(OUT)と直結しない** |
+| PICO_3V3 | Pico 2 3V3(OUT)、OLED/RTC用。TPS63031の3V3を**並列接続しない** |
 | GND | 低圧GND。配線大電流・ADC帰路・熱ビア配置をPCB上で明確化 |
-| PWR_5V_EN / PWR_3V3_EN | 各DC/DCのENに適用する有効化論理。起動タイミング・デフォルトは未確定 |
+| PWR_5V_EN | TPS61023 EN、GP16制御。PWRでデフォルトLOW。独立3V3 ENはRev.A省略候補 |
 | SYS_TO_MCU | SYS_BUSからPico 2 VSYSのORダイオードへ |
 | HV_EN_REQ / HV_FAULT_N | CTRL↔PWR↔HVの中継。高電圧監視/遮断はHV側ハード優先 |
 
@@ -66,7 +67,7 @@ flowchart TB
 - 最大負荷約1.0A時の起動・最低SYS・電流制限（典型値でなく最小値）・誘導ノイズ・温度を確認する。
 - **EN=LOWで入力と出力が切り離される（True Disconnection）はTIの仕様で確認済み**。ただし出力コンデンサの残留電荷やGPIOなど外部経路からの逆給電は保証対象外。HV電源停止はHV基板自身のHV_EN/OVPで独立に実装する。
 
-## 4. TPS63031 U3 — TI DSK 10-pin WSON (pin map verified)
+## 4. 旧代替案 TPS63031 U3 — Rev.Aでは原則DNP/未実装
 | U3 pin | 名前 | ネット / 外付けパーツ |
 |---:|---|---|
 | 1 | VOUT | +3V3_PERIPH、COUT=10µF×2 nominal |
@@ -86,7 +87,7 @@ flowchart TB
 ## 5. PWR↔CTRL / PWR↔HV の設計境界
 - **PWR→Pico 2**: SYS_BUS→外付けショットキーダイオード→Pico VSYS。Picoの内蔵USB VBUS→ダイオード→VSYSと電源OR。USB側5VをPWR→Pico VBUSに直結しない。ダイオードは電流・VF・逆漏れを選別。
 - **PWR→HV低圧J1（4極案）**: +5V_HV、GND、HV_EN_REQ、HV_FAULT_N（PWR側にはHV_EN/FAULTのパススルーだけ）。JST XH 4極が候補。定格電流、線材、ハーネス、誤挿入、電流帰路を確認。
-- **PWR→CTRL**: SYS_TO_MCU、GND、+5V_LOGIC、+3V3_PERIPH、STATx、ADC_BAT/SYS/5V（**分圧済みのみ**）、HV_EN_REQ、HV_FAULT_N、PWR_5V_OK optional。電源と信号を別コネクタにする案。
+- **PWR→CTRL**: SYS_TO_MCU、SYS_TO_AMP（任意、SYS共通）、GND×必要本数、+5V_LOGIC、STATx、ADC_BAT/SYS/5V（**分圧済みのみ**）、PWR_5V_EN、HV_EN_REQ、HV_FAULT_N、PWR_5V_OK optional。**独立+3V3_PERIPHはRev.A基準で接続しない**。電源と信号を別コネクタにする案。
 - 高電圧出力HV_OUT/HV_RETURNをPWR配線/一般JST XHコネクタへ混ぜない。
 
 ## 6. KiCad化するときの未解決リスト (mandatory)
@@ -94,7 +95,7 @@ flowchart TB
 - [ ] USB-C端子/CC1・CC2 Rd/電流広告読み取り条件、ESD・過電流・逆極性保護の型番と接続。
 - [ ] BQ25185/その他電源ICのCin/Csys/Coutの**実効容量・定格・MLCCケース**選定。
 - [ ] TPS61023のインダクタ飽和・DCR・温度・出力トランジェント、EN/OFF中の電力経路。
-- [ ] TPS63031のVINAとVINの給電、PS/SYNC、ENシーケンス、出力安定性と充電中ノイズ。
+- [ ] Pico 3V3(OUT)からOLED/RTCを給電する外部負荷・待機電流と、PicoのみUSB給電時の逆給電を確認。TPS63031を将来使用する場合は別設計。
 - [ ] Pico VSYS外付けダイオードを含むUSB同時接続、GND、I²C/ADC/STATの逆給電防止。
 - [ ] BQ25185の熱ビアとGND銅箔、TPS61023高速ループ、温度/電池隔離、筐体CAD。
 - [ ] コネクタ具体型番/方向/極数、TP、基板実寸、全体予算の積算。
