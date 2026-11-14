@@ -35,7 +35,7 @@ Updated: 2026-11-14 (JST)
 | 15 | 3.3V電源 | **TPS63031（固定3.3V Buck-Boost）第一候補** | 1+予備 | PROPOSED | C | SYS電圧範囲と必要出力、静止電流 |
 | 16 | 充電・Power Path | Texas Instruments BQ25185 | 1+予備 | PROPOSED | B | 入力条件、充電中の動作、電池保護・NTC・熱 |
 | 17 | Li-ion電池 | 保護付き1S電池パック/21700約5Ah案 | 1 | TO_VERIFY | B | **生セルと完成保護付きパックを混同しない**、容量・ケース寸法・NTC・輸送安全性 |
-| 18 | USB-C | USB-C 5Vシンク、ESD/入力保護と適切なCC実装 | 1+予備 | PROPOSED | B | 端子実装、基板位置、必要なUSB電流 |
+| 18 | USB-C・電源切替・保護 | **GCT USB4105-GF-A** USB2.0 USB-Cコネクタ第一候補。**TI TPS22918DBVR**は低圧ロードスイッチ候補（eFuseではない） | 各1+予備 | PROPOSED | B | USB-C CC1/CC2に各5.1kΩ、VBUS ESD/サージ・入力電流制限、XIAO USB電源との競合とデータ配線、5V経路の電源切替・逆流、筐体取付。TPS22918 1〜5.5V・最大2A、過電流保護機能なし。非常停止/保守切離しと通常OFFを分ける。USB https://www.digikey.jp/en/products/detail/gct/USB4105-GF-A/11198441 / switch https://www.ti.com/product/TPS22918 |
 | 19 | 高電圧電源 | 可変/調整可能な昇圧系。**kohacraft MAX668 + 1:10トランスのSEPIC参考設計（5V→高電圧）**を候補に追加 | 1評価系 | TO_VERIFY | C | **2023-04-12の原記事PDF確認済み**。MAX668のFB分圧式 Vout=1.25×(1+R1/R2); R1=2MΩ、R2=14.3kΩで約176V。抵抗変更で目標電圧は設計変更可能だが実出力保証ではない。5V入力前提、スイッチング/トランス/安全定格/無負荷保護/リップル/軽負荷効率/ENとIN-12B着火を要検証。記事 https://kohacraft.com/archives/202304120917.html |
 | 20 | HV最終制御IC候補 | LT3757Aを使うトランス結合Flyback案 | 1+予備 | PROPOSED | C | トランス・FET・基板の実現性とレビュー前提 |
 | 21 | ACTION | **三和電子 OBSF-30（30mm級モーメンタリ）第一候補** | 1+予備 | PROPOSED | A | マルツ参考¥301税込（色別）。ボタン部φ25mm、取り付けスペース・ケース高さ、色/3Dキャップ、押下音と感触を3D実寸模型で確認。https://www.marutsu.co.jp/pc/i/9604/ |
@@ -48,6 +48,14 @@ Updated: 2026-11-14 (JST)
 | 28 | 造形素材 | PETG等（試作）/最終ASA等を比較 | 適量 | PROPOSED | A/B | Bambu Lab A1での印刷適合性、耐熱・難燃性。ASAは適切な設備が必要 |
 | 29 | 透光・固定 | 拡散板、遮光材、ネジ、スペーサー、配線コネクタ | 小分け一式 | TO_VERIFY | A/B | 球体の開口と保守設計ができてからサイズ決定 |
 | 30 | PCB | 表示/ドライバ/UI/電源の複数基板案。HV5524等QFN用ステンシルも検討 | 試作数回 | TO_VERIFY | C | CAD外形、分割、熱・絶縁・実装確認、学校のリフロー炉借用可否、適切なリフロー条件と検査 |
+
+## USB-C・本体OFF・保護回路（2026-11-14）
+- 本体背面USB-C 5VシンクでBQ25185へ充電入力。候補 GCT USB4105-GF-A (USB2.0データ線あり、シールド/固定脚付き)。https://www.digikey.jp/en/products/detail/gct/USB4105-GF-A/11198441
+- CC1/CC2各5.1kΩ Rdで5Vシンクを構成し、CCで通知された供給可能電流を超えないようBQ25185の入力制限を設定。コネクタ・ESD/サージ・VBUS保護とUSBデータ経路は詳細設計待ち。
+- **充電回路は主電源OFFでも動作させる**方向。主電源OFFは高電圧電源OFF（Enable）+ MCU低消費電力化/低圧負荷切断を中心に検討。安全なメンテナンスの電池切り離しは別途。
+- TPS22918DBVRは候補ロードスイッチ（1〜5.5V、2A、SOT-23-6、shutdown typ 0.5µA）。https://www.ti.com/product/TPS22918 。**eFuseではなく過電流保護は非搭載**。切る場所と必要電流、OFF時の逆給電を検証。XIAOのGPIOで電源を制御する際の起動/保持ロジックにも注意。
+- XIAOのUSB-Cを試作書き込みに使用。本体USB-CとXIAO USB VBUSの単純並列はしない。最終単一ポート化は回路・FW設計が必要なため未決。
+- 180–200V HVレールのEN制御と**高耐圧ブリーダ/放電経路**、エンクロージャの感電保護は別系統で設計・確認する（ロードスイッチでHV遮断は不可）。
 
 ## ニキシー・ネオン球の固定方式（2026-11-14）
 - **IN-12B ×2: PCBに個別ソケットレセプタクルを実装する方式を第一候補**。交換できること、PETGのガイドとPCB側支持を分離し、高電圧端子に触れないこと。IN-12Bのピン径約1.02mm、SK-136/1mm用接点が参照される。接点の具体型番・適合範囲・ピッチと孔径は実物測定後に選定。参考 https://www.tube-tester.com/sites/nixie/data/in-12b.htm
