@@ -30,8 +30,8 @@ Status: PROPOSED / TO_VERIFY。**回路方式案でありPCB発注・電気安�
 1. USB-Cまたは電池でBQ25185 SYSを生成。Pico 2 VSYSへ電源が供給される一方、**TPS61023 EN/HV_ENはプルダウン等で既定OFF**。TPS63031のEN既定状態はRTC/OLEDの要件に合わせて設計する。
 2. Pico 2が起動し、電圧/温度/充電状態など、無通電でも安全な測定系を確認。BOOT_SAFEの間HVはOFF。
 3. 必要なら周辺3.3Vを起動。I2Cバスのpull-upをどの3.3Vドメインにつなぐか確定し、未通電周辺からの逆給電を防止する。
-4. 必要な場合のみ5Vレール（TPS61023 EN）を有効化し、電圧良好の確認後、74AHCT125/HV5524の論理電源を整える。
-5. **HV5524全消灯**を保証するBL/POL/LE/シフトデータ初期化を行う。ロジック電源不安定時はブランキングを外部ハードで維持。
+4. 必要な場合のみ5Vレール（TPS61023 EN）を有効化し、電圧良好の確認後、SN74LV4T125/HV5524の論理電源を整える。
+5. **HV5524全消灯**：Microchip真理値表でBL=LOW、POL=HIGHが全OFF（BL=LOW、POL=LOWは全ON）。POLを5Vにプルアップして固定、BLをGNDへプルダウンする案。ロジック5V安定→全ゼロデータ書込み・ラッチ→必要時のみBL=HIGH。電源不安定時はHV電源の起動をハード側で禁止。詳細は[hv-blanking-rtc-backup.md](hv-blanking-rtc-backup.md)。
 6. ユーザー要求と電源余力、HV OVP/FAULTの正常を確認して、HV_EN_REQを許可する。
 7. HVを使わないときは、HV出力全消灯→HV_EN OFF→bleederで残留電荷放電。必要なら5VレールOFF（ただしRTC/OLED/MCUからの逆給電を監視）。
 
@@ -41,7 +41,7 @@ Status: PROPOSED / TO_VERIFY。**回路方式案でありPCB発注・電気安�
 | HV_EN_REQ | OFF (LOW案) | **HV基板側**プルダウン/論理AND with independent OVP; 3.3V GPIO直結の耐圧と過渡を確認 |
 | TPS61023_EN | OFF | PWR基板側プルダウン。MCUから制御するルートと5V供給前のGPIOが3.3V有効であることを検証 |
 | TPS63031_EN | ONまたはOFF（要件待ち） | RTCを常時動かすかバックアップ電源に委ねるかで決定。Picoが3.3V独立動作できることが前提 |
-| HV5524_BL/LE/CLK/DATA | **起動時全OFF** | BLの論理極性・POL・電源シーケンスをHV5524 datasheetで確認し、電源不安定でも全消灯 |
+| HV5524_BL/LE/CLK/DATA | **起動時全OFF** | **BL=LOWかつPOL=HIGHで全OFF、POL=LOWなら全ON**。5V VDDなしでの出力状態は保証しないためHV昇圧禁止と放電/接触防止を独立に設計 |
 | PWR_STATUS/FAULT | 通信不可時もHV安全停止 | OPEN DRAIN方式、未通電GPIO逆給電、配線断の検知/ハード停止要件 |
 | BQ25185_/CE | 充電を許可/禁止する設計値 | 電池NTC・USB入力と整合。MCU起動を前提にせず、充電の単独動作を検討 |
 
