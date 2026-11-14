@@ -1,4 +1,7 @@
 # 部品候補台帳 / Procurement BOM — Draft v0.2
+
+> **最新Rev.A基準の更新（2026-11-14）:** MCU第一候補は**Raspberry Pi Pico 2**、OLEDとRTCはPico 3V3(OUT)、3.3V独立レギュレータ**TPS63031は省略候補**、HV5524のシフタは**SN74LV4T125**第一候補。以下にあるXIAO RP2350/74AHCT125/TPS63031の第一候補表記は**旧比較履歴**であり、現行の部品購入指示ではない。参照：[Rev.A統合ネット仕様](reva-integrated-net-spec.md)。
+
 Updated: 2026-11-14 (JST)
 
 **購入予算を使える期限: 2027年1月下旬（正確な日は未確認）。計画上の発注完了目標を 2027-01-20 に前倒しする。**
