@@ -129,3 +129,46 @@ flowchart TB
 6. コネクタ型番・GPIO・UVLO・抵抗コンデンサ定格、KiCad footprintとJLCPCBの実際の購買/実装可能性を確認。
 
 関連: [module-interfaces.md](module-interfaces.md) / [power-state-machine.md](power-state-machine.md) / [components.md](components.md)
+
+## 6A. メーカー典型回路から抽出した周辺定数（2026-11-14）
+
+**ステータス: PROPOSED / NOT ORDER-READY**。以下はメーカーPDFの標準アプリケーションまたは計算から得た*初期検討値*。標準推奨値と、NIXIDORO実機での動作・熱・容量ディレーティング保証は別物。
+
+### BQ25185（TI SLUSF65B, revised Aug 2026）
+- **ILIM/VSET: 18kΩ → VBATREG 4.2V + USB入力電流制限500mA**（TIの設定表/設計例）。電池セルの4.2V定格・USB利用条件に適合する場合に限る。5V/500mA入力と500mA充電は同時負荷時に充電電流低減される。
+- **ISET:** RISET = KISET / ICHG, KISET typical 300 AΩ。250mA→1.2kΩ、500mA→600Ω、データシートの設計例300mA→1kΩ。**250mAを初回実装の第一候補**、500mAは基板のパッド/交換評価候補（充電中の抵抗ホットスワップ運用は要注意）。1%精度以上を目安とし熱試験を実施。
+- **CIN >=1µF / CSYS: nominal 10µF (メーカー範囲1–100µF) / CBAT >=1µF**。製造容量ではなく、DCバイアス・温度・公差・経年後の**実効容量**がメーカー要求を満たすこと。IN/SYSはTIが25V定格X5R/X7Rを推奨。実装サイズは選定したMLCCデータシートで確認。
+- NTCは選んだ電池仕様とTS/MRピンのTI推奨回路を照合。定数未確定。STAT1/STAT2と/CEの無通電時のデフォルト状態も未確定。
+- 資料: https://www.ti.com/lit/ds/symlink/bq25185.pdf 7.2.2およびISET Pin Detection。
+
+### TPS61023（TI SLVSF14B, Figure 8-1: 2.7–4.35V to 5V/1.5A）
+| 部品 | 典型回路値 | Rev.A補足 |
+|---|---:|---|
+| L1 | 1µH | **Isat > 温度/公差込みのピーク電流**。DCRとケース高さを選定。TI例 XEL4030-102ME/74438357010/HBME042A-1R0MS-99 |
+| CIN | 10µF X5R/X7R | 実効容量・入力ケーブル寄生Lによるリンギング評価 |
+| COUT | 22µF×2 X5R/X7R | DCバイアス、定常/突入/負荷過渡、安定性 |
+| RFB_TOP | 732kΩ | 5V設定のTI典型回路、実際のFB公差/精度を確認 |
+| RFB_BOTTOM | 100kΩ | 同上 |
+- 最小スイッチ電流制限は**2.7A**（VIN=3.6V, VOUT=5Vの電気特性表）、typ 3.7A。「typ3.7Aだから3.7A入力が使える」と見なさず、低SYS電圧・高温・ピークIを計算する。
+- 200V/16mAのHV出力=3.2W、MAX668効率70%仮定→5V入力0.914A。5Vロジックなどの追加負荷・過渡・熱も評価する。
+- 資料: https://www.ti.com/lit/ds/symlink/tps61023.pdf Figure 8-1, Table 8-1/8-2。
+
+### TPS63031（TI SLVS696D, Figure 6 Fixed 3.3V)
+| 部品 | 典型回路値 | Rev.A補足 |
+|---|---:|---|
+| L1 | 1.5µH | 飽和電流・DCR・最大温度・入手性を評価 |
+| CIN | 10µF | 実効容量確認 |
+| CVINA | 0.1µF | VINA-GNDの近傍配置 |
+| COUT | 10µF×2 | 実効容量と3.3V負荷/リップル |
+| FB | **VOUTへ直結** | 固定出力版TPS63031（可変TPS63030の上/下抵抗を流用しない） |
+| PS/SYNC | 制御方法未確定 | 軽負荷効率/ノイズと電源投入時レベルの確認 |
+- 3.3V昇圧側で最大500mAというTIの参考値を全入力電圧での保証と誤認しない。
+- 資料: https://www.ti.com/lit/ds/symlink/tps63030.pdf Figure 6。
+
+### 次のKiCad回路前の数値ゲート
+1. BQ25185 ILIM=18kΩ, ISET=1.2kΩの設定表を充電セルメーカー仕様・TS NTC回路と照合。
+2. TPS61023 1µHのピーク電流・最小電流制限マージン、2×22µFの実効容量・熱と負荷過渡を計算。
+3. TPS63031の出力負荷上限、EN/PS/SYNCの初期状態、Pico 2 3V3(OUT)との競合禁止。
+4. WSON/SOT563の実装方法・リフロー・試験ポイント、JLCPCB在庫/実装とコネクタ取付寸法を確認。
+5. **¥50,000総額の見積と追加試作予備費を確認するまでは発注確定しない**。
+
