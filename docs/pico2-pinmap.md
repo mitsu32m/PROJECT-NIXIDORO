@@ -12,9 +12,9 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 | Pico GPIO | Pico基板物理pin | 信号名 | 行先/用途 | 注意点 |
 |---|---:|---|---|---|
 | GP0 | 1 | HV_DATA | SN74LV4T125候補 → HV5524 DATA | 5Vレベル変換、OFF中の逆給電防止 |
-| GP1 | 2 | HV_CLK | 74AHCT125 → HV5524 CLK | 同上 |
-| GP2 | 4 | HV_LE | 74AHCT125 → HV5524 LE | 同上 |
-| GP3 | 5 | HV_BL | 74AHCT125 → HV5524 BL | 電源投入時の全消灯レベルはHV5524資料で確定 |
+| GP1 | 2 | HV_CLK | SN74LV4T125候補 → HV5524 CLK | 同上 |
+| GP2 | 4 | HV_LE | SN74LV4T125候補 → HV5524 LE | 同上 |
+| GP3 | 5 | HV_BL | SN74LV4T125候補 → HV5524 BL | 電源投入時の全消灯レベルはHV5524資料で確定 |
 | GP4 | 6 | HV_EN_REQ | HV電源起動要求 | HV基板ハードOFF既定。独立OVPが上位優先 |
 | GP5 | 7 | HV_FAULT_N | OVPなど異常通知 | ハードウェア側で停止が完結すること |
 | GP6 | 9 | NEXT_L | NEXTスイッチ左 | チャタリング、プルアップ |
@@ -67,4 +67,4 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 
 詳細なJ1/J2/J3/J4基板間配線案: [board-interconnects.md](board-interconnects.md)。
 
-電源OFF時のバス保護とレベルシフタ候補の更新: [pwr-sequencing.md](pwr-sequencing.md)。
+電源OFF時のバス保護とレベルシフタ候補の更新: [pwr-sequencing.md](pwr-sequencing.md)。HV5524 POL=HIGH/BL=LOWの全消灯案とRTCバックアップは[hv-blanking-rtc-backup.md](hv-blanking-rtc-backup.md)を参照。
