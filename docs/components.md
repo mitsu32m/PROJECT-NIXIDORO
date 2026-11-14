@@ -49,6 +49,14 @@ Updated: 2026-11-14 (JST)
 | 29 | 透光・固定 | 拡散板、遮光材、ネジ、スペーサー、配線コネクタ | 小分け一式 | TO_VERIFY | A/B | 球体の開口と保守設計ができてからサイズ決定 |
 | 30 | PCB | 表示/ドライバ/UI/電源の複数基板案。HV5524等QFN用ステンシルも検討 | 試作数回 | TO_VERIFY | C | CAD外形、分割、熱・絶縁・実装確認、学校のリフロー炉借用可否、適切なリフロー条件と検査 |
 
+## Power Path / 充電選定メモ (2026-11-14)
+- **BQ25185DLHRを第一候補として継続（未発注）**。
+- TI公式資料: https://www.ti.com/product/BQ25185 / Rev.B (2026年8月)。最大1A充電、SYS優先、入力不足時の充電電流削減、電池へのシームレス移行。動作時のSYSはUSB接続時通常約4.5V、電池時は電池電圧に追従する。
+- **SYS→5V昇圧→MAX668方式の高電圧電源 / HV5524ロジック**、別途SYS→3.3V安定化→MCU/OLED/RTCを想定。5Vレールの電力・変換効率・電源ON/OFF順序は未検証。
+- WSON 2.2×2.0mm（10ピン）のため学校リフロー炉借用が有力。底面パッド・検査・熱拡散の設計が必要。
+- **BQ25185EVMはDigiKey参考価格約¥22,914（税抜）で総予算5万円に対し高価**。純正EVM購入は現状優先しない。電源・充電の試験は教員監督下で安全な評価方法を選ぶ。
+- 充電ICの各保護機能があることと、完成電池パックの保護回路が不要になることは同義ではない。温度監視/電池保護/USB-C CCと入力ESDを総合設計する。
+
 ## HV表示ドライバ検証メモ (2026-11-14)
 - メーカー資料: https://www.microchip.com/en-us/product/hv5524 / https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/HV5524-32-Channel-Serial-to-Parallel-Converter-Data-Sheet-DS20006850.pdf
 - HV5524はIn Production、32ch・220V連続推奨、VDD=4.5–5.5V。3.3V MCU→74AHCT125等を挟む。
