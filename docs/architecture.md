@@ -10,7 +10,8 @@ flowchart TB
     SYS --> LV[3.3V regulator]
     SYS --> V5[5V boost regulator / MAX668入力とHV driver logic]
     V5 --> HV[高電圧昇圧 MAX668 / TO_VERIFY]
-    V5 --> MCU[MCU XIAO RP2350 via validated 5V power path / TO_VERIFY]
+    SYS --> MUX[external diode / ORing with Pico USB VBUS]
+    MUX --> MCU[MCU Pico 2 VSYS / PROPOSED]
     LV --> OLED[OLED]
     LV --> RTC[RTC]
     MCU --> CTRL[ACTION / NEXT / Encoder]
@@ -51,3 +52,8 @@ flowchart TB
 
 ## 検証順
 低電圧LED UI試作 → スモークOLED/筐体の実寸検証 → ネオン球と数字管の個別電気特性検証（監督下） → ドライバ → 電源/電池統合。
+
+## HV5524ブランキング・RTCバックアップ（2026-11-14）
+- HV5524真理値表は**BL=LOW、POL=HIGHで全出力OFF**。**BL=LOW、POL=LOWは全出力ON**なので注意。POLを5Vへプルアップ固定、BLをGNDにプルダウンする回路が第一案。HVの独立OVP/放電と置き換えない。
+- RTC RV-3028-C7のVBACKUPは低漏れコンデンサ/一次電池を比較。バックアップ切替・トリクルチャージはEEPROM設定が必要。一次電池の充電は禁止。
+- 詳細: [表示ドライバ全消灯・RTCバックアップ設計](hv-blanking-rtc-backup.md)。
