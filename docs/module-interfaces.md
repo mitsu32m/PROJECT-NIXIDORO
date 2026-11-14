@@ -37,6 +37,8 @@ Status: PROPOSED / TO_VERIFY
 | CTRL→DISP | SHIFT_DATA, SHIFT_CLK, LE, BL (POL固定候補) | 3.3→5V変換したHV5524制御 | 74AHCT125 / 5V未投入時の逆給電防止、起動時全OFF |
 | CTRL→UI | I2C_SCL/SDA, ACTION, NEXT_L/R, ENC_A/B/SW, AUDIO | 低電圧の表示と操作 | 全GPIO数、GPIO割当、入力保護、ケーブル長は後で確認 |
 
+**Pico 2の具体GPIO割当とPWR↔CTRLネット定義**: [pico2-pinmap.md](pico2-pinmap.md)。
+
 ### MCU選定更新（2026-11-14）
 - 完成品のMCU第一候補を**Raspberry Pi Pico 2（51×21mm）**へ変更。XIAO RP2350は小型化比較候補、Waveshare RP2350-Zeroは代替候補。
 - Pico 2の場合、**PWRのSYS→ショットキー→VSYS**を検討。USB VBUSはPico内蔵D1を通じてVSYSに入る。5V_LOGICをPicoのVBUSへ供給する案は原則使わない。5V電源はMAX668・HV5524・レベルシフタ向けに維持。
