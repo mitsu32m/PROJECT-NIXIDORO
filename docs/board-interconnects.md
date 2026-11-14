@@ -1,4 +1,7 @@
 # 基板間コネクタ・ハーネス設計案 — Draft v0.1
+
+> **2026-11-14 Rev.A電源構成の第一候補更新:** RTC・OLEDはPico 2の3V3(OUT)へ統合、アンプはSYS給電＋SHUTDOWNとし、TPS63031とI²C分離ICを削減する案を追加。**実測/発注前検証未了**。詳細：[CTRL電源ドメイン統合案](ctrl-power-domains.md)。以下に残る3V3_PERIPHや分離構成は従来案・比較対象。
+
 Updated: 2026-11-14 JST
 Status: PROPOSED / TO_VERIFY。**接続関係と必要ネットを定義したドラフト。実際のピン番号・HV端子部品は未確定。発注用図面ではない。**
 
