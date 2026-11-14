@@ -104,3 +104,31 @@ flowchart TB
 - TI TPS63031 product / TPS6303x datasheet: https://www.ti.com/product/TPS63031
 - Raspberry Pi Pico 2 official datasheet: https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf
 - [PWR調査ノート](pwr-schematic-plan.md) / [モジュール間配線](board-interconnects.md) / [GPIO割当](pico2-pinmap.md)
+
+## 7. BQ25185 TS/MR・USB-C入力保護の具体化（2026-11-14）
+
+**ステータス：メーカー仕様に根拠を持つ回路候補。部品型番/USB入力保護を実装確定したわけではない。**
+
+### セル温度NTC
+- **BQ25185 TS/MR (U1 pin6) → 10kΩ @25°C, B(25/85)=3435KのNTC → GND** がメーカー標準構成。NTCを**セル表面へ熱結合**し、充電ICやコイルの温度を測る場所には置かない。TI内蔵のTSバイアスを利用するためメーカー典型構成のNTCに外部プルアップ抵抗を足さない。
+- 10kΩ NTCのメーカー型番・温度精度・端子/ケーブル長・セル貼付材料・耐熱定格は未確定。保護付き21700セルに既設NTCがある場合は**B定数/常温値と保護回路との電気的共用可否**を確認し、単純に並列接続しない。
+- TS/MRが所定のcold/hot比較器閾値を越えると充電が停止し安全タイマも停止。異なるB定数では実際の停止温度が変わるため補正抵抗と閾値の再計算が必要。
+- **TS/MRはMRファクトリーモード入力を兼用**する。意図しない長時間LOWでfactory modeに入らないよう、NTCケーブルの短絡/断線/押しボタン併設/基板洗浄残渣を検討。特にGNDへ固定するダミー抵抗で温度保護を**意図的に無効化しない**。
+- メーカーのNTC故障検出に加えて、実セル温度を同時測定し、電池メーカーの充電温度範囲より安全側の停止条件を設定する。BQ25185のTS保護は**セルパックの保護回路の代用ではない**。
+- 一次資料: TI SLUSF65B (Aug 2026), External NTC Monitoring §8.3.9 / Typical Application Fig 7-1 https://www.ti.com/lit/ds/symlink/bq25185.pdf
+
+### USB-C受電・入力保護
+- 既存 GCT USB4105-GF-A を暫定候補とし、**CC1→Rd 5.1kΩ→GND、CC2→別のRd 5.1kΩ→GND**。VbusとGNDをBQ25185 INへ配線。USB-Cの入力電流広告/USB規則の判定なしにBQ25185のILIMを1100mAへ固定してはいけない。
+- **初期仕様はUSB-C 5V/500mA相当までを評価対象**。PC USB2.0の既定電流と接続元USB-CアダプターのCC情報/認識状態は異なる場合がある。500mAがいかなる接続先でも自動で保証されるわけではない。USB 2.0の列挙状況やType-C電流広告に整合する制御を要検討。
+- **CC電流検知が必要な拡張案**: TI TUSB320 (USB Type-C UFP/DRP CC検出, GPIO/I²CでDefault/1.5A/3A広告を検出)。ただしBQ25185のILIM/VSETは充電終止電圧も設定するため、マイコンで単純に抵抗値を切替えて電流能力に追従する方法は**充電電圧への誤影響・起動/停止挙動を含む再設計が必要**。現時点で追加採用しない。
+- **ESD（信号）候補**: TI TPD4E05U06等のUSB Type-C用低容量ESD保護。CC1/CC2、USBデータを使う場合はD+/D-、USB挿抜への保護を検討し、コネクタ近傍に配置。**5.5V Vrwmの信号ESDデバイスは、VBUS過電圧遮断やヒューズではない**。正式な保護対象ピン、クランプ電圧と接続を確認。
+- **入力パワー保護候補**: TI TPS2595系eFuse。過電流制限、UVLO/OVP、突入制御、過熱保護が可能。ただし**全てのTPS2595枝番でUSB 5Vに適切なOVP閾値とは限らない**ため、具体型番の可変OVLO/クランプ閾値・ILIM・漏れ電流・入力5V時の動作、BQ25185のIN入力保護との重複・価格/手実装性を比較してから採用判断。
+- TI BQ25185そのものにINPUT OVP、入力電流制限、充電熱制御があり、eFuseは必須と断定できない。一方、**VBUS ESD、物理的な短絡、コネクタ側パターン/ケーブルの電流、誤配線、異常USB供給**に対する保護範囲を区別し、必要ならeFuse/ヒューズを追加。受電5VでのTPS2595の必要性は機能重複と価格を比較して保留。
+- USB-C receptacleのシールド接地、USBデータ線を使うか（Picoのデバッグ用USBとは分離）、USB電源の逆流経路、CC配線の静電気放電、TVSの戻り経路、負荷側CINの突入を配線図で確認する。
+- 一次資料：TI TUSB320 https://www.ti.com/product/TUSB320 ; TI TPS2595 https://www.ti.com/product/TPS2595 ; TI TPD4E05U06 https://www.ti.com/product/TPD4E05U06
+
+### Rev.A作図前の判断ゲート
+1. **電池NTCの現物型番を先に指定**し、10kΩ@25°C B=3435Kを保証するか確認。温度しきい値、TS/MRの短絡・断線時挙動を実験計画に明記。
+2. USB-C 5V入力の使用条件を「単純な充電器専用」か「PC USBのデータ/列挙を含む」か明文化し、USB規則との適合性をレビュー。今は500mAで保守的評価。
+3. CC用ESD/シールド、VBUS入力保護、BQ25185 IN前のショート/サージ保護の実装部品は**価格・定格・JLC実装・基板面積**の比較後に採否を決める。
+4. NTC接続、USB異常、VBUS入力定格、BQ25185熱/充電保護のテストを、実セルを危険に晒さずダミー負荷・NTC模擬抵抗で先に実施。
