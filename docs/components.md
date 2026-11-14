@@ -29,7 +29,7 @@ Updated: 2026-11-14 (JST)
 | 09 | MCU 試作用 | Seeed Studio XIAO RP2350 | 1–2 | PROPOSED | A | 3.3V入出力、ピン数、開発環境 |
 | 10 | MCU 最終基板 | STM32U073K8 | 1+予備 | PROPOSED | C | 実際に移行する必要性、パッケージ/開発負荷 |
 | 11 | RTC | Micro Crystal RV-3028-C7 | 1+予備 | PROPOSED | B | モジュールの有無、配線、バックアップ、実装容易性 |
-| 12 | 高耐圧シンクドライバ | **Microchip HV5524K7-G ×1（第一候補）** | 1+予備 | PROPOSED | B | メーカー現行生産、32ch・220V推奨動作上限・5Vロジック。ネオン12+数字20で32ch（IN-12Bのコンマ不使用）。**44ピン7×7mm WQFN実装が最大の課題**。Mouser Japan参考単価¥1,703（変動）。[メーカー](https://www.microchip.com/en-us/product/hv5524) / [Mouser](https://www.mouser.jp/ja/ProductDetail/Microchip-Technology/HV5524K7-G) |
+| 12 | 高耐圧シンクドライバ | **Microchip HV5524K7-G ×1（第一候補）** | 1+予備 | PROPOSED | B | メーカー現行生産、32ch・220V推奨動作上限・5Vロジック。ネオン12+数字20で32ch（IN-12Bのコンマ不使用）。**44ピン7×7mm WQFN実装は学校のリフロー炉借用を検討中**。Mouser Japan参考単価¥1,703（変動）。[メーカー](https://www.microchip.com/en-us/product/hv5524) / [Mouser](https://www.mouser.jp/ja/ProductDetail/Microchip-Technology/HV5524K7-G) |
 | 13 | ロジック変換 | 74AHCT125（5V動作の4chバッファ） | 1+予備 | PROPOSED | B | HV5524のVIH≥0.8×VDDより3.3V直接駆動は不可。CLK/DATA/LE/BLを変換、POL固定。 |
 | 14 | 5V電源 | TPS61023など単セルから5V生成 | 1+予備 | PROPOSED | C | 各負荷の動作/停止条件、効率、電流 |
 | 15 | 3.3V電源 | TPS63031などBuck-Boost | 1+予備 | PROPOSED | C | SYS電圧範囲と必要出力、静止電流 |
@@ -47,13 +47,14 @@ Updated: 2026-11-14 (JST)
 | 27 | 低圧試作用 | ブレッドボード、線材、ピンヘッダ、試作PCB | 一式 | PROPOSED | A | すでに所持しているものは重複購入しない |
 | 28 | 造形素材 | PETG等（試作）/最終ASA等を比較 | 適量 | PROPOSED | A/B | Bambu Lab A1での印刷適合性、耐熱・難燃性。ASAは適切な設備が必要 |
 | 29 | 透光・固定 | 拡散板、遮光材、ネジ、スペーサー、配線コネクタ | 小分け一式 | TO_VERIFY | A/B | 球体の開口と保守設計ができてからサイズ決定 |
-| 30 | PCB | 表示/ドライバ/UI/電源の複数基板案 | 試作数回 | TO_VERIFY | C | CAD外形、分割、熱・絶縁・実装確認 |
+| 30 | PCB | 表示/ドライバ/UI/電源の複数基板案。HV5524等QFN用ステンシルも検討 | 試作数回 | TO_VERIFY | C | CAD外形、分割、熱・絶縁・実装確認、学校のリフロー炉借用可否、適切なリフロー条件と検査 |
 
 ## HV表示ドライバ検証メモ (2026-11-14)
 - メーカー資料: https://www.microchip.com/en-us/product/hv5524 / https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/HV5524-32-Channel-Serial-to-Parallel-Converter-Data-Sheet-DS20006850.pdf
 - HV5524はIn Production、32ch・220V連続推奨、VDD=4.5–5.5V。3.3V MCU→74AHCT125等を挟む。
 - ネオン12 + IN-12B数字20で32chちょうど、**コンマ電極は駆動対象外**。増設余裕なし。
-- **発注前のゲート: WQFN実装方法/費用とPCB会社の対応、ICの配置・手直し難度**。
+- **ユーザーはリフロー炉を借用できる見込み**（未確認）。WQFN実装方法として、適切な温度プロファイル、ステンシル、はんだペースト、部品位置合わせ、実装後の検査を用いる案を優先。装置利用可否と経験者の立ち合いを確認。
+- **発注前のゲート: リフロー炉の借用可否、PCBとメタルマスクの仕様、実装品質の確認方法、手直し難度**。
 - PQFP/PLCC型の別ドライバ（HV5522など）もパッケージだけでなくロジック電源条件が異なるため単純置換しない。
 
 ## 高電圧電源の設計メモ (2026-11-14)
