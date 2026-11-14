@@ -6,9 +6,9 @@
 flowchart TB
     U[USB-C 5V] --> PP[充電・Power Path / PROPOSED: BQ25185]
     B[保護付き1S Li-ion / PROPOSED] <--> PP
-    PP --> SYS[System rail]
+    PP --> SYS[System rail / USB時と電池時で電圧変動]
     SYS --> LV[3.3V regulator]
-    SYS --> V5[5V driver logic regulator]
+    SYS --> V5[5V boost regulator / MAX668入力とHV driver logic]
     SYS --> HV[高電圧昇圧 / TO_VERIFY]
     LV --> MCU[MCU / prototype: XIAO RP2350]
     LV --> OLED[OLED]
