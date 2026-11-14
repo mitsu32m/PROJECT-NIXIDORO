@@ -49,6 +49,15 @@ Updated: 2026-11-14 (JST)
 | 29 | 透光・固定 | 拡散板、遮光材、ネジ、スペーサー、配線コネクタ | 小分け一式 | TO_VERIFY | A/B | 球体の開口と保守設計ができてからサイズ決定 |
 | 30 | PCB | 表示/ドライバ/UI/電源の複数基板案。HV5524等QFN用ステンシルも検討 | 試作数回 | TO_VERIFY | C | CAD外形、分割、熱・絶縁・実装確認、学校のリフロー炉借用可否、適切なリフロー条件と検査 |
 
+## MAX668 Rev.A パワー段候補・設計ゲート（2026-11-14、購入未確定）
+- **電力目標**: HV 200–205V、通常およびストレス試験は0〜16mA以上を設計検討。200V×12mA=2.4W、200V×16mA=3.2W。2本のIN-12Bを各3.5mA、ネオン12灯を各0.7mAとして重ねると約15.4mA（ただし全数字カソード同時ON時の管電流分配は別問題）。「10–12mA」を最悪負荷確定値にしない。効率70%仮定で3.2W出力/5V入力は約0.91A、効率は実測前の仮定。
+- **MOSFET比較候補**: Diodes DMN6070SSD (dual N-MOS, 60V, RDS(on)≤100mΩ@VGS4.5V, Qg typ5.6nC@4.5V)。ゲート電荷は小さいが、60V耐圧が漏れLスパイクを含め足りる保証なし。さらにダブルFETパッケージの使用法・熱/放熱・フットプリント確認。https://www.diodes.com/part/view/DMN6070SSD 〔**未採用**〕。他の60–100Vロジックレベル低Qg品と比較。MAX668出力EXTの実ゲート電圧でRDS(on)が保証されることが条件。
+- **整流ダイオード比較候補**: Diodes ES1J (VRRM 600V, IF(AV)1A, trr typ35ns @ datasheet条件, VF max等は条件付き)。二次側の逆ピーク電圧、逆回復・漏洩、リップル、実温度を評価。https://www.diodes.com/part/view/ES1J 〔未採用〕。
+- **電流検出抵抗**: MAX668 datasheet の Current Limit Threshold 85/100/115mV (min/typ/max)。RCS=30mΩなら2.83/3.33/3.83A相当。トランスの許容ピーク3.2Aを仮定すると最大側で超過し得る。**トランス枝番013の確定電気仕様・飽和データが揃うまで抵抗値未決定**。Kelvin接続で計測し、寄生/公差/温度を加味。https://www.analog.com/media/en/technical-documentation/data-sheets/max668-max669.pdf
+- **出力**: 350V級の容量とESR/リップルに余裕のあるコンデンサを比較。FB高圧抵抗は複数直列で各チップの動作電圧/損失を満たす。200V nominalとMAX668のFB公差、OVPとHV5524の220V推奨上限とのマージンを評価。
+- **OVP/放電**: フィードバック開放、無負荷突入、起動/停止過渡を想定して、FBとは独立の電圧監視→MAX668停止（かつ停止が有効に働くことを試験）、電圧適合ブリーダ、スナバ/クランプのフットプリントを用意。実測波形と故障試験後に定数確定。HV5524の220V continuous/230V abs maxを超えないことが合格条件。https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/HV5524-32-Channel-Serial-to-Parallel-Converter-Data-Sheet-DS20006850.pdf
+- **全要素、購入・PCB設計の確定前**。HV基板は電流制限した5V給電からダミー負荷のみで安全レビュー後に評価。熱・5V入力/出力能力、接触・残留電荷・オシロの接地を含む試験手順が必要。
+
 ## MAX668用トランスの型番調査（2026-11-14、Rev.A前の検証候補）
 - **TTRN-060S-013-T（東京コイルエンジニアリング）**を具体的比較候補に追加。別作者によるMAX668/5V→200V級ニキシー電源の製作例で採用され、巻数比1:10.5・一次最大スイッチ電流3.2Aという値が製作例と小売表記にある。**メーカー個別枝番の確定データシートをまだ確認できていないためこれらはメーカー保証値ではない**。製作例 https://ehbtj.com/electronics/redesign-of-boost-converter-for-nixie-tube/
 - TTRN-060Sシリーズのメーカー文書に寸法・推奨ランド・ピン配置・リフロー対応があるが、公開PDF例は**別枝番 TTRN-060S-055-T**。その10.8µH、最大2.7A、1:18等を013品へ流用しないこと。シリーズPDF https://www.tokyocoil.com/wp-content/themes/tokyo_coil/pdf/ttrn/TTRN-060S.pdf
