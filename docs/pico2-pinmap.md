@@ -28,7 +28,7 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 | GP14 | 19 | BQ_STAT2 | BQ25185 STAT2 | 同上 |
 | GP15 | 20 | PWR_5V_OK | 5V PowerGood（回路は未確定） | 単純に5VをGPIOへ入力しない |
 | GP16 | 21 | PWR_5V_EN | TPS61023のENをPWRへ | 電源OFFデフォルト、PWRプルダウン |
-| GP17 | 22 | SPARE | Rev.AではI2C分離を省略するため予備 | 将来OLED電源遮断に変更するなら再割当 |
+| GP17 | 22 | ADC_SENSE_EN | PWR J3 pin10→Q4–Q6のADC高側スイッチ | PWR R24=100kΩでLOW既定。Pico無給電時の注入と停止過渡は実測 |
 | GP18 | 24 | SPARE | Rev.Aでは独立3V3を省略するため予備 | 将来拡張 |
 | GP19 | 25 | AUDIO_AMP_EN (option) | TPA2005D1 SHUTDOWN | LOW=停止、アンプ省略時は予備 |
 | GP20 | 26 | I2C_SDA | OLED+RTC | I2C0 SDA |
@@ -37,7 +37,7 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 | GP26 | 31 | ADC_BAT | 電池電圧監視 | 分圧/保護/逆給電防止/セル保護との整合 |
 | GP27 | 32 | ADC_SYS | BQ25185 SYS監視 | 分圧/ノイズ/保護 |
 | GP28 | 34 | ADC_5V | 5Vブースト監視 | 分圧/逆給電防止 |
-- **既存21本+GP16の5V_ENで22本/26本を使用する方向**。GP17/GP18/GP22は予備、GP19はアンプ実装時のみ使用。アンプ採用で23本使用・予備3本、アンプ省略なら22本使用・予備4本（GP15の5V_OKはオプション）。GP15の5V_OKは選択部品の有無で削減可能。
+- **GP17をADC_SENSE_ENへ割当**。元の集計基準22本/26本から1本増え、アンプなし23本・アンプあり24本。予備はGP18/GP22の2本（GP15の5V_OK未実装なら追加1本）。これはGPIO割当案であり、CTRL回路図・ファームは未更新。
 - GPIOの機能割当はRP2350の利用可能ペリフェラルと重複していない。ただしPCB配置・信号品質・実装しやすさで変更可能。
 - GP26–GP28の外部ADCは3.3V範囲のピン入力定格・ADC精度を厳守。分圧器は未給電時のGPIOクランプ経由の逆給電と常時損失を防ぐ構造で設計。入力低抵抗化で常時電池消費を増やさない。
 - GP29内部のVSYS監視をADC_SYSとして流用すると、**外付けショットキー後のVSYS**でありBQ25185 SYSそのものではない。測り分けるのでGP27を確保する。
@@ -50,7 +50,8 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 | PICO_3V3 | CTRL基板内 | Pico 3V3(OUT)→RTC/OLED | **PWR→CTRLコネクタには入れず、TPS63031と並列化しない** |
 | +5V_LOGIC | PWR→CTRL | HV5524/SN74LV4T125の5Vロジック | 5V耐圧、起動時BL制御、MCU未通電時の逆給電 |
 | BQ_STAT1, BQ_STAT2 | PWR→CTRL | 充電状態 | 3.3V側プルアップ、電源ドメイン間対策 |
-| ADC_BAT, ADC_SYS, ADC_5V | PWR→CTRL | 安全な分圧後の監視信号 | **生BAT/SYS/5VをそのままADCへ送らない**。分圧回路をどちらのPCBに置くか未決定 |
+| ADC_BAT, ADC_SYS, ADC_5V | PWR→CTRL | PWR v3の100kΩ/47kΩ分圧後の監視信号 | **生BAT/SYS/5VをそのままADCへ送らない**。MOS遮断のOFF漏れとPico無給電時の注入は未実測 |
+| ADC_SENSE_EN | CTRL→PWR | GP17からPWR J3 pin10へ。PWR側MOSで分圧を有効化 | LOW既定、ADC読取り時のみHIGH。停止過渡・逆給電は実測 |
 | HV_EN_REQ | CTRL→PWR→HV | HV起動要求をPWR経由でパススルーする構成案 | **PWR-HV 4極案**。PWR未接続・CTRL抜去ではOFF |
 | HV_FAULT_N | HV→CTRL | OVP/PowerFaultの状態 | **PWR-HVの4極案に追加済み**。PWR経由でCTRLに通知する想定。部品型番と配線は別途検証 |
 | PWR_5V_OK | PWR→CTRL | 5Vレールの妥当性 | PWR上の比較器/PG方式が確定するまでオプション |
@@ -72,7 +73,7 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 **OLED・スイッチ・エンコーダ・通知音の接続ドラフト:** [ctrl-ui-audio-schematic.md](ctrl-ui-audio-schematic.md)。
 
 ## Rev.A 2026-11-14統合
-- **PWR_5V_EN=GP16、AUDIO_AMP_EN=GP19（アンプを使う場合）**。GP17/GP18/GP22は予備。
+- **PWR_5V_EN=GP16、ADC_SENSE_EN=GP17、AUDIO_AMP_EN=GP19（アンプを使う場合）**。GP18/GP22は予備。
 - RTC/OLEDはPico 3V3(OUT)の同一I2C電源ドメインで、外付け3V3_PERIPHとI2C分離のRev.A実装は省略候補。
-- PWR↔CTRL電源J2はSYS_TO_MCU、SYS_TO_AMP(optional)、+5V_LOGIC、GND帰路2本の5ピン候補、信号J3は8信号+GNDの9ピン（PWR_5V_OK実装なら10ピン）。
+- PWR↔CTRL電源J2はSYS_TO_MCU、SYS_TO_AMP(optional)、+5V_LOGIC、GND帰路2本の5ピン候補。信号J3は**9信号+GNDの10ピン**で、pin10=ADC_SENSE_ENを追加（PWR v3の暫定ピン番号）。PWR_5V_OKを加えるなら11ピン又は信号再配置が必要。
 - [Rev.A統合ネット仕様](reva-integrated-net-spec.md)を優先参照。

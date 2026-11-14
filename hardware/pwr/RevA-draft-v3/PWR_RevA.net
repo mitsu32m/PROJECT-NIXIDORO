@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "C:\\Users\\nakan\\Documents\\Codex\\2026-11-14\\project-nixidoro-kicad-https-github-com\\outputs\\PROJECT-NIXIDORO-PWR-RevA-v3\\PWR_RevA.kicad_sch")
-		(date "2026-11-14T18:20:26")
+		(date "2026-11-14T18:34:02")
 		(tool "Eeschema 10.0.4")
 		(sheet
 			(number "1")
