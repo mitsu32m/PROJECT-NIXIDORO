@@ -16,6 +16,7 @@
 - [ui-spec.md](ui-spec.md): 操作と状態遷移
 - [decisions/0001-record-decisions.md](decisions/0001-record-decisions.md): 設計決定の記録
 - [research/README.md](research/README.md): Deep Research資料の索引
+- [pwr-reva-v2-review.md](pwr-reva-v2-review.md): PWR Rev.A KiCadドラフトv2とメーカー照合・未解決事項
 
 ## 運用ルール
 1. Deep Researchの「推奨」は自動的にCONFIRMEDにしない。
