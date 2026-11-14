@@ -11,7 +11,7 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 ## GPIO初回アサイン
 | Pico GPIO | Pico基板物理pin | 信号名 | 行先/用途 | 注意点 |
 |---|---:|---|---|---|
-| GP0 | 1 | HV_DATA | 74AHCT125 → HV5524 DATA | 5Vレベル変換、OFF中の逆給電防止 |
+| GP0 | 1 | HV_DATA | SN74LV4T125候補 → HV5524 DATA | 5Vレベル変換、OFF中の逆給電防止 |
 | GP1 | 2 | HV_CLK | 74AHCT125 → HV5524 CLK | 同上 |
 | GP2 | 4 | HV_LE | 74AHCT125 → HV5524 LE | 同上 |
 | GP3 | 5 | HV_BL | 74AHCT125 → HV5524 BL | 電源投入時の全消灯レベルはHV5524資料で確定 |
@@ -27,14 +27,17 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 | GP13 | 17 | BQ_STAT1 | BQ25185 STAT1 | 3.3V適合プルアップ、電源OFF時逆給電注意 |
 | GP14 | 19 | BQ_STAT2 | BQ25185 STAT2 | 同上 |
 | GP15 | 20 | PWR_5V_OK | 5V PowerGood（回路は未確定） | 単純に5VをGPIOへ入力しない |
-| GP16–GP19 | 21,22,24,25 | SPARE | 予備4本 | 今後の回路変更/検査用 |
+| GP16 | 21 | PWR_5V_EN | TPS61023のENをPWRへ | 電源OFFデフォルト、PWRプルダウン |
+| GP17 | 22 | I2C_ISO_EN (option) | RTC/OLEDの異電源I2C分離 | 使わなければ予備 |
+| GP18 | 24 | PWR_3V3_EN (option) | 周辺3.3V制御 | RTCの保持電源方針決定まで予備 |
+| GP19 | 25 | SPARE | 予備 | 将来拡張 |
 | GP20 | 26 | I2C_SDA | OLED+RTC | I2C0 SDA |
 | GP21 | 27 | I2C_SCL | OLED+RTC | I2C0 SCL |
 | GP22 | 29 | SPARE | 予備1本 | 電源保持/MCUリセット拡張候補 |
 | GP26 | 31 | ADC_BAT | 電池電圧監視 | 分圧/保護/逆給電防止/セル保護との整合 |
 | GP27 | 32 | ADC_SYS | BQ25185 SYS監視 | 分圧/ノイズ/保護 |
 | GP28 | 34 | ADC_5V | 5Vブースト監視 | 分圧/逆給電防止 |
-- **使用21本/26本、予備5本**（うちGP15のPWR_5V_OKは選択部品の有無で削減可能）。
+- **既存21本+GP16の5V_ENで22本/26本を使用する方向**。GP17/GP18はオプション、GP19/GP22は予備。オプション全実装なら24本使用、予備2本。GP15の5V_OKは選択部品の有無で削減可能。
 - GPIOの機能割当はRP2350の利用可能ペリフェラルと重複していない。ただしPCB配置・信号品質・実装しやすさで変更可能。
 - GP26–GP28の外部ADCは3.3V範囲のピン入力定格・ADC精度を厳守。分圧器は未給電時のGPIOクランプ経由の逆給電と常時損失を防ぐ構造で設計。入力低抵抗化で常時電池消費を増やさない。
 - GP29内部のVSYS監視をADC_SYSとして流用すると、**外付けショットキー後のVSYS**でありBQ25185 SYSそのものではない。測り分けるのでGP27を確保する。
@@ -63,3 +66,5 @@ Status: PROPOSED / TO_VERIFY。**ピン配置は設計初案で、購入/PCB発�
 6. 合計GPIO、コネクタ極数、台座内の配線・5V電源能力、余剰GPIOのアクセス方法を設計レビュー。
 
 詳細なJ1/J2/J3/J4基板間配線案: [board-interconnects.md](board-interconnects.md)。
+
+電源OFF時のバス保護とレベルシフタ候補の更新: [pwr-sequencing.md](pwr-sequencing.md)。
