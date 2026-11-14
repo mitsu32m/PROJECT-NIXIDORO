@@ -16,7 +16,7 @@ Status: PROPOSED / TO_VERIFY
 |---|---|---|---|
 | PWR | USB-C、BQ25185、保護付き1S Li-ion+NTC、TPS63031 3.3V、TPS61023 5V、入力保護 | 台座、充電端子付近 | **同じPCBを再利用する第一候補** |
 | HV | MAX668、個別仕様が確認できたトランス、MOSFET、整流、FB、独立OVP、bleeder、スナバ、EN | 電池から距離を取れる内部領域 | **同じPCBを再利用する第一候補** |
-| CTRL / DISP | XIAO RP2350（試作）、HV5524、74AHCT125、IN-12B×2、ネオン×12、OLED/RTC/操作・音声インターフェース | 表示球体と操作台 | 筐体制約で**制御PCB＋表示PCBに分割可** |
+| CTRL / DISP | Pico 2（完成品の暫定第一候補。XIAO RP2350は比較候補）、HV5524、74AHCT125、IN-12B×2、ネオン×12、OLED/RTC/操作・音声インターフェース | 表示球体と操作台 | 筐体制約で**制御PCB＋表示PCBに分割可** |
 
 - 「3論理モジュール」は「物理基板が必ず3枚」という意味ではない。CTRL/DISPは実装・配線の都合で2枚になる可能性あり。
 - HV5524とニキシー管を同じ基板とするか、表示位置に合わせて分割するかは筐体CADと絶縁・配線長から決定。
@@ -31,11 +31,16 @@ Status: PROPOSED / TO_VERIFY
 | PWR→HV | +5V_HV, GND_PWR | 5V入力 | 電圧許容範囲、定常/起動/故障時最大電流、線幅、リターン経路を後で確定 |
 | CTRL→HV | HV_EN | ロジック信号 | **未駆動、MCUリセット、CTRL断、コネクタ抜去で昇圧OFF**。極性、レベル、プル抵抗の選定待ち |
 | HV→CTRL/DISP | HV_OUT, HV_RETURN | 暫定200–205V DC | **低圧コネクタから物理分離**、誤挿入防止、耐圧・沿面/空間距離、接触防止、残留電圧 |
-| PWR→CTRL | +5V_LOGIC, GND_LOGIC | XIAOへの5V候補と5Vロジック | **XIAO内蔵USB/充電ICとの競合・逆流禁止**。Seeed 3V3出力への直接給電は禁止（メーカー別途確認がない限り） |
-| PWR→CTRL | +3V3_PERIPH, GND_LOGIC | OLED、RTC等の3.3V | MCU基板由来3.3Vとの**電源競合を禁止**。I²Cレベル/プルアップ配置確認 |
+| PWR→CTRL | SYS_TO_MCU, GND_LOGIC | **Pico 2 VSYSへ外付けダイオードを介して給電する候補** | USB VBUS→VSYSの内蔵D1とのダイオードOR（Pico公式Figure 8）。SYSの全モード電圧、切替グリッチ、接地、逆給電を試験。XIAO採用時の5V/VBUS直接衝突は禁止 |
+| PWR→CTRL | +3V3_PERIPH, GND_LOGIC | OLED、RTC等の3.3V | Pico 2の3V3出力との**電源競合を禁止**。I²Cプルアップ・無通電GPIO経由の逆給電を確認 |
 | PWR→CTRL | CHG_STATUS, POWER_GOOD (optional) | 電源状態の通知 | BQ25185出力論理、レベル、プルアップ、実用性を検討 |
 | CTRL→DISP | SHIFT_DATA, SHIFT_CLK, LE, BL (POL固定候補) | 3.3→5V変換したHV5524制御 | 74AHCT125 / 5V未投入時の逆給電防止、起動時全OFF |
 | CTRL→UI | I2C_SCL/SDA, ACTION, NEXT_L/R, ENC_A/B/SW, AUDIO | 低電圧の表示と操作 | 全GPIO数、GPIO割当、入力保護、ケーブル長は後で確認 |
+
+### MCU選定更新（2026-11-14）
+- 完成品のMCU第一候補を**Raspberry Pi Pico 2（51×21mm）**へ変更。XIAO RP2350は小型化比較候補、Waveshare RP2350-Zeroは代替候補。
+- Pico 2の場合、**PWRのSYS→ショットキー→VSYS**を検討。USB VBUSはPico内蔵D1を通じてVSYSに入る。5V_LOGICをPicoのVBUSへ供給する案は原則使わない。5V電源はMAX668・HV5524・レベルシフタ向けに維持。
+- **仮決定**であり筐体51×21mmの収容、RTC/I²C、全GPIOと休止消費電流、調達額、実験が揃うまでは発注しない。詳しくは[pwr-schematic-plan.md](pwr-schematic-plan.md)参照。
 
 ### HV_RETURN / GNDについて
 - HV電源が非絶縁型であればHV_RETURNは内部で低圧側GNDと共通となり得る。それでも**高電圧出力側コネクタと低圧コネクタを分離**し、各電流ループの帰路をレイアウトで管理する。
@@ -124,7 +129,7 @@ Status: PROPOSED / TO_VERIFY
 ## 8. 初回設計前のGo / No-Go
 1. HVトランスの特定枝番について、メーカーのLp、飽和特性、巻線抵抗、巻線極性、温度、入手性が揃う。
 2. PWRの5V出力の定常・瞬間・熱の余裕を最大HV負荷+CTRL負荷で確認する。
-3. BQ25185とXIAOのUSB/電池電源の競合防止を、メーカー回路図で説明できる。
+3. **Pico 2のVSYS（第一候補）へのSYS給電とUSB VBUSのORing**を公式Figure 8で説明し、電圧/電流/瞬断を実測。XIAO採用の場合は内蔵充電ICとの競合防止が追加条件。
 4. HV5524の耐圧、全消灯回路、独立OVP、放電経路を設計・安全レビューする。
 5. MCUと表示管の取付寸法、基板外形の上限、工具・検査アクセスを3D模型で検証する。
 6. JLCPCB試作を含む現実のBOMが¥50,000以内、残予算と期限が確認できる。
