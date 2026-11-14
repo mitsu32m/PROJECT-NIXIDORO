@@ -9,8 +9,8 @@ flowchart TB
     PP --> SYS[System rail / USB時と電池時で電圧変動]
     SYS --> LV[3.3V regulator]
     SYS --> V5[5V boost regulator / MAX668入力とHV driver logic]
-    SYS --> HV[高電圧昇圧 / TO_VERIFY]
-    LV --> MCU[MCU / prototype: XIAO RP2350]
+    V5 --> HV[高電圧昇圧 MAX668 / TO_VERIFY]
+    V5 --> MCU[MCU XIAO RP2350 via validated 5V power path / TO_VERIFY]
     LV --> OLED[OLED]
     LV --> RTC[RTC]
     MCU --> CTRL[ACTION / NEXT / Encoder]
@@ -30,6 +30,15 @@ flowchart TB
 - HVドライバ基板: 表示基板背面
 - UI/MCU基板: 下部操作台
 - 電源基板: USB-C, 充電, 低圧レギュレータ, 昇圧
+
+## 2026-11-14 レビューを受けた優先修正 [TO_VERIFY]
+- 原資料のIN-12BはDC供給電圧 **200V以上** を示す。**176Vを確定設計値にしない**。200–205Vは暫定評価目標であり、実機の点灯・電流・過渡を測定してから決定する。
+- HV5524の連続推奨HVOUTは最大220V、絶対最大230V。200V級運用は余裕が小さい。**独立過電圧監視/停止、残留電荷放電、起動時全消灯を追加**し、過渡最大215V以下という仮目標の成立を試験する。
+- **SYS→HV直接経路を廃止してSYS→TPS61023→5V→MAX668へ統一**（5Vレールの入力余裕・負荷・起動順は未検証）。
+- **XIAO RP2350の3V3はSeeed資料上は電源出力**。外部TPS63031から直接駆動すると確定しない。XIAOのUSB/VBUS/内部充電回路とBQ25185は並列接続禁止。XIAO側の独立した5V供給・逆流防止を設計、3.3V外部レールは他の3.3V周辺用。
+- BQ25185は熱試験なしに1A充電を確定しない。250/500/750/1000mAを比較、USB-Cの入力電流上限は充電+動作電流の合計へ適用されることに注意。
+- 試作を HV電源、表示ドライバ、充電低圧電源、低圧UIに分け、各Go/No-Go試験を通過してから統合する。PCBレイアウトと安全性は教員レビュー前提。
+- 詳細: [設計レビュー比較メモ](research/2026-11-14-three-report-review.md)。
 
 ## 重要な未検証事項 [TO_VERIFY]
 - ネオン球とIN-12Bの**共通HV電圧**。特にIN-12B着火余裕。170 Vは仮置きで確定ではない。
