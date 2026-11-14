@@ -26,8 +26,8 @@ Updated: 2026-11-14 (JST)
 | 06 | 数字管保持・接続 | IN-12系ソケット/実装方法 | 2組+予備 | TO_VERIFY | B | 実際の管の寸法・端子に対応、交換性と保護カバー |
 | 07 | OLED | **Adafruit #938**（白色1.3インチ128×64、SSD1306、I²C/SPI）が第一候補。比較候補: Waveshare 1.3inch OLED Module (C)（白64×128、SH1107）、Waveshare 1.32inch OLED（白階調128×96、SSD1327） | 1+予備候補 | PROPOSED | A | Adafruit基板35.6×33mm、表示有効域29.42×14.70mm。台座内の基板干渉、スモーク窓、価格、国内在庫を確認。Waveshare 1.3inch OLED (A/B)は青色で外観条件に不一致。 |
 | 08 | スモーク窓 | スモークPMMA（透過率候補 27/38/49%） | 小片3種類 | PROPOSED | A | 表示OFFの隠蔽と点灯時の可読性、反射・加工 |
-| 09 | MCU 試作用 | Seeed Studio XIAO RP2350 | 1–2 | PROPOSED | A | 3.3V入出力、ピン数、開発環境 |
-| 10 | MCU 最終基板 | STM32U073K8 | 1+予備 | PROPOSED | C | 実際に移行する必要性、パッケージ/開発負荷 |
+| 09 | MCU 試作・完成品 第一候補 | **Seeed Studio XIAO RP2350** | 1–2 | PROPOSED | A | 外形21×17.8mm、2MB Flash、最大19 GPIO（裏面端子含む）。HV5524(4本)、I²C共有(2本)、操作UI(5本)、音声(1本)、HV enable(1本)で概算13 GPIO。端子割当と3.3V/USB/外部電源の競合、スリープ電流、実装方法を検証 |
+| 10 | MCU 省電力化代替案 | STM32U073K8（64KB Flash/56MHz/低消費電力、32pin） | 必要時 | PROPOSED | C | XIAOによる実測後、消費電力・サイズ制約が厳しい場合のみ移行を検討。ファームウェア移植/USB周辺回路・書込/デバッグ・端子数を再評価 |
 | 11 | RTC | **Micro Crystal RV-3028-C7 32.768kHz 1ppm-TA-QA（第一候補）** | 1+予備 | PROPOSED | B | 3.2×1.5×0.8mm、I²C、45nA typ @3V、±1ppm @25°C。DigiKey約¥487税込（価格変動、送料別）。バックアップ電源・切替回路の構成、I²C、極小8端子の実装を確認。時計モードに有用、単なるポモドーロ計測では必須ではない |
 | 12 | 高耐圧シンクドライバ | **Microchip HV5524K7-G ×1（第一候補）** | 1+予備 | PROPOSED | B | メーカー現行生産、32ch・220V推奨動作上限・5Vロジック。ネオン12+数字20で32ch（IN-12Bのコンマ不使用）。**44ピン7×7mm WQFN実装は学校のリフロー炉借用を検討中**。Mouser Japan参考単価¥1,703（変動）。[メーカー](https://www.microchip.com/en-us/product/hv5524) / [Mouser](https://www.mouser.jp/ja/ProductDetail/Microchip-Technology/HV5524K7-G) |
 | 13 | ロジック変換 | 74AHCT125（5V動作の4chバッファ） | 1+予備 | PROPOSED | B | HV5524のVIH≥0.8×VDDより3.3V直接駆動は不可。CLK/DATA/LE/BLを変換、POL固定。 |
@@ -48,6 +48,14 @@ Updated: 2026-11-14 (JST)
 | 28 | 造形素材 | PETG等（試作）/最終ASA等を比較 | 適量 | PROPOSED | A/B | Bambu Lab A1での印刷適合性、耐熱・難燃性。ASAは適切な設備が必要 |
 | 29 | 透光・固定 | 拡散板、遮光材、ネジ、スペーサー、配線コネクタ | 小分け一式 | TO_VERIFY | A/B | 球体の開口と保守設計ができてからサイズ決定 |
 | 30 | PCB | 表示/ドライバ/UI/電源の複数基板案。HV5524等QFN用ステンシルも検討 | 試作数回 | TO_VERIFY | C | CAD外形、分割、熱・絶縁・実装確認、学校のリフロー炉借用可否、適切なリフロー条件と検査 |
+
+## MCU選定メモ（2026-11-14）
+- **XIAO RP2350を試作から完成品まで使う第一候補**とし、STM32U073K8は省電力化・さらなる小型化の代替候補。いずれも未発注。
+- Seeed公式: https://wiki.seeedstudio.com/xiao_rp2350_arduino/ / ST公式: https://www.st.com/ja/microcontrollers-microprocessors/stm32u073k8.html
+- 端子概算13本：HV5524シリアル4、OLED+RTC I²C2、ACTION/NEXT2、押し込み式エンコーダ3、音1、高電圧電源Enable1。HV5524 POLなど固定レベルで処理する信号の妥当性は別途確認。
+- XIAO RP2350の最大19 GPIOは裏面パッドも含むため、モジュール搭載方法と実際の端子配線で使える本数を確認する。
+- ボードとしてのスリープ電流（LED、周辺回路、電源レール）はMCU単体仕様とは異なる。実測前に電池寿命改善効果を断定しない。
+- 専用BQ25185 charger とXIAO側の既存電池充電機能を併用する構成は不可または要厳密設計。XIAOの電源接続、外部3.3V供給、USB接続時の電源逆流を資料で確認する。
 
 ## RTC選定メモ (2026-11-14)
 - 第一候補: Micro Crystal RV-3028-C7 32.768kHz 1ppm-TA-QA。メーカー https://www.microcrystal.com/en/products/real-time-clock-rtc-modules/rv-3028-c7/ 、DigiKey https://www.digikey.jp/ja/products/detail/micro-crystal-ag/RV-3028-C7-32-768KHZ-1PPM-TA-QA/10499248
