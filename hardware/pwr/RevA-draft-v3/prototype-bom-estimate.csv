@@ -1,0 +1,18 @@
+category,reference,manufacturer,mpn,quantity,unit_jpy_ex_tax,extended_jpy_inc_tax,status,source_or_basis,open_issue
+PWR_IC,U1,Texas Instruments,BQ25185DLHR,1,425,467.5,price_checked,https://www.digikey.jp/ja/products/detail/texas-instruments/BQ25185DLHR/21769368,cell/thermal validation pending
+PWR_IC,U2,Texas Instruments,TPS61023DRLR,1,203,223.3,price_checked,https://www.digikey.jp/en/products/detail/texas-instruments/TPS61023DRLR/11310629,thermal/startup validation pending
+PWR_IC,U3,Texas Instruments,TPS259533DSGR,1,171,188.1,price_checked,https://www.digikey.jp/ja/products/detail/texas-instruments/TPS259533DSGR/8597484,OVLO/clamp transient validation pending
+USB_ESD,U4,Texas Instruments,TPD2E2U06DCKR,1,108,118.8,price_checked,https://www.digikey.jp/ja/products/detail/texas-instruments/TPD2E2U06DCKR/11502208,out of stock at check
+USB_ESD,D1,Texas Instruments,TPD1E10B06DPYR,1,67,73.7,price_checked,https://www.digikey.jp/ja/products/detail/texas-instruments/TPD1E10B06DPYR/3197744,surge energy validation pending
+USB_connector,J4,GCT,USB4105-GF-A,1,133,146.3,price_checked,https://www.digikey.jp/ja/products/detail/gct/USB4105-GF-A/11198441,pad/footprint check before PCB
+PWR_passives,R1-R24,Panasonic,ERJ3EKF series,,,,candidate_only,https://industrial.panasonic.com/ww/products/pt/general-purpose-chip-resistors/models/ERJ3EKF1802V,quantities and other values require final BOM
+PWR_passives,C1-C9,Murata,GRM31CR71E106KA12L / GRM32ER71E226KE15L,,,,candidate_only,https://ds.murata.com/simsurfing/mlcc.html,DC-bias effective capacitance and stock
+PWR_magnetics,L1,Coilcraft,XEL4030-102MEC,,,,candidate_only,https://www.coilcraft.com/getmedia/beede189-faf8-4b6b-825f-8ce276b0c18c/shortformcatalog_eu.pdf,core loss footprint and price
+PWR_safety,RT1,cell manufacturer,10k B3435 NTC,,,,unresolved,,cell pack and protection specification needed
+PWR_connector,J1/J2/J3/J5,undecided,undecided,,,,unresolved,,mating orientation and price
+HV_safety,HV OVP and discharge,undecided,undecided,,,,unresolved,,cannot omit
+PWR_remaining,PWR passives cell interface and safety,undecided,undecided,,,,planning_allowance,internal planning only,JPY 4000-8000 inc tax; unquoted items above included
+PCB,PWR/CTRL/HV prototype,PCB vendor,quote needed,,,,planning_allowance,internal planning only,JPY 6000-12000 inc tax; dimensions layers shipping assembly and reuse plan unresolved
+Shipping,consolidated orders,suppliers,quote needed,,,,planning_allowance,internal planning only,JPY 2000-5000 inc tax; tax and shipping per cart unresolved
+Other_project,display MCU HV cell and enclosure,undecided,undecided,,,,planning_allowance,internal planning only,JPY 20000-30000 inc tax; unquoted and includes HV safety
+Project_total,whole project,all suppliers,not computable,,,,unresolved,,PWR checked subtotal 1217.7 JPY inc tax is not whole-project cost

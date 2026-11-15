@@ -98,9 +98,9 @@ Status: PROPOSED / TO_VERIFY。**回路方式案でありPCB発注・電気安�
 
 ### GPIO予約案
 - GP16: PWR_5V_EN（TPS61023 EN、PWR側プルダウンで既定OFF）。
-- GP17: I2C_ISO_EN（分離ICを使う場合のみ。未使用なら予約のまま）。
-- GP18: PWR_3V3_EN（周辺3.3Vをスイッチ化する場合のみ。RTC保持方針が未確定のため予約）。
-- これらはまだ正式ピン割当ではなく、**PWR→CTRL監視/制御コネクタの極数も再計算**する。保護回路が増えても予算超過するならまず電源ドメインを簡素化する。
+- GP17: ADC_SENSE_EN（PWR Rev.A v3のJ3 pin10へ。PWR側R24=100kΩでLOW既定）。
+- GP18: 予備。旧PWR_3V3_EN案は現行Rev.Aでは採用しない。
+- この節は旧検討案を含む。現行第一候補は[統合ネット仕様](reva-integrated-net-spec.md)のGP17=ADC_SENSE_EN、J3=10極。GP18のPWR_3V3_EN案も現行Rev.Aには含めない。保護回路は予算調整で省略しない。
 
 ### KiCad設計の優先順位
 1. レール（Pico 3V3(OUT)、SYS、PWR 3.3V、5V LOGIC）の**電源ツリー/ドメイン**を確定。

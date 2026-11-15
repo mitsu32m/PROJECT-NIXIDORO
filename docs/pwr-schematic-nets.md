@@ -1,5 +1,7 @@
 # PWR Rev.A 回路図ドラフト：ネット接続表 — v0.1
 
+> **履歴資料。** このv0.1の`PWR_3V3_EN`、TPS63031、旧コネクタ案はPWR Rev.A v3の配線基準ではない。現行基準は[統合ネット仕様](reva-integrated-net-spec.md)と[KiCad v3回路図](../hardware/pwr/RevA-draft-v3/)で、GP17=`ADC_SENSE_EN`、J3=10極。
+
 **電源レールの起動順序・逆給電試験は** [pwr-sequencing.md](pwr-sequencing.md) **を参照**。TPS61023はTI仕様上shutdown時のtrue disconnectionを持つ（ただし出力残留電荷・GPIO経由の逆流には別対策）。
 Updated: 2026-11-14 JST
 Status: **SCHEMATIC DRAFT / NOT PCB-ORDER READY**. これはKiCadへ転記するための設計用接続表で、`.kicad_sch`ではない。未検証接続を「確定」と誤記しないこと。
