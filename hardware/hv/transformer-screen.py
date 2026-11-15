@@ -1,8 +1,9 @@
-"""First-order CCM screen of three manufacturer-documented transformers.
+"""Ideal CCM and LT8304 boundary-mode screens of three transformers.
 
-This is not a flyback design or a transformer rating calculation. Duty is ideal;
-efficiency is assumed; copper resistance is specified at room temperature. No thermal, control,
-startup, core, snubber, or certification conclusion can be drawn from the CSV.
+This is not a flyback design or a transformer rating calculation. Duty and
+boundary-mode power ceiling omit diode drop, delays and switching losses;
+efficiency is assumed. Copper resistance is specified at room temperature.
+No thermal, control, startup, core, snubber or safety conclusion follows.
 """
 import csv
 from itertools import product
@@ -36,6 +37,16 @@ for part, vin, vout, load_ma, efficiency, frequency_khz, lpri_uh in product(
     ipeak = ion_avg + ripple / 2
     ivalley = ion_avg - ripple / 2
     ipri_rms_sq = duty * (ion_avg**2 + ripple**2 / 12)
+    # LT8304 operates in boundary mode at heavy load. With zero valley
+    # current and Ipk=2 A, one cycle stores L*Ipk^2/2. Ideal on/off times
+    # are L*Ipk/Vin and L*Ipk/(Vout/Ns:Np). L cancels from the power ceiling.
+    reflected_v = vout / part['n_sec_pri']
+    bcm_on_s = lpri_h * LT8304_CURRENT_LIMIT_MIN_A / vin
+    bcm_off_s = lpri_h * LT8304_CURRENT_LIMIT_MIN_A / reflected_v
+    bcm_freq_hz = 1 / (bcm_on_s + bcm_off_s)
+    bcm_pin_ceiling = 0.5 * lpri_h * LT8304_CURRENT_LIMIT_MIN_A**2 * bcm_freq_hz
+    bcm_eta_required = pout / bcm_pin_ceiling
+    bcm_ipeak_required = 2 * pin / (vin * reflected_v / (vin + reflected_v))
     rows.append({
         'candidate': part['part'],
         'Vin_V': vin, 'Vout_V': vout, 'Iout_mA': load_ma,
@@ -46,6 +57,12 @@ for part, vin, vout, load_ma, efficiency, frequency_khz, lpri_uh in product(
         'Ipri_valley_CCM_A': round(ivalley, 6),
         'MAX668_D87pct_min_spec_margin': round(0.87 - duty, 6),
         'LT8304_2A_limit_margin_A': round(LT8304_CURRENT_LIMIT_MIN_A - ipeak, 6),
+        'LT8304_BCM_2A_f_ideal_kHz': round(bcm_freq_hz / 1000, 6),
+        'LT8304_BCM_2A_Pin_ideal_ceiling_W': round(bcm_pin_ceiling, 6),
+        'LT8304_BCM_eta_required': round(bcm_eta_required, 6),
+        'LT8304_BCM_Ipk_required_assumed_eta_A': round(bcm_ipeak_required, 6),
+        'LT8304_BCM_Pout_margin_assumed_eta_W': round(
+            bcm_pin_ceiling * efficiency - pout, 6),
         'current_reference_kind': part['current_reference_kind'],
         'current_reference_margin_A': round(part['current_reference_a'] - ipeak, 6),
         'Ppri_copper_room_temp_maxR_W': round(ipri_rms_sq * part['rpri_max_ohm'], 6),
