@@ -24,3 +24,7 @@ HV回路図は制御ICのピンを記録したドラフトであり、高電圧�
 ## HV方式の一次判定
 
 [HV電源方式の比較](../../docs/hv-architecture-decision.md)に、MAX668一段/二段、トランス・フライバック、高電圧カスコード、市販モジュールの成立条件を記録した。`python hardware/hv/hv-option-model.py` で仮定した効率の90条件を再計算できる。方式と部品が確定していないためHV KiCad回路図は今回変更していない。
+
+## HVトランスの一次選別
+
+[候補3型番の比較と432条件の再計算](../../docs/hv-transformer-screen.md)を追加した。適合する16mA連続回路は未確認のため、HV KiCadドラフト、ERC、ネットリストは変更していない。
