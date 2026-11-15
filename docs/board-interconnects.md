@@ -80,3 +80,7 @@ flowchart TB
 - Microchip HV5524 https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/HV5524-32-Channel-Serial-to-Parallel-Converter-Data-Sheet-DS20006850.pdf
 
 **2026-11-14 正本扱いのRev.A統合表:** [reva-integrated-net-spec.md](reva-integrated-net-spec.md)。この文書中の従来の3V3_PERIPH記述・旧極数は比較履歴。
+
+## 2026-11-15 統合ドラフトのコネクタ番号
+
+J番号は基板ごとに付ける。高圧ハーネスの旧「J4」は `HV.J2 ↔ CTRL.J4`、USB-Cは `PWR.J4`。PWR/CTRL信号10極は `PWR.J3 ↔ CTRL.J3`、pin10がADC_SENSE_EN/GP17でネットリスト照合済み。保護付きセルは統合PWRドラフトで `PWR.J5` を3極(BAT/GND/NTC)とした。各ハーネスの実部品・嵌合方向・定格は未決定。[統合レビュー](reva-integrated-prototype-review.md)を参照。

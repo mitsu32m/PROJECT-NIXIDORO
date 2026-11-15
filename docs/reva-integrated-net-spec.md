@@ -97,3 +97,7 @@ flowchart TD
 - [CTRL電源案](ctrl-power-domains.md) / [PWRピン別接続](pwr-schematic-nets.md) / [HV制御・RTC](ctrl-driver-rtc-schematic.md)
 - [PWR↔CTRL/HVインターフェース](board-interconnects.md) / [Pico GPIO](pico2-pinmap.md) / [電源シーケンス](pwr-sequencing.md)
 - メーカー: https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf ; https://www.ti.com/lit/ds/symlink/bq25185.pdf ; https://www.ti.com/lit/ds/symlink/tps61023.pdf ; https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/HV5524-32-Channel-Serial-to-Parallel-Converter-Data-Sheet-DS20006850.pdf
+
+## 2026-11-15 KiCad統合ドラフトへの差分
+
+[三基板統合・試作準備レビュー](reva-integrated-prototype-review.md)をこの仕様の実装検証記録とする。J番号は基板ローカルで、旧表記「J4 HV→CTRL/DISP」は `HV.J2 ↔ CTRL.J4` に読み替える。`PWR.J4` はUSB-Cである。旧文中の「ファームとCTRL回路図への実配線は未実装」は更新済みで、CTRLのPico 2 pin22/GP17からJ3 pin10へADC_SENSE_ENを結んだ。PWR v3のJ5 2極/基板上NTCは、元回路を保持したまま別ドラフトでJ5 3極/セル側NTCの概念接続へ変更した。セル型番・NTC値・コネクタは未確定。HVの磁性部品/独立OVP/放電とCTRLのRTCバックアップ/音声入力は未完成であり、KiCad ERCに残る違反を発注ゲートとする。

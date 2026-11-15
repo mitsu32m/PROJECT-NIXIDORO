@@ -1,0 +1,4684 @@
+(export
+	(version "E")
+	(design
+		(source "C:\\Users\\nakan\\OneDrive\\ドキュメント\\NIXIDORO\\PROJECT-NIXIDORO-repo\\hardware\\ctrl\\RevA-draft\\CTRL_RevA.kicad_sch")
+		(date "2026-11-15T19:23:57")
+		(tool "Eeschema 10.0.4")
+		(sheet
+			(number "1")
+			(name "/")
+			(tstamps "/")
+			(title_block
+				(title "PROJECT-NIXIDORO CTRL/DISP pin-level draft")
+				(company)
+				(rev "UNVERIFIED DRAFT")
+				(date "2026-11-15")
+				(source "CTRL_RevA.kicad_sch")
+				(comment
+					(number "1")
+					(value "")
+				)
+				(comment
+					(number "2")
+					(value "")
+				)
+				(comment
+					(number "3")
+					(value "")
+				)
+				(comment
+					(number "4")
+					(value "")
+				)
+				(comment
+					(number "5")
+					(value "")
+				)
+				(comment
+					(number "6")
+					(value "")
+				)
+				(comment
+					(number "7")
+					(value "")
+				)
+				(comment
+					(number "8")
+					(value "")
+				)
+				(comment
+					(number "9")
+					(value "")
+				)
+			)
+		)
+	)
+	(components
+		(comp
+			(ref "C1")
+			(value "0.1uF HV5524 VDD")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "7cf91eae-e1e0-4ece-8847-7739dd75f584")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C2")
+			(value "0.1uF translator")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "ed371b5f-69e0-453e-85d8-f8d6a0c54659")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C3")
+			(value "1uF amp bypass candidate")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "a84a22aa-09a4-40fd-aebb-3ffe9c50ef80")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "D1")
+			(value "Schottky OR MPN TBD")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "498e2d71-ca61-4c77-8d46-11aefbf5eceb")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J2")
+			(value "PWR-CTRL power provisional")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "CONN5")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "3f42ed65-855e-4937-b8a9-a2efab1e5904")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J3")
+			(value "PWR-CTRL signal provisional")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "CONN10")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "1474726f-eab2-44b8-be2e-68ffcd81c963")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "8")
+						)
+						(pin
+							(num "9")
+						)
+						(pin
+							(num "10")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J4")
+			(value "HV to DISP interface RESERVED")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "CONN2")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "73ebdac1-66aa-4942-bf38-bcc401a9b76d")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J5")
+			(value "OLED Adafruit 938 provisional")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "CONN4")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "a518175e-1707-4d50-9c5b-bdc70881fab1")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J6")
+			(value "UI ACTION/NEXT provisional")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "CONN4")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "343a8b1a-ae7b-4f97-b04b-d1044a9021a6")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J7")
+			(value "Encoder provisional")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "CONN4")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "bcc86055-1c30-4579-9894-2d937cde811d")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J8")
+			(value "8ohm speaker provisional")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "CONN2")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "edee71c3-e186-47b1-8d6a-d6eeaf6fb6de")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R2")
+			(value "10k BL default LOW")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "0cb7f405-094f-4f8b-b735-5361c3f04558")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R3")
+			(value "10k OE disable HIGH")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "4208d856-7285-4fa8-8ba9-e479fa16b6a0")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R4")
+			(value "4.7k I2C SDA candidate")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "d0acbb90-779f-4003-b79c-92f83718a5f1")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R5")
+			(value "4.7k I2C SCL candidate")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "e73c5ecf-1136-4c7b-a00d-841882ecdc00")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R6")
+			(value "100k amp default OFF")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "816b05fd-862f-409c-920d-ef09e12bacd2")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R100")
+			(value "IN12B A anode R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "99bfa95a-8e50-4714-a731-49a58943d450")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R101")
+			(value "IN12B B anode R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "2b961c49-e07d-46e7-b261-1d5683692abe")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R201")
+			(value "Neon limit R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "507d2af9-48ba-4373-ac20-ce0fe2d63e08")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R202")
+			(value "Neon limit R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "61d5f28a-315f-4bf7-a727-571941b2195f")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R203")
+			(value "Neon limit R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "179dd543-4b69-4bf9-b175-64d4e857224d")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R204")
+			(value "Neon limit R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "48d8409b-69bd-4f68-9970-93963d41a118")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R205")
+			(value "Neon limit R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "f455d9e3-88e1-45c5-9984-1da5bfeeb7a3")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R206")
+			(value "Neon limit R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "2609efe4-5b98-4565-84aa-7b1e825668c4")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R207")
+			(value "Neon limit R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "8abef675-41f2-42f2-b396-9656db64e0ac")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R208")
+			(value "Neon limit R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "3847e614-7cec-466b-b9b8-d34b0130c6cb")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R209")
+			(value "Neon limit R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "a5f82ac0-549f-486a-89d8-7b1507a1dfca")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R210")
+			(value "Neon limit R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "93a692b9-648c-46f2-b1bd-b852510273c3")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R211")
+			(value "Neon limit R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "aef40a04-d339-4c3d-b8e1-6046fde881c4")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R212")
+			(value "Neon limit R TODO")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PASSIVE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "5f2402f9-7884-4da6-95b7-17a93e8cb58c")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U1")
+			(value "Raspberry Pi Pico 2")
+			(footprint "Module:RaspberryPi_Pico_Common_THT")
+			(datasheet "https://pip-assets.raspberrypi.com/categories/1005-raspberry-pi-pico-2/documents/RP-008299-DS-2-pico-2-datasheet.pdf")
+			(fields
+				(field
+					(name "Footprint") "Module:RaspberryPi_Pico_Common_THT")
+				(field
+					(name "Datasheet") "https://pip-assets.raspberrypi.com/categories/1005-raspberry-pi-pico-2/documents/RP-008299-DS-2-pico-2-datasheet.pdf")
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "PICO2")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "609a8861-6077-4e78-9da1-cbe52ab59ee5")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "8")
+						)
+						(pin
+							(num "9")
+						)
+						(pin
+							(num "10")
+						)
+						(pin
+							(num "11")
+						)
+						(pin
+							(num "12")
+						)
+						(pin
+							(num "13")
+						)
+						(pin
+							(num "14")
+						)
+						(pin
+							(num "15")
+						)
+						(pin
+							(num "16")
+						)
+						(pin
+							(num "17")
+						)
+						(pin
+							(num "18")
+						)
+						(pin
+							(num "19")
+						)
+						(pin
+							(num "20")
+						)
+						(pin
+							(num "21")
+						)
+						(pin
+							(num "22")
+						)
+						(pin
+							(num "23")
+						)
+						(pin
+							(num "24")
+						)
+						(pin
+							(num "25")
+						)
+						(pin
+							(num "26")
+						)
+						(pin
+							(num "27")
+						)
+						(pin
+							(num "28")
+						)
+						(pin
+							(num "29")
+						)
+						(pin
+							(num "30")
+						)
+						(pin
+							(num "31")
+						)
+						(pin
+							(num "32")
+						)
+						(pin
+							(num "33")
+						)
+						(pin
+							(num "34")
+						)
+						(pin
+							(num "35")
+						)
+						(pin
+							(num "36")
+						)
+						(pin
+							(num "37")
+						)
+						(pin
+							(num "38")
+						)
+						(pin
+							(num "39")
+						)
+						(pin
+							(num "40")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U2")
+			(value "SN74LV4T125PWR")
+			(footprint "Package_SO:TSSOP-14_4.4x5mm_P0.65mm")
+			(datasheet "https://www.ti.com/lit/ds/symlink/sn74lv4t125.pdf")
+			(fields
+				(field
+					(name "Footprint") "Package_SO:TSSOP-14_4.4x5mm_P0.65mm")
+				(field
+					(name "Datasheet") "https://www.ti.com/lit/ds/symlink/sn74lv4t125.pdf")
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "SN74LV4T125")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "63bb6ebf-a119-4bf3-9617-a2ddbb9016d4")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "9")
+						)
+						(pin
+							(num "10")
+						)
+						(pin
+							(num "12")
+						)
+						(pin
+							(num "13")
+						)
+						(pin
+							(num "14")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "8")
+						)
+						(pin
+							(num "11")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U3")
+			(value "HV5524K7-G")
+			(footprint "Package_DFN_QFN:QFN-44-1EP_7x7mm_P0.5mm_EP5.15x5.15mm")
+			(datasheet "https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/HV5524-32-Channel-Serial-to-Parallel-Converter-Data-Sheet-DS20006850.pdf")
+			(fields
+				(field
+					(name "Footprint") "Package_DFN_QFN:QFN-44-1EP_7x7mm_P0.5mm_EP5.15x5.15mm")
+				(field
+					(name "Datasheet") "https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/HV5524-32-Channel-Serial-to-Parallel-Converter-Data-Sheet-DS20006850.pdf")
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "HV5524")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "65a1f323-f4b3-4269-9a08-64db50753ef5")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "35")
+						)
+						(pin
+							(num "36")
+						)
+						(pin
+							(num "37")
+						)
+						(pin
+							(num "38")
+						)
+						(pin
+							(num "39")
+						)
+						(pin
+							(num "40")
+						)
+						(pin
+							(num "41")
+						)
+						(pin
+							(num "42")
+						)
+						(pin
+							(num "43")
+						)
+						(pin
+							(num "44")
+						)
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "27")
+						)
+						(pin
+							(num "28")
+						)
+						(pin
+							(num "29")
+						)
+						(pin
+							(num "30")
+						)
+						(pin
+							(num "31")
+						)
+						(pin
+							(num "32")
+						)
+						(pin
+							(num "33")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "8")
+						)
+						(pin
+							(num "9")
+						)
+						(pin
+							(num "10")
+						)
+						(pin
+							(num "11")
+						)
+						(pin
+							(num "12")
+						)
+						(pin
+							(num "13")
+						)
+						(pin
+							(num "14")
+						)
+						(pin
+							(num "15")
+						)
+						(pin
+							(num "16")
+						)
+						(pin
+							(num "17")
+						)
+						(pin
+							(num "18")
+						)
+						(pin
+							(num "19")
+						)
+						(pin
+							(num "20")
+						)
+						(pin
+							(num "21")
+						)
+						(pin
+							(num "22")
+						)
+						(pin
+							(num "23")
+						)
+						(pin
+							(num "24")
+						)
+						(pin
+							(num "25")
+						)
+						(pin
+							(num "26")
+						)
+						(pin
+							(num "34")
+						)
+						(pin
+							(num "45")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U4")
+			(value "RV-3028-C7")
+			(datasheet "https://www.microcrystal.com/fileadmin/Media/Products/RTC/Datasheet/RV-3028-C7.pdf")
+			(fields
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet") "https://www.microcrystal.com/fileadmin/Media/Products/RTC/Datasheet/RV-3028-C7.pdf")
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "RV3028")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "6b20a38f-7d02-4614-a811-2abaa98b9618")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "8")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U5")
+			(value "TPA2005D1DRBR optional")
+			(footprint "Package_DFN_QFN:Texas_DRB0008A")
+			(datasheet "https://www.ti.com/lit/ds/symlink/tpa2005d1.pdf")
+			(fields
+				(field
+					(name "Footprint") "Package_DFN_QFN:Texas_DRB0008A")
+				(field
+					(name "Datasheet") "https://www.ti.com/lit/ds/symlink/tpa2005d1.pdf")
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "Project")
+				(part "TPA2005D1")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "Root")
+			)
+			(property
+				(name "Sheetfile")
+				(value "CTRL_RevA.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "852232f5-cb1a-4cb7-b71a-cea3a4611d9d")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "9")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "8")
+						)
+					)
+				)
+			)
+		)
+	)
+	(groups)
+	(variants)
+	(libparts
+		(libpart
+			(lib "Project")
+			(part "CONN10")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "CONN10")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "passive")
+				)
+				(pin
+					(num "3")
+					(name "3")
+					(type "passive")
+				)
+				(pin
+					(num "4")
+					(name "4")
+					(type "passive")
+				)
+				(pin
+					(num "5")
+					(name "5")
+					(type "passive")
+				)
+				(pin
+					(num "6")
+					(name "6")
+					(type "passive")
+				)
+				(pin
+					(num "7")
+					(name "7")
+					(type "passive")
+				)
+				(pin
+					(num "8")
+					(name "8")
+					(type "passive")
+				)
+				(pin
+					(num "9")
+					(name "9")
+					(type "passive")
+				)
+				(pin
+					(num "10")
+					(name "10")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "Project")
+			(part "CONN2")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "CONN2")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "Project")
+			(part "CONN4")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "CONN4")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "passive")
+				)
+				(pin
+					(num "3")
+					(name "3")
+					(type "passive")
+				)
+				(pin
+					(num "4")
+					(name "4")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "Project")
+			(part "CONN5")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "CONN5")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "passive")
+				)
+				(pin
+					(num "3")
+					(name "3")
+					(type "passive")
+				)
+				(pin
+					(num "4")
+					(name "4")
+					(type "passive")
+				)
+				(pin
+					(num "5")
+					(name "5")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "Project")
+			(part "DISPLAY_PATH")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "DISPLAY_PATH")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "Project")
+			(part "HV5524")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "HV5524")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "HV11")
+					(type "open_collector")
+				)
+				(pin
+					(num "2")
+					(name "HV12")
+					(type "open_collector")
+				)
+				(pin
+					(num "3")
+					(name "HV13")
+					(type "open_collector")
+				)
+				(pin
+					(num "4")
+					(name "HV14")
+					(type "open_collector")
+				)
+				(pin
+					(num "5")
+					(name "HV15")
+					(type "open_collector")
+				)
+				(pin
+					(num "6")
+					(name "HV16")
+					(type "open_collector")
+				)
+				(pin
+					(num "7")
+					(name "HV17")
+					(type "open_collector")
+				)
+				(pin
+					(num "8")
+					(name "HV18")
+					(type "open_collector")
+				)
+				(pin
+					(num "9")
+					(name "HV19")
+					(type "open_collector")
+				)
+				(pin
+					(num "10")
+					(name "HV20")
+					(type "open_collector")
+				)
+				(pin
+					(num "11")
+					(name "HV21")
+					(type "open_collector")
+				)
+				(pin
+					(num "12")
+					(name "HV22")
+					(type "open_collector")
+				)
+				(pin
+					(num "13")
+					(name "HV23")
+					(type "open_collector")
+				)
+				(pin
+					(num "14")
+					(name "HV24")
+					(type "open_collector")
+				)
+				(pin
+					(num "15")
+					(name "HV25")
+					(type "open_collector")
+				)
+				(pin
+					(num "16")
+					(name "HV26")
+					(type "open_collector")
+				)
+				(pin
+					(num "17")
+					(name "HV27")
+					(type "open_collector")
+				)
+				(pin
+					(num "18")
+					(name "HV28")
+					(type "open_collector")
+				)
+				(pin
+					(num "19")
+					(name "HV29")
+					(type "open_collector")
+				)
+				(pin
+					(num "20")
+					(name "HV30")
+					(type "open_collector")
+				)
+				(pin
+					(num "21")
+					(name "HV31")
+					(type "open_collector")
+				)
+				(pin
+					(num "22")
+					(name "HV32")
+					(type "open_collector")
+				)
+				(pin
+					(num "23")
+					(name "DATA_OUT")
+					(type "output")
+				)
+				(pin
+					(num "24")
+					(name "NC")
+					(type "passive")
+				)
+				(pin
+					(num "25")
+					(name "NC")
+					(type "passive")
+				)
+				(pin
+					(num "26")
+					(name "NC")
+					(type "passive")
+				)
+				(pin
+					(num "27")
+					(name "POL")
+					(type "input")
+				)
+				(pin
+					(num "28")
+					(name "CLK")
+					(type "input")
+				)
+				(pin
+					(num "29")
+					(name "VSS")
+					(type "power_in")
+				)
+				(pin
+					(num "30")
+					(name "VDD")
+					(type "power_in")
+				)
+				(pin
+					(num "31")
+					(name "LE")
+					(type "input")
+				)
+				(pin
+					(num "32")
+					(name "DATA_IN")
+					(type "input")
+				)
+				(pin
+					(num "33")
+					(name "BL")
+					(type "input")
+				)
+				(pin
+					(num "34")
+					(name "NC")
+					(type "passive")
+				)
+				(pin
+					(num "35")
+					(name "HV1")
+					(type "open_collector")
+				)
+				(pin
+					(num "36")
+					(name "HV2")
+					(type "open_collector")
+				)
+				(pin
+					(num "37")
+					(name "HV3")
+					(type "open_collector")
+				)
+				(pin
+					(num "38")
+					(name "HV4")
+					(type "open_collector")
+				)
+				(pin
+					(num "39")
+					(name "HV5")
+					(type "open_collector")
+				)
+				(pin
+					(num "40")
+					(name "HV6")
+					(type "open_collector")
+				)
+				(pin
+					(num "41")
+					(name "HV7")
+					(type "open_collector")
+				)
+				(pin
+					(num "42")
+					(name "HV8")
+					(type "open_collector")
+				)
+				(pin
+					(num "43")
+					(name "HV9")
+					(type "open_collector")
+				)
+				(pin
+					(num "44")
+					(name "HV10")
+					(type "open_collector")
+				)
+				(pin
+					(num "45")
+					(name "EP")
+					(type "power_in")
+				)
+			)
+		)
+		(libpart
+			(lib "Project")
+			(part "PASSIVE")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "PASSIVE")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "Project")
+			(part "PICO2")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "PICO2")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "GP0")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "GP1")
+					(type "passive")
+				)
+				(pin
+					(num "3")
+					(name "GND")
+					(type "passive")
+				)
+				(pin
+					(num "4")
+					(name "GP2")
+					(type "passive")
+				)
+				(pin
+					(num "5")
+					(name "GP3")
+					(type "passive")
+				)
+				(pin
+					(num "6")
+					(name "GP4")
+					(type "passive")
+				)
+				(pin
+					(num "7")
+					(name "GP5")
+					(type "passive")
+				)
+				(pin
+					(num "8")
+					(name "GND")
+					(type "passive")
+				)
+				(pin
+					(num "9")
+					(name "GP6")
+					(type "passive")
+				)
+				(pin
+					(num "10")
+					(name "GP7")
+					(type "passive")
+				)
+				(pin
+					(num "11")
+					(name "GP8")
+					(type "passive")
+				)
+				(pin
+					(num "12")
+					(name "GP9")
+					(type "passive")
+				)
+				(pin
+					(num "13")
+					(name "GND")
+					(type "passive")
+				)
+				(pin
+					(num "14")
+					(name "GP10")
+					(type "passive")
+				)
+				(pin
+					(num "15")
+					(name "GP11")
+					(type "passive")
+				)
+				(pin
+					(num "16")
+					(name "GP12")
+					(type "passive")
+				)
+				(pin
+					(num "17")
+					(name "GP13")
+					(type "passive")
+				)
+				(pin
+					(num "18")
+					(name "GND")
+					(type "passive")
+				)
+				(pin
+					(num "19")
+					(name "GP14")
+					(type "passive")
+				)
+				(pin
+					(num "20")
+					(name "GP15")
+					(type "passive")
+				)
+				(pin
+					(num "21")
+					(name "GP16")
+					(type "passive")
+				)
+				(pin
+					(num "22")
+					(name "GP17")
+					(type "passive")
+				)
+				(pin
+					(num "23")
+					(name "GND")
+					(type "passive")
+				)
+				(pin
+					(num "24")
+					(name "GP18")
+					(type "passive")
+				)
+				(pin
+					(num "25")
+					(name "GP19")
+					(type "passive")
+				)
+				(pin
+					(num "26")
+					(name "GP20")
+					(type "passive")
+				)
+				(pin
+					(num "27")
+					(name "GP21")
+					(type "passive")
+				)
+				(pin
+					(num "28")
+					(name "GND")
+					(type "passive")
+				)
+				(pin
+					(num "29")
+					(name "GP22")
+					(type "passive")
+				)
+				(pin
+					(num "30")
+					(name "RUN")
+					(type "passive")
+				)
+				(pin
+					(num "31")
+					(name "GP26_ADC0")
+					(type "passive")
+				)
+				(pin
+					(num "32")
+					(name "GP27_ADC1")
+					(type "passive")
+				)
+				(pin
+					(num "33")
+					(name "AGND")
+					(type "passive")
+				)
+				(pin
+					(num "34")
+					(name "GP28_ADC2")
+					(type "passive")
+				)
+				(pin
+					(num "35")
+					(name "ADC_VREF")
+					(type "passive")
+				)
+				(pin
+					(num "36")
+					(name "3V3_OUT")
+					(type "power_out")
+				)
+				(pin
+					(num "37")
+					(name "3V3_EN")
+					(type "passive")
+				)
+				(pin
+					(num "38")
+					(name "GND")
+					(type "passive")
+				)
+				(pin
+					(num "39")
+					(name "VSYS")
+					(type "passive")
+				)
+				(pin
+					(num "40")
+					(name "VBUS")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "Project")
+			(part "RV3028")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "RV3028")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "CLKOUT")
+					(type "output")
+				)
+				(pin
+					(num "2")
+					(name "INT")
+					(type "open_collector")
+				)
+				(pin
+					(num "3")
+					(name "SCL")
+					(type "input")
+				)
+				(pin
+					(num "4")
+					(name "SDA")
+					(type "bidirectional")
+				)
+				(pin
+					(num "5")
+					(name "VSS")
+					(type "power_in")
+				)
+				(pin
+					(num "6")
+					(name "VBACKUP")
+					(type "power_in")
+				)
+				(pin
+					(num "7")
+					(name "VDD")
+					(type "power_in")
+				)
+				(pin
+					(num "8")
+					(name "EVI")
+					(type "input")
+				)
+			)
+		)
+		(libpart
+			(lib "Project")
+			(part "SN74LV4T125")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "SN74LV4T125")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1OE")
+					(type "input")
+				)
+				(pin
+					(num "2")
+					(name "1A")
+					(type "input")
+				)
+				(pin
+					(num "3")
+					(name "1Y")
+					(type "output")
+				)
+				(pin
+					(num "4")
+					(name "2OE")
+					(type "input")
+				)
+				(pin
+					(num "5")
+					(name "2A")
+					(type "input")
+				)
+				(pin
+					(num "6")
+					(name "2Y")
+					(type "output")
+				)
+				(pin
+					(num "7")
+					(name "GND")
+					(type "power_in")
+				)
+				(pin
+					(num "8")
+					(name "3Y")
+					(type "output")
+				)
+				(pin
+					(num "9")
+					(name "3A")
+					(type "input")
+				)
+				(pin
+					(num "10")
+					(name "3OE")
+					(type "input")
+				)
+				(pin
+					(num "11")
+					(name "4Y")
+					(type "output")
+				)
+				(pin
+					(num "12")
+					(name "4A")
+					(type "input")
+				)
+				(pin
+					(num "13")
+					(name "4OE")
+					(type "input")
+				)
+				(pin
+					(num "14")
+					(name "VCC")
+					(type "power_in")
+				)
+			)
+		)
+		(libpart
+			(lib "Project")
+			(part "SUPPLY_MARK")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "SUPPLY_MARK")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "external_supply")
+					(type "power_out")
+				)
+			)
+		)
+		(libpart
+			(lib "Project")
+			(part "TPA2005D1")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "TPA2005D1")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "SHUTDOWN")
+					(type "input")
+				)
+				(pin
+					(num "2")
+					(name "NC")
+					(type "passive")
+				)
+				(pin
+					(num "3")
+					(name "IN+")
+					(type "input")
+				)
+				(pin
+					(num "4")
+					(name "IN-")
+					(type "input")
+				)
+				(pin
+					(num "5")
+					(name "VO+")
+					(type "output")
+				)
+				(pin
+					(num "6")
+					(name "VDD")
+					(type "power_in")
+				)
+				(pin
+					(num "7")
+					(name "GND")
+					(type "power_in")
+				)
+				(pin
+					(num "8")
+					(name "VO-")
+					(type "output")
+				)
+				(pin
+					(num "9")
+					(name "EP")
+					(type "power_in")
+				)
+			)
+		)
+	)
+	(libraries
+		(library
+			(logical "Project")
+			(uri "${KIPRJMOD}/Project.kicad_sym")
+		)
+	)
+	(nets
+		(net
+			(code "1")
+			(name "/+5V_LOGIC")
+			(class "Default")
+			(node
+				(ref "C1")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "C2")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "J2")
+				(pin "3")
+				(pinfunction "3_3")
+				(pintype "passive")
+			)
+			(node
+				(ref "R3")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "14")
+				(pinfunction "VCC_14")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U3")
+				(pin "27")
+				(pinfunction "POL_27")
+				(pintype "input")
+			)
+			(node
+				(ref "U3")
+				(pin "30")
+				(pinfunction "VDD_30")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "2")
+			(name "/ADC_5V")
+			(class "Default")
+			(node
+				(ref "J3")
+				(pin "5")
+				(pinfunction "5_5")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "34")
+				(pinfunction "GP28_ADC2_34")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "3")
+			(name "/ADC_BAT")
+			(class "Default")
+			(node
+				(ref "J3")
+				(pin "3")
+				(pinfunction "3_3")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "31")
+				(pinfunction "GP26_ADC0_31")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "4")
+			(name "/ADC_SENSE_EN")
+			(class "Default")
+			(node
+				(ref "J3")
+				(pin "10")
+				(pinfunction "10_10")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "22")
+				(pinfunction "GP17_22")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "5")
+			(name "/ADC_SYS")
+			(class "Default")
+			(node
+				(ref "J3")
+				(pin "4")
+				(pinfunction "4_4")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "32")
+				(pinfunction "GP27_ADC1_32")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "6")
+			(name "/AUDIO_AMP_EN")
+			(class "Default")
+			(node
+				(ref "R6")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "25")
+				(pinfunction "GP19_25")
+				(pintype "passive")
+			)
+			(node
+				(ref "U5")
+				(pin "1")
+				(pinfunction "SHUTDOWN_1")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "7")
+			(name "/AUDIO_INN_TODO")
+			(class "Default")
+			(node
+				(ref "U5")
+				(pin "4")
+				(pinfunction "IN-_4")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "8")
+			(name "/AUDIO_INP_TODO")
+			(class "Default")
+			(node
+				(ref "U5")
+				(pin "3")
+				(pinfunction "IN+_3")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "9")
+			(name "/AUDIO_PWM")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "16")
+				(pinfunction "GP12_16")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "10")
+			(name "/CHG_STAT1")
+			(class "Default")
+			(node
+				(ref "J3")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "17")
+				(pinfunction "GP13_17")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "11")
+			(name "/CHG_STAT2")
+			(class "Default")
+			(node
+				(ref "J3")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "19")
+				(pinfunction "GP14_19")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "12")
+			(name "/ENC_A_N")
+			(class "Default")
+			(node
+				(ref "J7")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "12")
+				(pinfunction "GP9_12")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "13")
+			(name "/ENC_B_N")
+			(class "Default")
+			(node
+				(ref "J7")
+				(pin "3")
+				(pinfunction "3_3")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "14")
+				(pinfunction "GP10_14")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "14")
+			(name "/ENC_SW_N")
+			(class "Default")
+			(node
+				(ref "J7")
+				(pin "4")
+				(pinfunction "4_4")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "15")
+				(pinfunction "GP11_15")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "15")
+			(name "/GND")
+			(class "Default")
+			(node
+				(ref "C1")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C2")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C3")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "J2")
+				(pin "4")
+				(pinfunction "4_4")
+				(pintype "passive")
+			)
+			(node
+				(ref "J2")
+				(pin "5")
+				(pinfunction "5_5")
+				(pintype "passive")
+			)
+			(node
+				(ref "J3")
+				(pin "9")
+				(pinfunction "9_9")
+				(pintype "passive")
+			)
+			(node
+				(ref "J5")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "J6")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "J7")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R2")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R6")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "13")
+				(pinfunction "GND_13")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "18")
+				(pinfunction "GND_18")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "23")
+				(pinfunction "GND_23")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "28")
+				(pinfunction "GND_28")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "3")
+				(pinfunction "GND_3")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "33")
+				(pinfunction "AGND_33")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "38")
+				(pinfunction "GND_38")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "8")
+				(pinfunction "GND_8")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "7")
+				(pinfunction "GND_7")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U3")
+				(pin "29")
+				(pinfunction "VSS_29")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U3")
+				(pin "45")
+				(pinfunction "EP_45")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U4")
+				(pin "5")
+				(pinfunction "VSS_5")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U5")
+				(pin "7")
+				(pinfunction "GND_7")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U5")
+				(pin "9")
+				(pinfunction "EP_9")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "16")
+			(name "/HV_BL_3V3")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "5")
+				(pinfunction "GP3_5")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "12")
+				(pinfunction "4A_12")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "17")
+			(name "/HV_BL_5V")
+			(class "Default")
+			(node
+				(ref "R2")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "11")
+				(pinfunction "4Y_11")
+				(pintype "output")
+			)
+			(node
+				(ref "U3")
+				(pin "33")
+				(pinfunction "BL_33")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "18")
+			(name "/HV_CLK_3V3")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "2")
+				(pinfunction "GP1_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "5")
+				(pinfunction "2A_5")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "19")
+			(name "/HV_CLK_5V")
+			(class "Default")
+			(node
+				(ref "U2")
+				(pin "6")
+				(pinfunction "2Y_6")
+				(pintype "output")
+			)
+			(node
+				(ref "U3")
+				(pin "28")
+				(pinfunction "CLK_28")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "20")
+			(name "/HV_DATA_3V3")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "1")
+				(pinfunction "GP0_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "2")
+				(pinfunction "1A_2")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "21")
+			(name "/HV_DATA_5V")
+			(class "Default")
+			(node
+				(ref "U2")
+				(pin "3")
+				(pinfunction "1Y_3")
+				(pintype "output")
+			)
+			(node
+				(ref "U3")
+				(pin "32")
+				(pinfunction "DATA_IN_32")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "22")
+			(name "/HV_EN_REQ")
+			(class "Default")
+			(node
+				(ref "J3")
+				(pin "7")
+				(pinfunction "7_7")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "6")
+				(pinfunction "GP4_6")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "23")
+			(name "/HV_FAULT_N")
+			(class "Default")
+			(node
+				(ref "J3")
+				(pin "8")
+				(pinfunction "8_8")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "7")
+				(pinfunction "GP5_7")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "24")
+			(name "/HV_LE_3V3")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "4")
+				(pinfunction "GP2_4")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "9")
+				(pinfunction "3A_9")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "25")
+			(name "/HV_LE_5V")
+			(class "Default")
+			(node
+				(ref "U2")
+				(pin "8")
+				(pinfunction "3Y_8")
+				(pintype "output")
+			)
+			(node
+				(ref "U3")
+				(pin "31")
+				(pinfunction "LE_31")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "26")
+			(name "/HV_OUT_TODO")
+			(class "Default")
+			(node
+				(ref "J4")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R100")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R101")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R201")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R202")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R203")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R204")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R205")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R206")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R207")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R208")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R209")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R210")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R211")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R212")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "27")
+			(name "/HV_RETURN_TODO")
+			(class "Default")
+			(node
+				(ref "J4")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "28")
+			(name "/I2C_SCL")
+			(class "Default")
+			(node
+				(ref "J5")
+				(pin "4")
+				(pinfunction "4_4")
+				(pintype "passive")
+			)
+			(node
+				(ref "R5")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "27")
+				(pinfunction "GP21_27")
+				(pintype "passive")
+			)
+			(node
+				(ref "U4")
+				(pin "3")
+				(pinfunction "SCL_3")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "29")
+			(name "/I2C_SDA")
+			(class "Default")
+			(node
+				(ref "J5")
+				(pin "3")
+				(pinfunction "3_3")
+				(pintype "passive")
+			)
+			(node
+				(ref "R4")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "26")
+				(pinfunction "GP20_26")
+				(pintype "passive")
+			)
+			(node
+				(ref "U4")
+				(pin "4")
+				(pinfunction "SDA_4")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "30")
+			(name "/NEON_01_ANODE")
+			(class "Default")
+			(node
+				(ref "R201")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "31")
+			(name "/NEON_01_K")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "11")
+				(pinfunction "HV21_11")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "32")
+			(name "/NEON_02_ANODE")
+			(class "Default")
+			(node
+				(ref "R202")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "33")
+			(name "/NEON_02_K")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "12")
+				(pinfunction "HV22_12")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "34")
+			(name "/NEON_03_ANODE")
+			(class "Default")
+			(node
+				(ref "R203")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "35")
+			(name "/NEON_03_K")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "13")
+				(pinfunction "HV23_13")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "36")
+			(name "/NEON_04_ANODE")
+			(class "Default")
+			(node
+				(ref "R204")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "37")
+			(name "/NEON_04_K")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "14")
+				(pinfunction "HV24_14")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "38")
+			(name "/NEON_05_ANODE")
+			(class "Default")
+			(node
+				(ref "R205")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "39")
+			(name "/NEON_05_K")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "15")
+				(pinfunction "HV25_15")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "40")
+			(name "/NEON_06_ANODE")
+			(class "Default")
+			(node
+				(ref "R206")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "41")
+			(name "/NEON_06_K")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "16")
+				(pinfunction "HV26_16")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "42")
+			(name "/NEON_07_ANODE")
+			(class "Default")
+			(node
+				(ref "R207")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "43")
+			(name "/NEON_07_K")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "17")
+				(pinfunction "HV27_17")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "44")
+			(name "/NEON_08_ANODE")
+			(class "Default")
+			(node
+				(ref "R208")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "45")
+			(name "/NEON_08_K")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "18")
+				(pinfunction "HV28_18")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "46")
+			(name "/NEON_09_ANODE")
+			(class "Default")
+			(node
+				(ref "R209")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "47")
+			(name "/NEON_09_K")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "19")
+				(pinfunction "HV29_19")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "48")
+			(name "/NEON_10_ANODE")
+			(class "Default")
+			(node
+				(ref "R210")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "49")
+			(name "/NEON_10_K")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "20")
+				(pinfunction "HV30_20")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "50")
+			(name "/NEON_11_ANODE")
+			(class "Default")
+			(node
+				(ref "R211")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "51")
+			(name "/NEON_11_K")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "21")
+				(pinfunction "HV31_21")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "52")
+			(name "/NEON_12_ANODE")
+			(class "Default")
+			(node
+				(ref "R212")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "53")
+			(name "/NEON_12_K")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "22")
+				(pinfunction "HV32_22")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "54")
+			(name "/PICO_3V3")
+			(class "Default")
+			(node
+				(ref "J5")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R4")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R5")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "36")
+				(pinfunction "3V3_OUT_36")
+				(pintype "power_out")
+			)
+			(node
+				(ref "U4")
+				(pin "7")
+				(pinfunction "VDD_7")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "55")
+			(name "/PICO_VSYS")
+			(class "Default")
+			(node
+				(ref "D1")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "39")
+				(pinfunction "VSYS_39")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "56")
+			(name "/PWR_5V_EN")
+			(class "Default")
+			(node
+				(ref "J3")
+				(pin "6")
+				(pinfunction "6_6")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "21")
+				(pinfunction "GP16_21")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "57")
+			(name "/RTC_BACKUP_TODO")
+			(class "Default")
+			(node
+				(ref "U4")
+				(pin "6")
+				(pinfunction "VBACKUP_6")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "58")
+			(name "/SHIFTER_OE_N_TODO")
+			(class "Default")
+			(node
+				(ref "R3")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "1")
+				(pinfunction "1OE_1")
+				(pintype "input")
+			)
+			(node
+				(ref "U2")
+				(pin "10")
+				(pinfunction "3OE_10")
+				(pintype "input")
+			)
+			(node
+				(ref "U2")
+				(pin "13")
+				(pinfunction "4OE_13")
+				(pintype "input")
+			)
+			(node
+				(ref "U2")
+				(pin "4")
+				(pinfunction "2OE_4")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "59")
+			(name "/SPEAKER_N")
+			(class "Default")
+			(node
+				(ref "J8")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U5")
+				(pin "8")
+				(pinfunction "VO-_8")
+				(pintype "output")
+			)
+		)
+		(net
+			(code "60")
+			(name "/SPEAKER_P")
+			(class "Default")
+			(node
+				(ref "J8")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U5")
+				(pin "5")
+				(pinfunction "VO+_5")
+				(pintype "output")
+			)
+		)
+		(net
+			(code "61")
+			(name "/SYS_TO_AMP")
+			(class "Default")
+			(node
+				(ref "C3")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "J2")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U5")
+				(pin "6")
+				(pinfunction "VDD_6")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "62")
+			(name "/SYS_TO_MCU")
+			(class "Default")
+			(node
+				(ref "D1")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "J2")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "63")
+			(name "/TUBE_A_ANODE")
+			(class "Default")
+			(node
+				(ref "R100")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "64")
+			(name "/TUBE_A_K0")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "35")
+				(pinfunction "HV1_35")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "65")
+			(name "/TUBE_A_K1")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "36")
+				(pinfunction "HV2_36")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "66")
+			(name "/TUBE_A_K2")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "37")
+				(pinfunction "HV3_37")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "67")
+			(name "/TUBE_A_K3")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "38")
+				(pinfunction "HV4_38")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "68")
+			(name "/TUBE_A_K4")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "39")
+				(pinfunction "HV5_39")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "69")
+			(name "/TUBE_A_K5")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "40")
+				(pinfunction "HV6_40")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "70")
+			(name "/TUBE_A_K6")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "41")
+				(pinfunction "HV7_41")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "71")
+			(name "/TUBE_A_K7")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "42")
+				(pinfunction "HV8_42")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "72")
+			(name "/TUBE_A_K8")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "43")
+				(pinfunction "HV9_43")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "73")
+			(name "/TUBE_A_K9")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "44")
+				(pinfunction "HV10_44")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "74")
+			(name "/TUBE_B_ANODE")
+			(class "Default")
+			(node
+				(ref "R101")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "75")
+			(name "/TUBE_B_K0")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "1")
+				(pinfunction "HV11_1")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "76")
+			(name "/TUBE_B_K1")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "2")
+				(pinfunction "HV12_2")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "77")
+			(name "/TUBE_B_K2")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "3")
+				(pinfunction "HV13_3")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "78")
+			(name "/TUBE_B_K3")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "4")
+				(pinfunction "HV14_4")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "79")
+			(name "/TUBE_B_K4")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "5")
+				(pinfunction "HV15_5")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "80")
+			(name "/TUBE_B_K5")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "6")
+				(pinfunction "HV16_6")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "81")
+			(name "/TUBE_B_K6")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "7")
+				(pinfunction "HV17_7")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "82")
+			(name "/TUBE_B_K7")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "8")
+				(pinfunction "HV18_8")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "83")
+			(name "/TUBE_B_K8")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "9")
+				(pinfunction "HV19_9")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "84")
+			(name "/TUBE_B_K9")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "10")
+				(pinfunction "HV20_10")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "85")
+			(name "/UI_ACTION_N")
+			(class "Default")
+			(node
+				(ref "J6")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "11")
+				(pinfunction "GP8_11")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "86")
+			(name "/UI_NEXT_L_N")
+			(class "Default")
+			(node
+				(ref "J6")
+				(pin "3")
+				(pinfunction "3_3")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "9")
+				(pinfunction "GP6_9")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "87")
+			(name "/UI_NEXT_R_N")
+			(class "Default")
+			(node
+				(ref "J6")
+				(pin "4")
+				(pinfunction "4_4")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "10")
+				(pinfunction "GP7_10")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "88")
+			(name "unconnected-(U1-3V3_EN-Pad37)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "37")
+				(pinfunction "3V3_EN_37")
+				(pintype "passive+no_connect")
+			)
+		)
+		(net
+			(code "89")
+			(name "unconnected-(U1-ADC_VREF-Pad35)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "35")
+				(pinfunction "ADC_VREF_35")
+				(pintype "passive+no_connect")
+			)
+		)
+		(net
+			(code "90")
+			(name "unconnected-(U1-GP15-Pad20)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "20")
+				(pinfunction "GP15_20")
+				(pintype "passive+no_connect")
+			)
+		)
+		(net
+			(code "91")
+			(name "unconnected-(U1-GP18-Pad24)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "24")
+				(pinfunction "GP18_24")
+				(pintype "passive+no_connect")
+			)
+		)
+		(net
+			(code "92")
+			(name "unconnected-(U1-GP22-Pad29)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "29")
+				(pinfunction "GP22_29")
+				(pintype "passive+no_connect")
+			)
+		)
+		(net
+			(code "93")
+			(name "unconnected-(U1-RUN-Pad30)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "30")
+				(pinfunction "RUN_30")
+				(pintype "passive+no_connect")
+			)
+		)
+		(net
+			(code "94")
+			(name "unconnected-(U1-VBUS-Pad40)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "40")
+				(pinfunction "VBUS_40")
+				(pintype "passive+no_connect")
+			)
+		)
+		(net
+			(code "95")
+			(name "unconnected-(U3-DATA_OUT-Pad23)")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "23")
+				(pinfunction "DATA_OUT_23")
+				(pintype "output+no_connect")
+			)
+		)
+		(net
+			(code "96")
+			(name "unconnected-(U3-NC-Pad24)")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "24")
+				(pinfunction "NC_24")
+				(pintype "passive+no_connect")
+			)
+		)
+		(net
+			(code "97")
+			(name "unconnected-(U3-NC-Pad25)")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "25")
+				(pinfunction "NC_25")
+				(pintype "passive+no_connect")
+			)
+		)
+		(net
+			(code "98")
+			(name "unconnected-(U3-NC-Pad26)")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "26")
+				(pinfunction "NC_26")
+				(pintype "passive+no_connect")
+			)
+		)
+		(net
+			(code "99")
+			(name "unconnected-(U3-NC-Pad34)")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "34")
+				(pinfunction "NC_34")
+				(pintype "passive+no_connect")
+			)
+		)
+		(net
+			(code "100")
+			(name "unconnected-(U4-CLKOUT-Pad1)")
+			(class "Default")
+			(node
+				(ref "U4")
+				(pin "1")
+				(pinfunction "CLKOUT_1")
+				(pintype "output+no_connect")
+			)
+		)
+		(net
+			(code "101")
+			(name "unconnected-(U4-EVI-Pad8)")
+			(class "Default")
+			(node
+				(ref "U4")
+				(pin "8")
+				(pinfunction "EVI_8")
+				(pintype "input+no_connect")
+			)
+		)
+		(net
+			(code "102")
+			(name "unconnected-(U4-INT-Pad2)")
+			(class "Default")
+			(node
+				(ref "U4")
+				(pin "2")
+				(pinfunction "INT_2")
+				(pintype "open_collector+no_connect")
+			)
+		)
+		(net
+			(code "103")
+			(name "unconnected-(U5-NC-Pad2)")
+			(class "Default")
+			(node
+				(ref "U5")
+				(pin "2")
+				(pinfunction "NC_2")
+				(pintype "passive+no_connect")
+			)
+		)
+	)
+)

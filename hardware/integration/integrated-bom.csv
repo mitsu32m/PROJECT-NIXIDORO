@@ -1,0 +1,27 @@
+board,reference,manufacturer,mpn,quantity,footprint_or_size,unit_jpy_inc_tax,stock_seen_2026-11-15,status,source,unresolved
+PWR,U1,Texas Instruments,BQ25185DLHR,1,DLH WSON10 2.2x2mm,467.5,13480,priced_candidate,https://www.digikey.jp/ja/products/detail/texas-instruments/BQ25185DLHR/21769368,cell and charge thermal validation
+PWR,U2,Texas Instruments,TPS61023DRLR,1,DRL SOT563 1.6x1.6mm,223.3,19492,priced_candidate,https://www.digikey.jp/en/products/detail/texas-instruments/TPS61023DRLR/11310629,boost thermal and startup
+PWR,U3,Texas Instruments,TPS259533DSGR,1,DSG WSON8 2x2mm,188.1,2658,priced_candidate,https://www.digikey.jp/ja/products/detail/texas-instruments/TPS259533DSGR/8597484,OVLO and clamp transients
+PWR,U4,Texas Instruments,TPD2E2U06DCKR,1,SC70-3,118.8,0,priced_candidate,https://www.digikey.jp/ja/products/detail/texas-instruments/TPD2E2U06DCKR/11502208,alternate stock required
+PWR,D1,Texas Instruments,TPD1E10B06DPYR,1,X1SON-2 1x0.6mm,73.7,684031,priced_candidate,https://www.digikey.jp/ja/products/detail/texas-instruments/TPD1E10B06DPYR/3197744,surge energy test
+PWR,J4,GCT,USB4105-GF-A,1,USB-C 16 pads+shield,146.3,,priced_candidate,https://www.digikey.jp/ja/products/detail/gct/USB4105-GF-A/11198441,physical pad and mating check
+PWR,L1,Coilcraft,XEL4030-102MEC,1,4.3x4.3x3.1mm,,,candidate_unpriced,https://www.coilcraft.com/getmedia/8245f050-f190-4295-8c41-7c03d662ee3d/xel4030.pdf,core loss and footprint not assigned
+PWR,C1-C9,Murata,GRM31CR71E106KA12L and GRM32ER71E226KE15L,,1206 and 1210,,,candidate_unpriced,https://ds.murata.com/simsurfing/mlcc.html,DC-bias effective capacity and availability
+PWR,R1-R24,Panasonic,ERJ3EKF series,,0603 0.1W 1%,,,candidate_unpriced,https://industrial.panasonic.com/ww/products/pt/general-purpose-chip-resistors/models/ERJ3EKF1802V,verify all individual values
+PWR,J5,undecided,protected cell 3-wire connector,1,3 pins,,,unresolved,,cell NTC polarity current and connector
+HV,U1,Analog Devices,MAX668EUB+T,1,10-uMAX / provisional MSOP10,1787.5,5437,priced_candidate,https://www.digikey.jp/en/products/detail/analog-devices-inc-maxim-integrated/MAX668EUB-T/3894819,footprint land pattern and stage design
+HV,T1,undecided,TTRN-060S-013-T not qualified,1,SMD-5P,,,rejected_as_unverified,https://jlcpcb.com/partdetail/JLCPCBAssembly-TTRN_060S_013T/C9900124494,no manufacturer electrical data
+HV,Q1 D1 RCS snubber,undecided,undecided,,,,,unresolved,,transformer Lp ratio leakage Isat and topology required
+HV,OVP bleeder comparator,undecided,undecided,,,,,unresolved,,independent OVP discharge fault latch and resistor ratings
+HV,J2,undecided,HV rated output connector,1,2 poles or more,,,unresolved,,200V plus OVP transient creepage touch protection
+CTRL,U1,Raspberry Pi,SC1631 Pico 2,1,Pico common 40-pin THT,990,stock shown,priced_candidate,https://akizukidenshi.com/catalog/g/g129604/,headers and thermals not included
+CTRL,U2,Texas Instruments,SN74LV4T125PWR,1,TSSOP14 4.4x5mm,170.5,25182,priced_candidate,https://www.digikey.jp/ja/products/detail/texas-instruments/SN74LV4T125PWR/4806529,OE power-good gate missing
+CTRL,U3,Microchip,HV5524K7-G,1,WQFN44 7x7mm EP5.15x5.15mm,,132,price_tax_unverified,https://www.mouser.jp/ja/ProductDetail/Microchip-Technology/HV5524K7-G,JPY1702.5 list tax and shipping unverified
+CTRL,U4,Micro Crystal,RV-3028-C7 32.768KHZ 1PPM-TA-QC,1,8SON 3.2x1.5mm,441.1,0,priced_candidate,https://www.digikey.jp/ja/products/detail/micro-crystal-ag/RV-3028-C7-32-768KHZ-1PPM-TA-QC/10431080,stock backup element and footprint
+CTRL,U5,Texas Instruments,TPA2005D1DRBR,1,DRB VSON8 3x3mm EP,,,candidate_unpriced,https://www.ti.com/lit/ds/symlink/tpa2005d1.pdf,input filter and reverse feed unresolved
+CTRL,J5,Adafruit,938 OLED 1.3in,1,module 35.6x33mm,3591.5,2331,priced_candidate,https://www.digikey.jp/ja/products/detail/adafruit-industries-llc/938/5774238,module pullups mounting and 3V3 load
+CTRL,IN12B lamps,undecided,IN-12B,2,physical socket TBD,,,unresolved,,tube data and physical socket needed
+CTRL,neon lamps,undecided,neon lamp TBD,12,physical leads TBD,,,unresolved,,lamp current voltage striking and vendor
+CTRL,R100 R101 R201-R212,undecided,H V limit resistor TBD,14,HV rated size TBD,,,unresolved,,tube sustaining current and pulse power
+ALL,PCB,JLCPCB,three boards prototype and respin,,board sizes and stackup TBD,,,quote_required,https://jlcpcb.com/ads/pcb-prototype,shipping VAT finish dimensions and respin not quoted
+ALL,shipping,all vendors,cart quotation needed,,,,,quote_required,,multiple vendor shipping customs and tax
