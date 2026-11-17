@@ -10,6 +10,10 @@
 - **VERIFIED**: 実測またはテストで条件付き確認済み（証拠を添付）
 
 ## 主要ファイル
+- [ai-workflow.md](ai-workflow.md): AI設計・調査・レビューの必須手順、役割分担、引き継ぎ、コミット運用
+- [tech-tree.md](tech-tree.md): 研究テックツリー（進捗可視化）
+- [tech-tree.yaml](tech-tree.yaml): 機械可読な課題ノード・依存関係・達成基準
+- [verification/README.md](verification/README.md): 検証台帳と記録フォーマット
 - [requirements.md](requirements.md): 何を作りたいか、必須機能・デザイン
 - [architecture.md](architecture.md): 電源・電子回路・分割基板の暫定構成
 - [components.md](components.md): 候補部品と確認待ち項目
