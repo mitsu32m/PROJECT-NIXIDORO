@@ -29,7 +29,7 @@ Frequency compatibility: ROSC=200kΩ yields guaranteed 225–275kHz at specified
 
 ## Startup, fault, system limits
 - MAX668 soft-start is described but does not guarantee 205V startup into full load; HV output capacitance, initial conditions, pulse limit, feedback loop and TPS61023 5V droop are UNKNOWN.
-- For C_HV=1µF ASSUMED, E=0.5*C*205²=21.0mJ. At 3.28W useful output, an impossible zero-loss lower-bound charge time is 6.4ms; a real startup may be longer and input power peaks larger. Capacitor value, bleeder and output startup profile are unspecified.
+- For C_HV=1µF ASSUMED, E=0.5*C*205²=21.0mJ. Dividing this stored energy by the 3.28W rated load gives 6.4ms as an illustrative energy/power ratio ONLY; it is not a lower bound on startup time because actual charging power is not defined by rated load power. Actual charge time and input peak are UNKNOWN. Capacitor value, bleeder and output startup profile are unspecified.
 - 205V*16mA=3.28W; 70% HV efficiency -> 4.686W/0.937A from 5V, before logic. At 85% 5V stage -> 5.513W from SYS, before logic; existing PWR review says batteryless USB at 500mA configured input is insufficient.
 - Static FB tolerance and independent OVP window remain HV-002 blockers. 70µs controller shutdown delay is not a guarantee that output will stop below 220V. 200V output capacitor ratings cannot be reused for 205V.
 - No guaranteed transformer core loss, flux density, winding thermal resistance, ambient enclosure temperature, MOSFET stress, diode stress, startup or thermal margin. **No approval to energize HV**.
