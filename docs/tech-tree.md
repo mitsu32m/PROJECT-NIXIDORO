@@ -14,8 +14,9 @@ flowchart TB
   PWRD["PWR-DR Draft PWR schematic and review"]
   CTRLD["CTRL-DR Draft CTRL schematic"]
   HVD["HV-DR Draft HV logic interface"]
-  BOOST["HV-OLD MAX668 one-stage boost rejected"]
-  HVF["HV-001 Proven flyback / 16mA OR requirement change"]
+  BOOST["HV-OLD MAX668 non-coupled boost rejected"]
+  HVF["HV-001 HV solution 16mA or approved alternative"]
+  COUPLED["HV-COUPLED MAX668 coupled inductor candidate"]
   HVW["HV-002 HV output tolerance window"]
   HVS["HV-003 Independent OVP / hard-off / discharge"]
   PWR["PWR-001 5V load/startup/thermal proof"]
@@ -32,6 +33,8 @@ flowchart TB
   NET --> HVD
   NET --> BOOST
   HVD --> HVF
+  HVD --> COUPLED
+  COUPLED -.-> HVF
   BOOST -.-> HVF
   HVF --> HVW
   HVW --> HVS
@@ -53,11 +56,17 @@ flowchart TB
   classDef active fill:#a16207,color:#fff,stroke:#854d0e
   classDef locked fill:#475569,color:#fff,stroke:#334155
   classDef rejected fill:#991b1b,color:#fff,stroke:#7f1d1d
+  classDef alternative fill:#2563eb,color:#fff,stroke:#1d4ed8
   class REQ,NET,PWRD,CTRLD,HVD documented
   class HVF,HVW,PWR,BAT,LAMP,CTRL,BOM active
   class HVS,HVPROTO,INTEG,PCB locked
   class BOOST rejected
+  class COUPLED alternative
 ```
+
+### Recent new research branch (2026-11-17)
+
+**HV-COUPLED: MAX668 coupled-inductor boost** is now an **alternative under investigation**, based on documented hobbyist Nixie supply examples. This **does not** make 205V/16mA continuous or independent OVP verified. The rejected `HV-OLD` node is limited to a **non-coupled conventional boost**. Evidence: [MAX668 precedent and correction](verification/2026-11-17-0930-JST-max668-coupled-inductor-precedents.md).
 
 ### Meaning of node states
 
