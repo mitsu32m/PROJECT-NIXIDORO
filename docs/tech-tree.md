@@ -21,6 +21,8 @@ flowchart TB
   HVS["HV-003 Independent OVP / hard-off / discharge"]
   PWR["PWR-001 5V load/startup/thermal proof"]
   BAT["BAT-001 Protected cell and NTC validated"]
+  PWR2["PWR-002 Charger and battery-assist thermal proof"]
+  SYS["SYS-001 Mode-specific power contract"]
   LAMP["HV-004 Lamps/current budget"]
   CTRL["CTRL-001 GPIO off-domain safety and RTC"]
   BOM["BOM-001 Verified priced BOM"]
@@ -41,6 +43,14 @@ flowchart TB
   HVD --> LAMP
   PWRD --> PWR
   PWRD --> BAT
+  PWRD --> PWR2
+  HVF --> SYS
+  LAMP --> SYS
+  PWR --> SYS
+  PWR2 --> SYS
+  BAT --> SYS
+  PWR2 --> INTEG
+  SYS --> INTEG
   CTRLD --> CTRL
   NET --> BOM
   HVS --> HVPROTO
@@ -58,7 +68,7 @@ flowchart TB
   classDef rejected fill:#991b1b,color:#fff,stroke:#7f1d1d
   classDef alternative fill:#2563eb,color:#fff,stroke:#1d4ed8
   class REQ,NET,PWRD,CTRLD,HVD documented
-  class HVF,HVW,PWR,BAT,LAMP,CTRL,BOM active
+  class HVF,HVW,PWR,PWR2,SYS,BAT,LAMP,CTRL,BOM active
   class HVS,HVPROTO,INTEG,PCB locked
   class BOOST rejected
   class COUPLED alternative
@@ -90,3 +100,9 @@ flowchart TB
 ### Important nuance
 
 A schematic draft or successful ERC only completes a **documentation** milestone. Independent OVP, discharge, current capacity, enclosure temperature, cell safety and HV hardware verification remain separate locked or open milestones.
+
+### 2026-11-17 Work integration
+
+[WORK-INT-001](verification/2026-11-17-work-integration-001.md): added SYS-001 mode-specific power contract and previously unrepresented PWR-002 charger/supplement thermal node. Both are **in progress**, with their evidence prerequisites shown in YAML and graph; MILE-02 now also requires these gates. SYS-001 is P0 in the issue register. No completed/verified status inferred.
+
+Latest Chat A report is pending review; no Chat C package located at examined SHA. Prioritize actual lamp-current evidence alongside Issue #2 before final topology adoption. MAX668 full-temperature frequency scope needs correction to 222–278kHz. Candidate ordering, targets and release locks remain unchanged; D-012 is proposed only.

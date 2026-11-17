@@ -119,7 +119,7 @@ nodes:
   - id: MILE-02
     title: Integrated prototype approval
     status: locked
-    depends_on: [MILE-01, PWR-001, BAT-001, CTRL-001]
+    depends_on: [MILE-01, PWR-001, PWR-002, SYS-001, BAT-001, CTRL-001]
     exit_criteria: "Power domains, thermal, control and HV behavior validated as an integrated system"
     evidence: [docs/verification/handoff.md]
   - id: MILE-03
@@ -128,3 +128,17 @@ nodes:
     depends_on: [MILE-02, BOM-001]
     exit_criteria: "Formal human review, complete footprint/BOM/DRC/thermal/safety evidence and explicit authorization"
     evidence: [docs/verification/handoff.md]
+  - id: PWR-002
+    title: Charger and battery-assist loss and thermal validation
+    status: in_progress
+    depends_on: [PWR-DR]
+    issue_id: PWR-002
+    exit_criteria: "Mode-consistent charger and BATFET losses, actual cell/NTC limits and board/enclosure thermal evidence; USB presence does not prove charging"
+    evidence: [docs/pwr-reva-power-thermal-review.md, docs/verification/2026-11-17-work-integration-001.md]
+  - id: SYS-001
+    title: Mode-specific HV PWR CTRL power contract
+    status: in_progress
+    depends_on: [HV-001, HV-004, PWR-001, PWR-002, BAT-001]
+    issue_id: SYS-001
+    exit_criteria: "Reviewed continuous/peak/average demand and low-cell, USB-only, battery-assist, charging and audio/OLED modes; startup, thermal and fault bounds; no unilateral target change"
+    evidence: [docs/verification/2026-11-17-work-integration-001.md, docs/verification/decisions.md]

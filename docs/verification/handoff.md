@@ -52,3 +52,16 @@ Independent OVP and hard-off with worst-case tolerances/transients below HV5524 
 ## AI collaboration rule
 
 Treat previous AI work as a *claim to audit*, not a guaranteed fact. Include exact references and status in every report; don't silently upgrade preliminary calculations into approved circuit values. Use append-only dated evidence and update issue/decision indexes, and never automatically alter KiCad or authorize high voltage, hardware purchasing, PR merge or PCB fabrication.
+
+## 2026-11-17 — latest Work integration (WORK-INT-001)
+
+Evidence: [integrated review](2026-11-17-work-integration-001.md), baseline 0d83c2d0d551e0893aa1eced613a250ec6a12181. **CONDITIONAL research / BLOCKED final HV selection / PENDING REVIEW.**
+No new Chat B research or Chat C judgment package was located in the examined branch tree, Issues #1/#2 comments or PR search. Chat A's latest [10:25 screen](2026-11-17-1025-JST-HV-001-max668-quantitative-screen.md) is unreviewed; do not promote its sizing proxies to selected circuit ratings.
+
+Immediate integration priority is SYS-001 (now P0): establish actual lamp demand (proposed HV-004A) and a mode-specific HV/PWR/CTRL power contract while [Issue #2](https://github.com/mitsu32m/PROJECT-NIXIDORO/issues/2) proceeds on coupled topology. This supplements the earlier transformer-first task, without changing 205V/16mA targets. 16mA comes from assumed 2mA×2 tubes +1mA×12 neons. Even ideal 5V×498mA=2.49W input is below 3.28W HV output; higher-rated USB adapter alone cannot fix BQ's current setting. USB presence may mean battery supplementation, not charging.
+
+At prior assumed efficiencies/allocations, full target needs 6.601W SYS before audio; converter losses are 2.321W, **not** whole-enclosure heat. Lamp/resistor/driver, logic/UI, charger and cell losses also matter. No thermal or safety gate is passed.
+
+Review clarification: full −40..85°C MAX668 table gives 222–278kHz for ROSC=200kΩ±1%; 225–275kHz applies 0..85°C. Keep temperature scope explicit. C-REVIEW-001 is proposed for both latest A report and this integration.
+
+No final topology or BOM values adopted; KiCad unchanged. Batch next Work run on important reviewed power-stage, load, OVP or thermal evidence. Twice/day remains a future ceiling; no schedule or usage quota verified and no automation changed.
