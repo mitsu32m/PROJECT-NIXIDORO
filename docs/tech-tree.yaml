@@ -1,0 +1,124 @@
+# PROJECT-NIXIDORO research tree; source of truth for node state.
+# Updated: 2026-11-17 JST. This is a curated baseline, not a complete validated engineering record.
+schema_version: 1
+project: PROJECT-NIXIDORO
+branch: codex/reva-integrated-prototype-review
+statuses:
+  - documented
+  - in_progress
+  - not_started
+  - locked
+  - rejected
+  - alternative
+  - verified
+nodes:
+  - id: REQ-001
+    title: Requirements baseline documented
+    status: documented
+    depends_on: []
+    exit_criteria: "Requirements and design goals captured in versioned documents; no claim of requirements freeze"
+    evidence: [docs/requirements.md, docs/reva-integrated-net-spec.md]
+  - id: NET-001
+    title: Rev.A net spec proposed
+    status: documented
+    depends_on: [REQ-001]
+    exit_criteria: "Proposed PWR/CTRL/HV net contracts documented, not fabrication approved"
+    evidence: [docs/reva-integrated-net-spec.md]
+  - id: PWR-DR
+    title: PWR Rev.A schematic draft
+    status: documented
+    depends_on: [NET-001]
+    exit_criteria: "Draft KiCad and engineering review exist; ERC is not functional validation"
+    evidence: [docs/pwr-reva-v3-review.md, docs/pwr-reva-power-thermal-review.md]
+  - id: CTRL-DR
+    title: CTRL schematic draft
+    status: documented
+    depends_on: [NET-001]
+    exit_criteria: "Draft exists, interfaces still under review"
+    evidence: [docs/reva-integrated-prototype-review.md]
+  - id: HV-DR
+    title: HV logic/interface draft
+    status: documented
+    depends_on: [NET-001]
+    exit_criteria: "Draft exists; actual HV generation/OVP/discharge not yet implemented"
+    evidence: [docs/reva-integrated-prototype-review.md]
+  - id: HV-OLD
+    title: MAX668 direct one-stage boost rejected
+    status: rejected
+    depends_on: [NET-001]
+    exit_criteria: "Documented ideal duty mismatch against manufacturer maximum"
+    evidence: [docs/hv-architecture-decision.md]
+  - id: HV-001
+    title: Proven HV power stage or approved reduced-current alternative
+    status: in_progress
+    depends_on: [HV-DR]
+    issue_id: HV-001
+    exit_criteria: "Manufacturer-grounded magnetics and worst-case efficiency, startup, thermal and current budget; if 16mA changed, explicit user approval"
+    evidence: [docs/hv-transformer-screen.md]
+  - id: HV-002
+    title: HV regulation tolerance and OVP window
+    status: in_progress
+    depends_on: [HV-001]
+    issue_id: HV-002
+    exit_criteria: "Full temperature/tolerance/overshoot analysis with HV5524 recommended max respected"
+    evidence: [docs/hv-voltage-window.md]
+  - id: HV-003
+    title: Independent OVP hard-off and discharge
+    status: locked
+    depends_on: [HV-002]
+    issue_id: HV-003
+    exit_criteria: "Independent fault shutdown and quantified safe discharge, with schematic and fault review"
+    evidence: [docs/verification/open-issues.md]
+  - id: HV-004
+    title: IN-12B and neon lamp current budget
+    status: in_progress
+    depends_on: [HV-DR]
+    issue_id: HV-004
+    exit_criteria: "Manufacturer ratings and current-limiting values plus a supervised measurement plan"
+    evidence: [docs/verification/open-issues.md]
+  - id: PWR-001
+    title: 5V regulator power and thermal feasibility
+    status: in_progress
+    depends_on: [PWR-DR]
+    issue_id: PWR-001
+    exit_criteria: "Worst-case power and startup including L1, effective capacitance and thermal margin"
+    evidence: [docs/pwr-reva-power-thermal-review.md]
+  - id: BAT-001
+    title: Protected cell and NTC specification
+    status: in_progress
+    depends_on: [PWR-DR]
+    issue_id: BAT-001
+    exit_criteria: "Selected cell and NTC with charge/discharge/temperature validation"
+    evidence: [docs/verification/open-issues.md]
+  - id: CTRL-001
+    title: CTRL reverse-feed, HV gating and RTC
+    status: in_progress
+    depends_on: [CTRL-DR]
+    issue_id: CTRL-001
+    exit_criteria: "Pin mapping, power-off fail-safe and low-voltage tests"
+    evidence: [docs/verification/open-issues.md]
+  - id: BOM-001
+    title: Fully costed parts list
+    status: in_progress
+    depends_on: [NET-001]
+    issue_id: BOM-001
+    exit_criteria: "Tax/shipping/PCB-inclusive estimate ≤JPY50k with ≤JPY40k initial and ≥JPY10k reserve"
+    evidence: [docs/verification/open-issues.md]
+  - id: MILE-01
+    title: HV bench prototype safety review
+    status: locked
+    depends_on: [HV-001, HV-003, HV-004]
+    exit_criteria: "Design safety review and controlled supervised test plan approved; not automatic authorization to energize"
+    evidence: [docs/verification/handoff.md]
+  - id: MILE-02
+    title: Integrated prototype approval
+    status: locked
+    depends_on: [MILE-01, PWR-001, BAT-001, CTRL-001]
+    exit_criteria: "Power domains, thermal, control and HV behavior validated as an integrated system"
+    evidence: [docs/verification/handoff.md]
+  - id: MILE-03
+    title: PCB manufacturing release
+    status: locked
+    depends_on: [MILE-02, BOM-001]
+    exit_criteria: "Formal human review, complete footprint/BOM/DRC/thermal/safety evidence and explicit authorization"
+    evidence: [docs/verification/handoff.md]
