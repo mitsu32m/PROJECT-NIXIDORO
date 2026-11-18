@@ -1,5 +1,5 @@
 # PROJECT-NIXIDORO research tree; source of truth for node state.
-# Updated: 2026-11-17 JST. This is a curated baseline, not a complete validated engineering record.
+# Updated: 2026-11-18 JST. This is a curated baseline, not a complete validated engineering record.
 schema_version: 1
 project: PROJECT-NIXIDORO
 branch: codex/reva-integrated-prototype-review
@@ -106,20 +106,20 @@ nodes:
   - id: BOM-001
     title: Fully costed parts list
     status: in_progress
-    depends_on: [NET-001]
+    depends_on: [NET-001, PROTO-001]
     issue_id: BOM-001
     exit_criteria: "Tax/shipping/PCB-inclusive estimate ≤JPY50k with ≤JPY40k initial and ≥JPY10k reserve"
     evidence: [docs/verification/open-issues.md]
   - id: MILE-01
     title: HV bench prototype safety review
     status: locked
-    depends_on: [HV-001, HV-003, HV-004]
+    depends_on: [HV-001, HV-003, HV-004, SYS-002, MECH-001]
     exit_criteria: "Design safety review and controlled supervised test plan approved; not automatic authorization to energize"
     evidence: [docs/verification/handoff.md]
   - id: MILE-02
     title: Integrated prototype approval
     status: locked
-    depends_on: [MILE-01, PWR-001, PWR-002, SYS-001, BAT-001, CTRL-001]
+    depends_on: [MILE-01, PWR-001, PWR-002, SYS-001, SYS-002, BAT-001, CTRL-001]
     exit_criteria: "Power domains, thermal, control and HV behavior validated as an integrated system"
     evidence: [docs/verification/handoff.md]
   - id: MILE-03
@@ -142,3 +142,31 @@ nodes:
     issue_id: SYS-001
     exit_criteria: "Reviewed continuous/peak/average demand and low-cell, USB-only, battery-assist, charging and audio/OLED modes; startup, thermal and fault bounds; no unilateral target change"
     evidence: [docs/verification/2026-11-17-work-integration-001.md, docs/verification/decisions.md]
+  - id: HV-DIRECT
+    title: Direct SYS HV controller and magnetics alternative
+    status: alternative
+    depends_on: [HV-DR]
+    exit_criteria: "C-reviewed actual minimum-SYS controller and magnetics pair, nonideal currents, losses, gate drive, startup, OVP and current sourcing; no direct-BAT equivalence"
+    evidence: [docs/verification/2026-11-18-0100-JST-chatb-sys001d-direct-hv-controller-primary-screen.md, docs/verification/2026-11-18-work-integration-002.md]
+  - id: SYS-002
+    title: Joint HV capacitance OVP startup and discharge contract
+    status: in_progress
+    depends_on: [HV-002, HV-003, PWR-001]
+    issue_id: SYS-002
+    exit_criteria: "Same actual Cmin/Cmax with bounded tail energy, normal dynamic voltage, startup surplus and current, discharge faults and reviewed nonzero margins; no selected value from hypothetical pulse"
+    evidence: [docs/verification/2026-11-17-2258-JST-C-REVIEW-002-hv002b-ovp-energy-and-shutdown.md, docs/verification/2026-11-18-work-integration-002.md]
+  - id: MECH-001
+    title: Physical HV interfaces insulation and enclosure thermal evidence
+    status: in_progress
+    depends_on: [NET-001]
+    issue_id: NET-001
+    exit_criteria: "Actual HV connector/resistor ratings, pin orientation, creepage/clearance, cover and probe access, board thermal paths and cell placement; supervised review before HV"
+    evidence: [docs/reva-integrated-prototype-review.md, docs/verification/2026-11-18-work-integration-002.md]
+  - id: PROTO-001
+    title: Traceable staged prototype BOM and sourcing
+    status: in_progress
+    depends_on: [NET-001]
+    issue_id: PROTO-001
+    github_issue: 7
+    exit_criteria: "Part-number and source-evidence matrix, current stock/tax/shipping/lead times or UNKNOWN, safety holds and LV-first vs standalone-HV BOM; no purchase authorization"
+    evidence: [docs/verification/2026-11-18-work-integration-002.md, hardware/integration/integrated-bom.csv]

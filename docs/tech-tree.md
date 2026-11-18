@@ -1,108 +1,193 @@
-# PROJECT-NIXIDORO — Research Tech Tree (prototype)
+# PROJECT-NIXIDORO — Research Tech Tree
 
-**Status snapshot:** 2026-11-17 JST. **Design research only.** A completed documentation node does not authorize manufacture, component ordering or HV energization.
+Status snapshot: **2026-11-18 JST**. Canonical data: [tech-tree.yaml](tech-tree.yaml).
+Evidence: [WORK-INT-002](verification/2026-11-18-work-integration-002.md), [decisions](verification/decisions.md), [open issues](verification/open-issues.md).
 
-The graph below is a *curated snapshot* of the evidence in [verification decisions](verification/decisions.md), [open issues](verification/open-issues.md), and [handoff](verification/handoff.md). Node statuses must be revisited whenever new evidence is committed. The canonical machine-readable node register is [tech-tree.yaml](tech-tree.yaml).
+Views below partition the canonical dependency edges. Repeated IDs denote the same node; all incoming prerequisites apply together, including MILE-02 parts A and B. Alternative nodes are candidates, not adopted hardware. Locked release gates do not prohibit research. No node count implies percentage complete or permission to buy/test/fabricate.
 
-## Current achievements and future unlocks
+States: documented = artifact exists; in_progress = exit evidence incomplete; alternative = comparison candidate; rejected = rejected in stated scope; locked = release gate incomplete; verified = only a precisely passed scope. There are no newly verified hardware nodes.
+
+## 1. Requirements and draft baseline
 
 ```mermaid
 flowchart TB
-  ROOT["PROJECT-NIXIDORO"]
-  REQ["REQ-001 Requirements baseline documented"]
-  NET["NET-001 Rev.A net spec proposed"]
-  PWRD["PWR-DR Draft PWR schematic and review"]
-  CTRLD["CTRL-DR Draft CTRL schematic"]
-  HVD["HV-DR Draft HV logic interface"]
-  BOOST["HV-OLD MAX668 non-coupled boost rejected"]
-  HVF["HV-001 HV solution 16mA or approved alternative"]
-  COUPLED["HV-COUPLED MAX668 coupled inductor candidate"]
-  HVW["HV-002 HV output tolerance window"]
-  HVS["HV-003 Independent OVP / hard-off / discharge"]
-  PWR["PWR-001 5V load/startup/thermal proof"]
-  BAT["BAT-001 Protected cell and NTC validated"]
-  PWR2["PWR-002 Charger and battery-assist thermal proof"]
-  SYS["SYS-001 Mode-specific power contract"]
-  LAMP["HV-004 Lamps/current budget"]
-  CTRL["CTRL-001 GPIO off-domain safety and RTC"]
-  BOM["BOM-001 Verified priced BOM"]
-  HVPROTO["MILE-01 HV safe bench prototype review"]
-  INTEG["MILE-02 Integrated prototype approval"]
-  PCB["MILE-03 PCB manufacturing release"]
-  ROOT --> REQ --> NET
-  NET --> PWRD
-  NET --> CTRLD
-  NET --> HVD
-  NET --> BOOST
-  HVD --> HVF
-  HVD --> COUPLED
-  COUPLED -.-> HVF
-  BOOST -.-> HVF
-  HVF --> HVW
-  HVW --> HVS
-  HVD --> LAMP
-  PWRD --> PWR
-  PWRD --> BAT
-  PWRD --> PWR2
-  HVF --> SYS
-  LAMP --> SYS
-  PWR --> SYS
-  PWR2 --> SYS
-  BAT --> SYS
-  PWR2 --> INTEG
-  SYS --> INTEG
-  CTRLD --> CTRL
-  NET --> BOM
-  HVS --> HVPROTO
-  LAMP --> HVPROTO
-  HVF --> HVPROTO
-  PWR --> INTEG
-  BAT --> INTEG
-  CTRL --> INTEG
-  HVPROTO --> INTEG
-  BOM --> PCB
-  INTEG --> PCB
-  classDef documented fill:#18794e,color:#fff,stroke:#125c3b
-  classDef active fill:#a16207,color:#fff,stroke:#854d0e
-  classDef locked fill:#475569,color:#fff,stroke:#334155
-  classDef rejected fill:#991b1b,color:#fff,stroke:#7f1d1d
-  classDef alternative fill:#2563eb,color:#fff,stroke:#1d4ed8
-  class REQ,NET,PWRD,CTRLD,HVD documented
-  class HVF,HVW,PWR,PWR2,SYS,BAT,LAMP,CTRL,BOM active
-  class HVS,HVPROTO,INTEG,PCB locked
-  class BOOST rejected
-  class COUPLED alternative
+  N_REQ_001["REQ-001 Requirements baseline documented (documented)"]
+  N_NET_001["NET-001 Rev.A net spec proposed (documented)"]
+  N_PWR_DR["PWR-DR PWR Rev.A schematic draft (documented)"]
+  N_CTRL_DR["CTRL-DR CTRL schematic draft (documented)"]
+  N_HV_DR["HV-DR HV logic/interface draft (documented)"]
+  N_HV_OLD["HV-OLD MAX668 non-coupled single-inductor boost rejected (rejected)"]
+  N_NET_001 --> N_CTRL_DR
+  N_NET_001 --> N_HV_DR
+  N_NET_001 --> N_HV_OLD
+  N_NET_001 --> N_PWR_DR
+  N_REQ_001 --> N_NET_001
+  classDef documented fill:#18794e,color:#fff
+  class N_CTRL_DR,N_HV_DR,N_NET_001,N_PWR_DR,N_REQ_001 documented
+  classDef rejected fill:#991b1b,color:#fff
+  class N_HV_OLD rejected
 ```
 
-### Recent new research branch (2026-11-17)
+## 2. HV comparisons and voltage protection
 
-**HV-COUPLED: MAX668 coupled-inductor boost** is now an **alternative under investigation**, based on documented hobbyist Nixie supply examples. This **does not** make 205V/16mA continuous or independent OVP verified. The rejected `HV-OLD` node is limited to a **non-coupled conventional boost**. Evidence: [MAX668 precedent and correction](verification/2026-11-17-0930-JST-max668-coupled-inductor-precedents.md).
+```mermaid
+flowchart TB
+  N_HV_DR["HV-DR HV logic/interface draft (documented)"]
+  N_HV_COUPLED["HV-COUPLED MAX668 coupled-inductor boost comparison candidate (alternative)"]
+  N_HV_001["HV-001 Proven HV power stage or approved reduced-current alternative (in_progress)"]
+  N_HV_002["HV-002 HV regulation tolerance and OVP window (in_progress)"]
+  N_HV_003["HV-003 Independent OVP hard-off and discharge (locked)"]
+  N_HV_004["HV-004 IN-12B and neon lamp current budget (in_progress)"]
+  N_HV_DIRECT["HV-DIRECT Direct SYS HV controller and magnetics alternative (alternative)"]
+  N_HV_001 --> N_HV_002
+  N_HV_002 --> N_HV_003
+  N_HV_DR --> N_HV_001
+  N_HV_DR --> N_HV_004
+  N_HV_DR --> N_HV_COUPLED
+  N_HV_DR --> N_HV_DIRECT
+  classDef documented fill:#18794e,color:#fff
+  class N_HV_DR documented
+  classDef in_progress fill:#a16207,color:#fff
+  class N_HV_001,N_HV_002,N_HV_004 in_progress
+  classDef locked fill:#475569,color:#fff
+  class N_HV_003 locked
+  classDef alternative fill:#2563eb,color:#fff
+  class N_HV_COUPLED,N_HV_DIRECT alternative
+```
 
-### Meaning of node states
+## 3. Supply and operating modes
 
-- **Documented** (green): a specific research/documentation artifact exists. It is **not** electrical validation or design approval.
-- **In progress** (amber): calculations or selection are underway, exit conditions are not met.
-- **Locked** (slate): prerequisites incomplete; must not claim this milestone is reached.
-- **Rejected** (red): evaluated approach failed under documented conditions; preserve rationale as knowledge.
-- **Alternative**: a candidate branch to compare without changing user-approved requirements.
-- **Verified**: evidence-based exit criterion passed for a *precisely stated scope*. Use a separate verified status in the machine-readable data.
+```mermaid
+flowchart TB
+  N_PWR_DR["PWR-DR PWR Rev.A schematic draft (documented)"]
+  N_HV_001["HV-001 Proven HV power stage or approved reduced-current alternative (in_progress)"]
+  N_HV_004["HV-004 IN-12B and neon lamp current budget (in_progress)"]
+  N_PWR_001["PWR-001 5V regulator power and thermal feasibility (in_progress)"]
+  N_BAT_001["BAT-001 Protected cell and NTC specification (in_progress)"]
+  N_PWR_002["PWR-002 Charger and battery-assist loss and thermal validation (in_progress)"]
+  N_SYS_001["SYS-001 Mode-specific HV PWR CTRL power contract (in_progress)"]
+  N_BAT_001 --> N_SYS_001
+  N_HV_001 --> N_SYS_001
+  N_HV_004 --> N_SYS_001
+  N_PWR_001 --> N_SYS_001
+  N_PWR_002 --> N_SYS_001
+  N_PWR_DR --> N_BAT_001
+  N_PWR_DR --> N_PWR_001
+  N_PWR_DR --> N_PWR_002
+  classDef documented fill:#18794e,color:#fff
+  class N_PWR_DR documented
+  classDef in_progress fill:#a16207,color:#fff
+  class N_BAT_001,N_HV_001,N_HV_004,N_PWR_001,N_PWR_002,N_SYS_001 in_progress
+```
 
-### Update protocol for automated reviews
+## 4. Shared capacitor energy contract
 
-1. Read `verification/handoff.md`, `verification/open-issues.md`, `verification/decisions.md`, newest dated verification report, and `tech-tree.yaml`.
-2. Update only nodes for which new evidence actually exists. Include `evidence` links and an explicit `exit_criteria` field.
-3. Add new discoveries as separate IDs; never reuse an old ID for a different question. Track rejected alternatives and superseded conclusions.
-4. For new dependency edges, confirm they represent a true prerequisite, not merely a recommended order.
-5. Keep YAML and this Mermaid view consistent. The YAML is canonical; the Mermaid diagram is a human-readable snapshot.
-6. Do not infer percentage complete from node count: nodes vary enormously in risk and scope.
-7. **No automatic change to KiCad, PCB manufacturing files, main branch, HV test authorization or purchase orders.**
+```mermaid
+flowchart TB
+  N_HV_002["HV-002 HV regulation tolerance and OVP window (in_progress)"]
+  N_HV_003["HV-003 Independent OVP hard-off and discharge (locked)"]
+  N_PWR_001["PWR-001 5V regulator power and thermal feasibility (in_progress)"]
+  N_SYS_002["SYS-002 Joint HV capacitance OVP startup and discharge contract (in_progress)"]
+  N_HV_002 --> N_SYS_002
+  N_HV_003 --> N_SYS_002
+  N_PWR_001 --> N_SYS_002
+  classDef in_progress fill:#a16207,color:#fff
+  class N_HV_002,N_PWR_001,N_SYS_002 in_progress
+  classDef locked fill:#475569,color:#fff
+  class N_HV_003 locked
+```
 
-### Important nuance
+## 5. Physical interfaces and HV bench review
 
-A schematic draft or successful ERC only completes a **documentation** milestone. Independent OVP, discharge, current capacity, enclosure temperature, cell safety and HV hardware verification remain separate locked or open milestones.
+```mermaid
+flowchart TB
+  N_NET_001["NET-001 Rev.A net spec proposed (documented)"]
+  N_HV_001["HV-001 Proven HV power stage or approved reduced-current alternative (in_progress)"]
+  N_HV_003["HV-003 Independent OVP hard-off and discharge (locked)"]
+  N_HV_004["HV-004 IN-12B and neon lamp current budget (in_progress)"]
+  N_MILE_01["MILE-01 HV bench prototype safety review (locked)"]
+  N_SYS_002["SYS-002 Joint HV capacitance OVP startup and discharge contract (in_progress)"]
+  N_MECH_001["MECH-001 Physical HV interfaces insulation and enclosure thermal evidence (in_progress)"]
+  N_HV_001 --> N_MILE_01
+  N_HV_003 --> N_MILE_01
+  N_HV_004 --> N_MILE_01
+  N_MECH_001 --> N_MILE_01
+  N_NET_001 --> N_MECH_001
+  N_SYS_002 --> N_MILE_01
+  classDef documented fill:#18794e,color:#fff
+  class N_NET_001 documented
+  classDef in_progress fill:#a16207,color:#fff
+  class N_HV_001,N_HV_004,N_MECH_001,N_SYS_002 in_progress
+  classDef locked fill:#475569,color:#fff
+  class N_HV_003,N_MILE_01 locked
+```
 
-### 2026-11-17 Work integration
+## 6. Integrated release prerequisites, part A
 
-[WORK-INT-001](verification/2026-11-17-work-integration-001.md): added SYS-001 mode-specific power contract and previously unrepresented PWR-002 charger/supplement thermal node. Both are **in progress**, with their evidence prerequisites shown in YAML and graph; MILE-02 now also requires these gates. SYS-001 is P0 in the issue register. No completed/verified status inferred.
+```mermaid
+flowchart TB
+  N_PWR_001["PWR-001 5V regulator power and thermal feasibility (in_progress)"]
+  N_MILE_01["MILE-01 HV bench prototype safety review (locked)"]
+  N_MILE_02["MILE-02 Integrated prototype approval (locked)"]
+  N_PWR_002["PWR-002 Charger and battery-assist loss and thermal validation (in_progress)"]
+  N_SYS_001["SYS-001 Mode-specific HV PWR CTRL power contract (in_progress)"]
+  N_MILE_01 --> N_MILE_02
+  N_PWR_001 --> N_MILE_02
+  N_PWR_002 --> N_MILE_02
+  N_SYS_001 --> N_MILE_02
+  classDef in_progress fill:#a16207,color:#fff
+  class N_PWR_001,N_PWR_002,N_SYS_001 in_progress
+  classDef locked fill:#475569,color:#fff
+  class N_MILE_01,N_MILE_02 locked
+```
 
-Latest Chat A report is pending review; no Chat C package located at examined SHA. Prioritize actual lamp-current evidence alongside Issue #2 before final topology adoption. MAX668 full-temperature frequency scope needs correction to 222–278kHz. Candidate ordering, targets and release locks remain unchanged; D-012 is proposed only.
+## 7. Integrated release prerequisites, part B and CTRL
+
+```mermaid
+flowchart TB
+  N_CTRL_DR["CTRL-DR CTRL schematic draft (documented)"]
+  N_BAT_001["BAT-001 Protected cell and NTC specification (in_progress)"]
+  N_CTRL_001["CTRL-001 CTRL reverse-feed, HV gating and RTC (in_progress)"]
+  N_MILE_02["MILE-02 Integrated prototype approval (locked)"]
+  N_SYS_002["SYS-002 Joint HV capacitance OVP startup and discharge contract (in_progress)"]
+  N_BAT_001 --> N_MILE_02
+  N_CTRL_001 --> N_MILE_02
+  N_CTRL_DR --> N_CTRL_001
+  N_SYS_002 --> N_MILE_02
+  classDef documented fill:#18794e,color:#fff
+  class N_CTRL_DR documented
+  classDef in_progress fill:#a16207,color:#fff
+  class N_BAT_001,N_CTRL_001,N_SYS_002 in_progress
+  classDef locked fill:#475569,color:#fff
+  class N_MILE_02 locked
+```
+
+## 8. Parts, cost and manufacturing gate
+
+```mermaid
+flowchart TB
+  N_NET_001["NET-001 Rev.A net spec proposed (documented)"]
+  N_BOM_001["BOM-001 Fully costed parts list (in_progress)"]
+  N_MILE_02["MILE-02 Integrated prototype approval (locked)"]
+  N_MILE_03["MILE-03 PCB manufacturing release (locked)"]
+  N_PROTO_001["PROTO-001 Traceable staged prototype BOM and sourcing (in_progress)"]
+  N_BOM_001 --> N_MILE_03
+  N_MILE_02 --> N_MILE_03
+  N_NET_001 --> N_BOM_001
+  N_NET_001 --> N_PROTO_001
+  N_PROTO_001 --> N_BOM_001
+  classDef documented fill:#18794e,color:#fff
+  class N_NET_001 documented
+  classDef in_progress fill:#a16207,color:#fff
+  class N_BOM_001,N_PROTO_001 in_progress
+  classDef locked fill:#475569,color:#fff
+  class N_MILE_02,N_MILE_03 locked
+```
+
+## Current integration notes
+
+C-REVIEW-001/002 now exist; the old 11/17 no-review-package snapshot is superseded. Their accepted equations do not qualify an actual HV stage. MAX668 shutdown 70us is TYP, not guaranteed maximum.
+
+SYS-002 connects Cmin OVP headroom with Cmax startup/discharge. HV-DIRECT remains an unreviewed alternative. MECH-001 gives physical HV/thermal evidence an explicit gate; PROTO-001 (#7) supplies traceable staged parts to BOM-001. PWR/cell work is in #8. No protection or manufacturing milestone is unlocked.
+
+YAML nodes, statuses and dependency edges were parsed, checked for missing/duplicate IDs and cycles, and compared with the union of Mermaid views. Use exact IDs in future updates; preserve rejected alternatives and dated reports. No automatic KiCad changes, purchases, main merge, HV energization or PCB orders.

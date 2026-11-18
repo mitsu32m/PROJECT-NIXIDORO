@@ -1,17 +1,17 @@
 # AI verification and design operating procedure
 
-Version: 1.0 — created 2026-11-17 JST
+Version: 1.1 — updated 2026-11-18 JST; original created 2026-11-17 JST
 Scope: Research, analysis, design decisions and documentation for PROJECT-NIXIDORO. **Not** authorization for hardware manufacture, procurement, HV energization or safety approval.
 
 ## 0. Why this exists
 GitHub is the durable shared state of the project, not a transcript of a single ChatGPT conversation. Every agent must be able to take over from repository files without assuming access to a predecessor's memory. This SOP is prescriptive; existing engineering findings remain in their own versioned reports.
 
 ## 1. Required startup (every task, including scheduled tasks)
-1. Identify repository `mitsu32m/PROJECT-NIXIDORO`, branch `codex/reva-integrated-prototype-review`; obtain current commit SHA. Never accidentally use `main` as if it contained in-progress work.
+1. Identify repository `mitsu32m/PROJECT-NIXIDORO`, branch `codex/reva-integrated-prototype-review`; obtain current commit SHA. The connected GitHub fetch tool can read `https://api.github.com/repos/mitsu32m/PROJECT-NIXIDORO/branches`; select the exact branch name and its `commit.sha`. Discover reports through `git/trees/<that-commit-sha>?recursive=1`, then fetch files at that SHA. These paths worked on 2026-11-18; if unavailable in another runtime, report the actual failure and do not substitute a blob SHA. Never use `main` as the working branch.
 2. Read `docs/ai-workflow.md` (this file), `docs/verification/handoff.md`, `docs/verification/open-issues.md`, `docs/verification/decisions.md`, `docs/tech-tree.yaml` and `docs/tech-tree.md`.
 3. Inspect the latest dated report in `docs/verification/`, relevant baseline schematic/docs and any relevant scripts. Do not accept a static snapshot as current if GitHub has newer changes.
 4. Check branch changes since the last examined SHA to avoid lost or overlapping edits; check for concurrent work before each write.
-5. Choose **one bounded work item** with issue ID, dependencies, exact question and a specific exit criterion. If a task is assigned, keep that scope. Highest priority is not always the largest problem; prefer evidence that unblocks a decision.
+5. Choose **one bounded work item** (or a related-issue batch for Work integration/Chat C review) with issue IDs, dependencies, exact question and a specific exit criterion. If a task is assigned, keep that scope. Highest priority is not always the largest problem; prefer evidence that unblocks a decision.
 6. Record the starting SHA and chosen task in the final report. If the repository is inaccessible, say so and do not pretend state was read.
 
 ## 2. Responsibility and permitted operations
@@ -93,6 +93,10 @@ Avoid copying entire source documents; use references to minimize context and ma
 - Keep a stable task ID and link evidence reports back to it so different runs can find the latest accepted result.
 - If no task scheduler/worker execution capability is connected, this SOP **does not** imply autonomous worker delegation. Use a sequential ChatGPT run instead.
 
+### Non-blocking research fallback (owner-authorized, 2026-11-18)
+
+If Issues/labels/atomic Claim are unavailable, research and scheduled runs continue provisionally from the issue register, tree and latest logs. Do not assert a formal Claim; avoid overlap, write unique PENDING REVIEW reports, and hand reviewed conclusions to Work for shared-index integration. Never stop research or disable schedules solely to complete management infrastructure. Prioritize actual hardware parts, reproducible bounds and prototype decision evidence over repeated hypothetical sensitivity screens.
+
 ## 8. Safety gates and scope restrictions
 - Hardware design remains `NOT ORDER-READY`: no PCB fabrication release, purchasing, HV energization, main merge or safety signoff by automation.
 - HV output ~200–205 V nominal / 16 mA continuous is a **target**, not proof of capability; a reduced maximum current is a proposal until user-approved.
@@ -102,7 +106,7 @@ Avoid copying entire source documents; use references to minimize context and ma
 - No simulated test automatically counts as physical verification.
 
 ## 9. Review cadence and efficiency
-The ChatGPT scheduled task currently targets 08:00, 14:00 and 21:00 JST; weekly integrated review on Wednesday. Schedule may change without editing this file. Prefer a narrow novel question in each run; cache conclusions through citations and dated reports instead of rereading all source material. When evidence cannot advance an issue, clearly record the obstacle and select an unrelated useful issue next time.
+Observed 2026-11-18 JST: dedicated A 0/4/8/12/16/20; B 1/5/9/13/17/21; C 3/9/15/21; a separate weekly Wednesday review also exists. No Work-specific/self-owned task was found. Work aims at at most twice/day only after quota/environment capability and duplication checks; no Work task was created. The scheduler API is the live source of truth; these observations do not guarantee execution or inherited tools. Prefer a narrow novel question in each run; cache conclusions through citations and dated reports instead of rereading all source material. When evidence cannot advance an issue, clearly record the obstacle and select an unrelated useful issue next time.
 
 ## 10. Success definition
 An entirely new AI with only GitHub access should be able to answer: **(a)** what is known and how, **(b)** what is not proven, **(c)** why each approach was chosen/rejected, **(d)** what task to do next, **(e)** which actions are forbidden, and **(f)** which SHA/files hold the latest evidence. If not, update the ledger before declaring task complete.

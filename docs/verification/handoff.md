@@ -1,5 +1,40 @@
 # Handoff — PROJECT-NIXIDORO
 
+Current snapshot: **2026-11-18 JST**, examined HEAD **90a2aad41696cc6e2362ef384eeca459fa4f2552**. Read latest branch HEAD before writing.
+
+## Current integration and next action
+
+[WORK-INT-002](2026-11-18-work-integration-002.md) supersedes the 11/17 availability/priority snapshot below. C judgment packages now exist:
+- [C-REVIEW-001](2026-11-17-1457-JST-C-REVIEW-001-max668-and-work-integration.md): comparative research conditional; mixed proxy currents cannot select parts.
+- [C-REVIEW-002](2026-11-17-2258-JST-C-REVIEW-002-hv002b-ovp-energy-and-shutdown.md): OVP algebra accepted only within assumptions; actual OVP/hardware adoption blocked.
+
+**Highest integration decision D-013:** co-design the same real HV capacitor for OVP (Cmin), startup/energy/discharge (Cmax). MAX668 Rev3 p3 confirms shutdown 70us is **TYP**, not a guaranteed maximum; 222–278kHz full-temperature oscillator. No pulse count or tail-energy upper bound exists. No OVP/capacitor value selected.
+
+**Current target unchanged:** around 200–205V /16mA continuous. 500mA-configured USB-only cannot sustain 3.28W HV output even ideally. Battery assist may mean discharging. Baseline SYS→5V→HV, MAX668 coupled, 5V flyback and direct-SYS alternatives remain comparisons, not confirmed solutions. B direct-SYS/LT3757A/LM5155/lamp/startup and A ideal tapped models after C-001/002 are unreviewed; do not promote them. Work found B 05:03's mixed primary current/ideal ratio implies 22.857mA secondary rather than 16mA; C batch correction required.
+
+## Role handoffs (no formal Claim)
+
+- Chat A: #2 actual topology/magnetics; #6 bounded stop energy + Cmin/Cmax joint design; new [#8 PWR-002A](https://github.com/mitsu32m/PROJECT-NIXIDORO/issues/8) charger/cell/5V/startup/thermal envelope.
+- Chat B: new [#7 PROTO-001](https://github.com/mitsu32m/PROJECT-NIXIDORO/issues/7) real lamp/cell/NTC/controller+magnetics/capacitor/safety sourcing and staged BOM; link modes to #4. Prefer concrete parts and evidence over further hypothetical sensitivity-only reports.
+- Chat C: C-REVIEW-003 batch #4/#6/#2, with B DCM inconsistency and 70us=TYP clarification. Return accepted equations separately from actual hardware qualification.
+- Work: update shared indices after reviewed evidence; no need to re-audit unchanged reports. SYS-002 and PROTO-001 now explicitly tracked. MILE gates remain locked; design research proceeds.
+
+## Prototype, deadline and current operating limits
+
+Prepare LV-only PWR/CTRL candidate BOM, separate HV/dummy-load safety design, then integrated enclosure plan (D-014 proposed). No purchase, PCB order, HV energization, important specification change or main merge authorized.
+
+Budget use deadline: **2027-01末**. Proposed internal checkpoints: 11/25 part evidence, 12/01 architecture/power/thermal decision material, 12/15 first-order decision package; these are planning targets, not procurement authorization or supplier delivery promises. Current BOM stock/prices are historical 11/15 values; 50k total /40k initial/10k reserve is not proven.
+
+Physical measurements remain: signed BAT/input currents, source transitions, 5V and HV startup/fault waveforms, magnetic/switch currents, OVP/discharge, board/component/cell and sealed-PETG temperatures. Exact cell/NTC and thermal paths are still unqualified. OE/RTC backup/ADC reverse feed and physical HV interfaces remain unfinished.
+
+## Automation observation 2026-11-18
+
+Connected task lookup found active A six/day, B six/day, C four/day (3/9/15/21 JST), plus a separate weekly review; no Work/self-owned task found. Work quota and inherited future execution environment/write capability were not returned (environments=null). No task created/changed. Existing A/B/C continue; manual Work batch integration is the demonstrated alternative. Maximum twice/day remains a future target.
+
+## Historical snapshot — 2026-11-17 (not current status)
+
+The following dated material is preserved for traceability. Where it says no B/C package or recommends transformer-only priority, use the 11/18 current integration above.
+
 Snapshot: **2026-11-17 JST**. This file contains facts checked from project reports and open design decisions. Always re-read GitHub HEAD before working.
 
 ## Objective
