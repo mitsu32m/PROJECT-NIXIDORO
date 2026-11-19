@@ -1,7 +1,7 @@
 # PROJECT-NIXIDORO — Research Tech Tree
 
-Status snapshot: **2026-11-18 JST**. Canonical data: [tech-tree.yaml](tech-tree.yaml).
-Evidence: [WORK-INT-002](verification/2026-11-18-work-integration-002.md), [decisions](verification/decisions.md), [open issues](verification/open-issues.md).
+Status snapshot: **2026-11-19 JST**. Canonical data: [tech-tree.yaml](tech-tree.yaml).
+Evidence: [WORK-INT-003](verification/2026-11-19-work-integration-003.md), [decisions](verification/decisions.md), [open issues](verification/open-issues.md).
 
 Views below partition the canonical dependency edges. Repeated IDs denote the same node; all incoming prerequisites apply together, including MILE-02 parts A and B. Alternative nodes are candidates, not adopted hardware. Locked release gates do not prohibit research. No node count implies percentage complete or permission to buy/test/fabricate.
 
@@ -60,12 +60,17 @@ flowchart TB
 ```mermaid
 flowchart TB
   N_PWR_DR["PWR-DR PWR Rev.A schematic draft (documented)"]
+  N_CTRL_DR["CTRL-DR CTRL schematic draft (documented)"]
+  N_THERM_001["THERM-001 Charge and battery-only thermal enforcement interface (in_progress)"]
   N_HV_001["HV-001 Proven HV power stage or approved reduced-current alternative (in_progress)"]
   N_HV_004["HV-004 IN-12B and neon lamp current budget (in_progress)"]
   N_PWR_001["PWR-001 5V regulator power and thermal feasibility (in_progress)"]
   N_BAT_001["BAT-001 Protected cell and NTC specification (in_progress)"]
   N_PWR_002["PWR-002 Charger and battery-assist loss and thermal validation (in_progress)"]
   N_SYS_001["SYS-001 Mode-specific HV PWR CTRL power contract (in_progress)"]
+  N_CTRL_DR --> N_THERM_001
+  N_PWR_DR --> N_THERM_001
+  N_THERM_001 --> N_BAT_001
   N_BAT_001 --> N_SYS_001
   N_HV_001 --> N_SYS_001
   N_HV_004 --> N_SYS_001
@@ -75,9 +80,9 @@ flowchart TB
   N_PWR_DR --> N_PWR_001
   N_PWR_DR --> N_PWR_002
   classDef documented fill:#18794e,color:#fff
-  class N_PWR_DR documented
+  class N_PWR_DR,N_CTRL_DR documented
   classDef in_progress fill:#a16207,color:#fff
-  class N_BAT_001,N_HV_001,N_HV_004,N_PWR_001,N_PWR_002,N_SYS_001 in_progress
+  class N_BAT_001,N_HV_001,N_HV_004,N_PWR_001,N_PWR_002,N_SYS_001,N_THERM_001 in_progress
 ```
 
 ## 4. Shared capacitor energy contract
@@ -186,8 +191,10 @@ flowchart TB
 
 ## Current integration notes
 
-C-REVIEW-001/002 now exist; the old 11/17 no-review-package snapshot is superseded. Their accepted equations do not qualify an actual HV stage. MAX668 shutdown 70us is TYP, not guaranteed maximum.
+[WORK-INT-003](verification/2026-11-19-work-integration-003.md) integrates C-REVIEW-003/004/005/006 within reviewed scopes. Mode/startup/DC algebra has additional review; no actual HV stage, cell or temperature-sensor assembly is qualified.
 
-SYS-002 connects Cmin OVP headroom with Cmax startup/discharge. HV-DIRECT remains an unreviewed alternative. MECH-001 gives physical HV/thermal evidence an explicit gate; PROTO-001 (#7) supplies traceable staged parts to BOM-001. PWR/cell work is in #8. No protection or manufacturing milestone is unlocked.
+THERM-001 (#9) makes charge inhibit and separate battery-only thermal enforcement an explicit BAT-001 prerequisite. The integrated PWR draft still has CE=GND; BQ TS is inactive battery-only. Direct NTC alone cannot enforce candidate P2150K +10..45C. Proposed circuitry is pending review, not implemented. New restricted Rs/Rp ratio screen in INT-003 is PENDING INDEPENDENT REVIEW.
 
-YAML nodes, statuses and dependency edges were parsed, checked for missing/duplicate IDs and cycles, and compared with the union of Mermaid views. Use exact IDs in future updates; preserve rejected alternatives and dated reports. No automatic KiCad changes, purchases, main merge, HV energization or PCB orders.
+TE STM010 PDF body is 20±1mm, while its environmental ratings differ from the web page; actual attachment and thermal lag remain unqualified. PROTO-001 partial candidate evidence is in thermal-qualification-holds.csv, not a purchase BOM. HV actual topology/magnetics #2 and joint OVP/capacity #6 remain urgent.
+
+YAML nodes, statuses, evidence paths and full dependency edges are structurally validated against all Mermaid views; no missing dependency or cycle is accepted. Historical research/rejected branches are preserved; no hardware gate is unlocked. Physical tests, purchases, fabrication, main merge or important specification changes require the existing explicit approvals.

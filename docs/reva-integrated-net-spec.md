@@ -1,6 +1,8 @@
 # Rev.A 統合ネット仕様・設計差分（PWR / CTRL / HV）
-Updated 2026-11-14 JST
+Updated 2026-11-19 JST (thermal compatibility hold appended; baseline nets unchanged)
 Status: **PROPOSED / NOT A KICAD SCHEMATIC / NOT ORDER-READY**
+**2026-11-19温度適合保留：** /CE=GNDと直接10k/B3435は候補セルの充電範囲・電池単独温度保護を保証しない。下記追記とWORK-INT-003/#9を参照。KiCadの配線は変更していない。
+
 これは2026-11-14までのドラフトを**Rev.Aの単一設計候補**へ統合するチェックリスト。全型番のピン番号や性能を再実測・再承認した確定回路ではない。旧資料のTPS63031/3V3_PERIPH/XIAO/74AHCT125表記は比較履歴であり、このページの第一候補と混同しない。
 
 ## A. Rev.A第一候補・機能ブロック
@@ -101,3 +103,11 @@ flowchart TD
 ## 2026-11-15 KiCad統合ドラフトへの差分
 
 [三基板統合・試作準備レビュー](reva-integrated-prototype-review.md)をこの仕様の実装検証記録とする。J番号は基板ローカルで、旧表記「J4 HV→CTRL/DISP」は `HV.J2 ↔ CTRL.J4` に読み替える。`PWR.J4` はUSB-Cである。旧文中の「ファームとCTRL回路図への実配線は未実装」は更新済みで、CTRLのPico 2 pin22/GP17からJ3 pin10へADC_SENSE_ENを結んだ。PWR v3のJ5 2極/基板上NTCは、元回路を保持したまま別ドラフトでJ5 3極/セル側NTCの概念接続へ変更した。セル型番・NTC値・コネクタは未確定。HVの磁性部品/独立OVP/放電とCTRLのRTCバックアップ/音声入力は未完成であり、KiCad ERCに残る違反を発注ゲートとする。
+
+## 2026-11-19 セル・充放電温度の統合保留（既存ネットの変更なし）
+
+[WORK-INT-003](verification/2026-11-19-work-integration-003.md)およびC-005/006を根拠とする。PWR統合版source/netlistではU1 pin4 CE=GND、pin6 TS/MR=J5 pin3 CELL_NTC。TI Rev.B §6.4 p19ではbattery-onlyのTS測定はNO。Table 6-2は状態ピン表であり、温度モード根拠ではない。
+
+候補P2150Kのメーカー充電+10〜45℃を、無補償直接NTCで満たす根拠はなく、公称R/Tだけでも範囲外充電を許す反例がある。/CE=GND提案は熱適合保留。独立充電禁止と電池運転の監視/実効停止、MCU-off/断線/短絡/脱落とヒステリシス、共有NTCバイアスの設計契約をIssue #9で提案する。/CEによる充電停止をSYS/HV遮断の代用にしない。
+
+ピン/コネクタ追加・制御変更・温度閾値の確定は未実装。別センサ/パック保護/充電器変更を比較し、具体案の妥当性と変更範囲を確認してから扱う。200〜205V/16mA目標は維持し、製造/購入/HV印加の許可はない。

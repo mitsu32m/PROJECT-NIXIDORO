@@ -1,6 +1,6 @@
 # Decision register — proposed vs verified
 
-Updated 2026-11-18 JST. This is a summary of prior project design documents, **not an engineering release approval**.
+Updated 2026-11-19 JST. This is a summary of prior project design documents, **not an engineering release approval**.
 
 | ID | Subject | Current state | Rationale / evidence | Reopen condition |
 |---|---|---|---|---|
@@ -11,7 +11,7 @@ Updated 2026-11-18 JST. This is a summary of prior project design documents, **n
 | D-005 | HV max output 16 mA continuous | **TARGET, NOT VERIFIED** | 205V×16mA=3.28W, high loss and current requirements; `docs/pwr-reva-power-thermal-review.md` | Lamp-current measurements or power/heat evidence |
 | D-006 | “200–205V” interpretation | **UNDECIDED** | Nominal-target vs guaranteed-window conflict; `docs/hv-voltage-window.md` | User decision + full tolerance/OVP analysis |
 | D-007 | Independent HV OVP, fault stop, bleeder | **MANDATORY SAFETY REQUIREMENTS, NOT DESIGNED** | `docs/reva-integrated-prototype-review.md` | Only marked complete after schematic, faults, tolerances and safe bench test |
-| D-008 | Charging /CE tied GND | **PROPOSED** | Automatic charging when valid USB/NTC; `docs/pwr-reva-v3-review.md` | Cell requirements or charging thermal tests disallow |
+| D-008 | Charging /CE tied GND | **PROPOSED BASELINE UNDER THERMAL HOLD** | Actual PWR net CE=GND; direct NTC does not enforce P2150K +10..45C, and BQ TS is inactive battery-only; [INT-003](2026-11-19-work-integration-003.md) | #9 reviewed charge/load thermal enforcement architecture; no schematic change yet |
 | D-009 | ADC: MOS-switched 100k/47k | **PROPOSED** | Lower cost than TMUX1101 approach; reverse feed needs validation; `docs/pwr-reva-v3-review.md` | Leak/injection or thermal results fail |
 | D-010 | USB supply from dedicated 5V ≥500mA charger | **PROPOSED operating constraint** | USB source advertisement/host behavior not automatically handled; `docs/pwr-reva-v3-review.md` | Need broader host compatibility |
 | D-011 | HV outputs rely on HV5524 BL=LOW/POL=HIGH for display OFF | **LOGIC-STATE ONLY; NOT SAFETY ISOLATION** | `docs/ctrl-driver-rtc-schematic.md`; HV logic supply must be valid | HV stop/discharge is separately verified |
@@ -40,3 +40,17 @@ Historical entries above retain their date/scope. B and C artifacts now exist; t
 | D-014 | No explicit staged prototype decision | **PROPOSED: low-voltage PWR/CTRL then independent HV then enclosure integration** | #7/#8 prepare BOM and test evidence; user authorizes purchases/tests separately |
 
 D-003 remains rejected only for conventional non-coupled boost. D-005 16mA target unchanged; D-006 nominal vs guaranteed voltage undecided; D-007 protection not implemented. MAX668 70us=TYP is now directly established; maximum shutdown/tail energy remains UNKNOWN. B 05:03 mixed DCM proxy is **CHANGES_REQUESTED as a simultaneous real operating point**, retained as a hypothetical screen. No unreviewed device proposal is formally selected.
+
+## 2026-11-19 — WORK-INT-003 dispositions
+
+[Integration and direct source/netlist checks](2026-11-19-work-integration-003.md) apply C-003/004/005/006 within their stated scopes. Earlier PENDING REVIEW statements are historical where those later packages cover a claim; no hardware node is promoted.
+
+| ID | Previous state | Current disposition | Grounds / adoption conditions |
+|---|---|---|---|
+| D-008 | /CE=GND proposed automatic charge | **THERMAL COMPATIBILITY HOLD**; actual net unchanged | U1 pin4 grounded; no separate charge-inhibit interface implemented. Existing pair with P2150K/direct NTC is not accepted for charge safety. #9 must define reviewed alternative and requested change scope |
+| D-015 | Charge/discharge thermal responsibilities not separately recorded | **REJECTED claim:** protected cell + direct 10k/B3435 alone completes charge AND battery-only thermal protection | C-005/006, TI §6.4 p19 (not Table 6-2), Keeppower page and nominal TE R/T counterexamples. Actual limits, worst-case errors, enforced charge/load cut paths and MCU-off/fault behavior required |
+| D-016 | TE 15mm versus 20mm ambiguity; nominal electrical match | **CONDITIONAL SENSOR CANDIDATES, none selected** | C-006 + primary PDF body supports STM010 20±1mm; PDF/web environmental conflict persists. Insulation, fit, attachment/lag and full cost remain unqualified |
+
+D-012 mode contract remains conditional; D-013 joint HV Cmin/Cmax analysis requirement is supported by C-003; D-014 staged prototype remains proposed. C-003 confirms rejection of the mixed B DCM operating point; C-004 accepts limited mode/direct-SYS algebra, not real controller/lamp selection. C-005 static power/OCP examples remain assumptions, not safe load thresholds.
+
+New Work proof for GND-only Rs+(Rp||NTC) cannot expand TE nominal R10/R45 ratio 3.64837 to BQ entry ratio 8.76087: **PENDING INDEPENDENT REVIEW**, a restricted analytical screen only. It does not reject all compensation circuits or adopt a new charger/NTC. No 16mA, HV voltage, USB current or cell temperature requirement changed.

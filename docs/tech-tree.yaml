@@ -1,5 +1,5 @@
 # PROJECT-NIXIDORO research tree; source of truth for node state.
-# Updated: 2026-11-18 JST. This is a curated baseline, not a complete validated engineering record.
+# Updated: 2026-11-19 JST. This is a curated baseline, not a complete validated engineering record.
 schema_version: 1
 project: PROJECT-NIXIDORO
 branch: codex/reva-integrated-prototype-review
@@ -81,7 +81,7 @@ nodes:
     depends_on: [HV-DR]
     issue_id: HV-004
     exit_criteria: "Manufacturer ratings and current-limiting values plus a supervised measurement plan"
-    evidence: [docs/verification/open-issues.md]
+    evidence: [docs/verification/open-issues.md, docs/verification/2026-11-18-2103-JST-C-REVIEW-004-hv004-lamp-sys001-direct-mode.md]
   - id: PWR-001
     title: 5V regulator power and thermal feasibility
     status: in_progress
@@ -92,17 +92,17 @@ nodes:
   - id: BAT-001
     title: Protected cell and NTC specification
     status: in_progress
-    depends_on: [PWR-DR]
+    depends_on: [PWR-DR, THERM-001]
     issue_id: BAT-001
-    exit_criteria: "Selected cell and NTC with charge/discharge/temperature validation"
-    evidence: [docs/verification/open-issues.md]
+    exit_criteria: "Actual cell/PCM and attached NTC with verified charge and battery-only temperature enforcement, full RT/error/lag/fault budget and #9 interface"
+    evidence: [docs/verification/open-issues.md, docs/verification/2026-11-19-work-integration-003.md, hardware/integration/thermal-qualification-holds.csv]
   - id: CTRL-001
     title: CTRL reverse-feed, HV gating and RTC
     status: in_progress
     depends_on: [CTRL-DR]
     issue_id: CTRL-001
     exit_criteria: "Pin mapping, power-off fail-safe and low-voltage tests"
-    evidence: [docs/verification/open-issues.md]
+    evidence: [docs/verification/open-issues.md, docs/verification/2026-11-19-work-integration-003.md]
   - id: BOM-001
     title: Fully costed parts list
     status: in_progress
@@ -134,14 +134,14 @@ nodes:
     depends_on: [PWR-DR]
     issue_id: PWR-002
     exit_criteria: "Mode-consistent charger and BATFET losses, actual cell/NTC limits and board/enclosure thermal evidence; USB presence does not prove charging"
-    evidence: [docs/pwr-reva-power-thermal-review.md, docs/verification/2026-11-17-work-integration-001.md]
+    evidence: [docs/pwr-reva-power-thermal-review.md, docs/verification/2026-11-17-work-integration-001.md, docs/verification/2026-11-19-0302-JST-C-REVIEW-005-pwr002a-proto001bcd-batch.md, docs/verification/2026-11-19-0905-JST-C-REVIEW-006-ts-entry-te-probe-primary-check.md]
   - id: SYS-001
     title: Mode-specific HV PWR CTRL power contract
     status: in_progress
     depends_on: [HV-001, HV-004, PWR-001, PWR-002, BAT-001]
     issue_id: SYS-001
     exit_criteria: "Reviewed continuous/peak/average demand and low-cell, USB-only, battery-assist, charging and audio/OLED modes; startup, thermal and fault bounds; no unilateral target change"
-    evidence: [docs/verification/2026-11-17-work-integration-001.md, docs/verification/decisions.md]
+    evidence: [docs/verification/2026-11-17-work-integration-001.md, docs/verification/decisions.md, docs/verification/2026-11-18-1502-JST-C-REVIEW-003-sys001e-f-dcm-startup.md, docs/verification/2026-11-18-2103-JST-C-REVIEW-004-hv004-lamp-sys001-direct-mode.md]
   - id: HV-DIRECT
     title: Direct SYS HV controller and magnetics alternative
     status: alternative
@@ -154,7 +154,7 @@ nodes:
     depends_on: [HV-002, HV-003, PWR-001]
     issue_id: SYS-002
     exit_criteria: "Same actual Cmin/Cmax with bounded tail energy, normal dynamic voltage, startup surplus and current, discharge faults and reviewed nonzero margins; no selected value from hypothetical pulse"
-    evidence: [docs/verification/2026-11-17-2258-JST-C-REVIEW-002-hv002b-ovp-energy-and-shutdown.md, docs/verification/2026-11-18-work-integration-002.md]
+    evidence: [docs/verification/2026-11-17-2258-JST-C-REVIEW-002-hv002b-ovp-energy-and-shutdown.md, docs/verification/2026-11-18-work-integration-002.md, docs/verification/2026-11-18-1502-JST-C-REVIEW-003-sys001e-f-dcm-startup.md]
   - id: MECH-001
     title: Physical HV interfaces insulation and enclosure thermal evidence
     status: in_progress
@@ -169,4 +169,12 @@ nodes:
     issue_id: PROTO-001
     github_issue: 7
     exit_criteria: "Part-number and source-evidence matrix, current stock/tax/shipping/lead times or UNKNOWN, safety holds and LV-first vs standalone-HV BOM; no purchase authorization"
-    evidence: [docs/verification/2026-11-18-work-integration-002.md, hardware/integration/integrated-bom.csv]
+    evidence: [docs/verification/2026-11-18-work-integration-002.md, hardware/integration/integrated-bom.csv, hardware/integration/thermal-qualification-holds.csv, docs/verification/2026-11-19-work-integration-003.md]
+  - id: THERM-001
+    title: Charge and battery-only thermal enforcement interface
+    status: in_progress
+    depends_on: [PWR-DR, CTRL-DR]
+    issue_id: THERM-001
+    github_issue: 9
+    exit_criteria: "C-reviewed cell and NTC compatible charge inhibit plus separate battery-only monitoring and load cutoff, MCU-off/sensor faults/hysteresis, shared sensor bias, pin/power/cost and proposed schematic-change scope; no hardware approval"
+    evidence: [docs/verification/2026-11-19-0302-JST-C-REVIEW-005-pwr002a-proto001bcd-batch.md, docs/verification/2026-11-19-0905-JST-C-REVIEW-006-ts-entry-te-probe-primary-check.md, docs/verification/2026-11-19-work-integration-003.md]
