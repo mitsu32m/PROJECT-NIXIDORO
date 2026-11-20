@@ -1,0 +1,39 @@
+# C-REVIEW-011 — THERM-001 /CE EVM default and HV-004/SYS-001 low-current neon power
+Date: 2026-11-20 15:00 JST. Role: Chat C independent reviewer. No formal Claim.
+Branch: `codex/reva-integrated-prototype-review`; starting branch HEAD **d7e335a7d2ebaea3efe3235acb7465855c1799eb** (GitHub branch REST endpoint).
+Scope: three A/B reports newly added after C-REVIEW-010; batch two related B reports and one A fault report. Review is of claims, not adoption.
+
+## Inputs and provenance
+Read at starting branch SHA: docs/ai-workflow.md, docs/verification/handoff.md, docs/verification/open-issues.md, docs/verification/decisions.md, docs/tech-tree.yaml, docs/tech-tree.md, docs/reva-integrated-net-spec.md and C-REVIEW-010. Recursive Git tree enumerated 175 entries and reports.
+- A: [2026-11-20-1204-JST-THERM-001-ce-floating-default-evm-evidence.md](2026-11-20-1204-JST-THERM-001-ce-floating-default-evm-evidence.md), Issue #9.
+- B: [2026-11-20-0904-JST-chatb-hv004-cml-2ml-dc-neon-current-screen.md](2026-11-20-0904-JST-chatb-hv004-cml-2ml-dc-neon-current-screen.md), Issues #7/#4.
+- B: [2026-11-20-1257-JST-chatb-sys001-low-current-usb-margin-corner.md](2026-11-20-1257-JST-chatb-sys001-low-current-usb-margin-corner.md), Issues #4/#7.
+- TI manufacturer product page (retrieved 2026-11-20): https://www.ti.com/product/BQ25185 lists Rev.B Aug 25 2026 and BQ25185EVM guide Oct 20 2023. The EVM guide **text was not independently opened**. Original A report uses third-party mirror and reports SLUUCS1 J4 wording; retain as unverified primary-text quotation. TI Rev.B electrical table and 450/475/498mA ILIM figures are inherited from C-010, **not independently re-extracted this run**. 2ML distributor listings are source reports only; manufacturer PDF and full DC characterization not obtained.
+
+## Verdict per claim
+1. **ACCEPTED (logic only):** floating /CE is not a guaranteed logic HIGH and therefore cannot be credited as a fail-inhibit. /CE tied GND enables charging subject to other conditions, per baseline and prior TI Rev.B review. **CONDITIONAL (EVM quote):** A quotes EVM J4 'Leave floating for low', but independent primary EVM PDF content not retrieved. Even if verified, EVM jumper behavior does not establish a guaranteed bare-IC internal pull-down over PVT. **BLOCKED**: any independent fail-safe charge inhibit implementation, particularly /CE GND-short, USB ramp, MCU power loss, sensor detachment.
+2. **ACCEPTED (arithmetic under assumptions):** 12 x 0.300mA + 2 x 2mA = 7.600mA; at 205V P_HV=1.558W. With ASSUMED eta5=.90 and etaHV=.80, P_upstream=1.558/.72=2.1638889W. At 5V x 450/475/500mA input powers 2.250/2.375/2.500W, arithmetic margins 0.086111/0.211111/0.336111W. At etaHV=.75, P=2.308148W; at etaHV=.70, P=2.473016W. ASSUMED 90V lamp drop: (205-90)/.0003=383333ohm; P_resistor=34.5mW. These are **not** approved ballast resistor values or real efficiency.
+3. **CHANGES_REQUESTED (power-boundary consistency):** The two-stage factor eta5=.90 * etaHV=.80 is a SYS→5V→HV *battery/SYS-side* model. Directly comparing P_upstream to USB connector input power without modeling BQ25185 power-path, SYS voltage, charge allocation, eFuse losses and topology is not a rigorous USB-only guarantee. If the input source is USB 5V and SYS→5V is boosted, the model must state all node voltages and loss factors; eta5 cannot be assumed to describe USB-to-SYS transfer. Also the ILIM table 450mA *minimum threshold* is **not a guaranteed available continuous USB power budget**; VBUS minimum, cable droop, DPPM, power-path thermal and upstream USB contract matter. The 0.086W margin is a hypothetical sensitivity, not a worst-case guaranteed positive reserve.
+4. **CONDITIONAL (distributor evidence):** 2ML listing 300uA is not manufacturer-qualified 205V DC continuous operating point, strike/extinction voltage, lamp life or luminous acceptability. The Newark 0.300A headline conflicts with detailed 300uA. Neither 250V supply nor 90VDC indicator rating can be equated to actual lamp voltage. No 2ML or IN-12B MPN and current point adopted.
+5. **ACCEPTED (ideal impossibility):** unchanged 205V x 16mA=3.280W > ideal 5V x 500mA=2.500W; no USB-only full-target operation within stated 500mA input ceiling even before losses. This does not forbid battery supplement or an owner-approved lower display mode.
+6. **BLOCKED (hardware):** real 2ML DC ballast and brightness, lamp supply voltage and strike, exact simultaneous load, USB/SYS/BAT signed current, converter efficiencies at actual loads, 5V startup, cell/thermal protection, independent OVP and discharge, sourced magnetics and assembly cost.
+
+## Independent challenge / failure conditions
+- The hypothetical 7.6mA omits HV divider/bleeder, driver and other loads. At 450mA assumed current and 5V nominal, 86mW margin would be exhausted by any combination of extra input-referred loads above 86mW; no guarantee of margin remains with voltage, efficiency and startup corners.
+- For lamp ballast, actual resistor power and working-voltage rating depend on measured/guaranteed operating lamp drop and ignition behavior; nominal 34.5mW is not an HV voltage-rating check.
+- A charge-inhibit /CE HIGH still cannot isolate SYS or remove stored HV energy. MCU-off, /CE-short, temperature sensor detached and brownout are separate faults.
+- Manufacturer TI page confirms Rev.B exists, but not the A report's exact EVM sentence. The manufacturer-controlled EVM guide and 2ML datasheet must be retrieved before elevating their details to independently verified primary evidence.
+
+## Work decision package (important; deliver)
+**Decision:** Keep full 16mA power target and USB 500mA contract while evaluating whether a lower-current 2ML display mode is useful, and decide independent charger interlock architecture only after fail-state proof.
+**A/B claims:** A reports TI EVM floating-low configuration; B proposes 7.6mA / 1.558W rail scenario and USB-only 86mW nominal low-corner reserve.
+**Verified:** above independent arithmetic and logic counterexample; TI manufacturer page confirms current Rev.B and EVM guide existence.
+**Not verified:** exact EVM jumper text, bare-IC floating behavior, manufacturer 2ML DC ratings, guaranteed 450mA delivered power, SYS/BAT energy paths and efficiency, real auxiliary load and thermal/OVP.
+**Alternatives:** independent adapter-domain pull-up plus redundant enforceable charge-cut, thermally qualified charger/pack; actual lamp current qualification and alternative lower-current neon; USB+BAT supplement vs USB-only constrained mode; topology-specific SYS/direct-HV budget.
+**System effect:** PWR/CTRL charge safety and state machine, 5V startup, battery net charge/discharge, 205V rail load, OVP/hard-stop/discharge, prototype BOM and Jan-2027 procurement.
+**Recommendation:** Keep #9 and #4/#7 hardware BLOCKED. Ask A for guaranteed independent inhibit state/fault table and direct TI EVM PDF evidence. Ask B for manufacturer-controlled 2ML PDF, full load/voltage-node budget, sourceable controller+magnetics pair, landed cost. Work should not modify the 16mA target or adopt 2ML based on this screen.
+**Source commit baseline:** d7e335a7d2ebaea3efe3235acb7465855c1799eb. Handoff: this file and comments on Issues #9/#4/#7.
+
+## Queue and restrictions
+Changed since C-010: 3 PENDING REVIEW A/B reports; reviewed all three within explicit limited scopes. Older unreviewed magnetics reports from 2026-11-17 23:59 and 2026-11-18 13:02 remain for coverage audit; earliest confirmed 2026-11-17 23:59. Total important outstanding **at least 4** (older tapped reports 23:59, 03:55, 07:56, B magnetics 13:02), subject to complete per-claim coverage reconciliation. Next priority #2 magnetics and #6 OVP.
+No purchase, PCB manufacturing, main merge, HV energization, safety approval, shared-index edit, or requirement change.
