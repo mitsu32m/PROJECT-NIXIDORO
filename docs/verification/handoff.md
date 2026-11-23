@@ -1,51 +1,35 @@
 # Handoff — PROJECT-NIXIDORO
 
-Current snapshot: **2026-11-19 JST**. Examined HEAD: **6ac0d8c966e2f76731997c0c5c45c220cf835bc3**. Always fetch live branch HEAD; this SHA identifies the evidence baseline, not a permanent current head.
+Current snapshot: **2026-11-23 JST**. Examined HEAD: **4752f388ba7e55a509a84cbdc8ad8c6d8a88ce87**. 正本は作業ブランチのlive HEAD。前回統合保存1e053400d2bcf70e57b63f7ba19dcbd8659a8582から72件のresearch/review追加。会話やこのSHAを永久最新としない。
 
-## Current decision package
+## Current Work decision package
 
-[WORK-INT-003](2026-11-19-work-integration-003.md) integrates C-REVIEW-003/004/005/006. **Comparative research CONDITIONAL; actual battery, sensor, full-HV operating and manufacturing adoption BLOCKED.**
+[WORK-INT-004](2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md) integrates C-007〜024; original reviews preserved. **Analysis requirements adopted; hardware/parts adoption BLOCKED / NOT ORDER-READY.** B 11/23 21:03 is still PENDING C REVIEW; Work independently checked only its arithmetic.
 
-**Highest new concern: thermal enforcement across charge and battery-only operation.** TI BQ25185 Rev.B §6.4 p19 (NOT Table 6-2) has TS Measurement NO in battery-only. Current PWR source/netlist confirms U1 pin4 /CE=GND and U1 pin6 TS/MR=J5 pin3 CELL_NTC. Direct 10k/B3435 plus a protected cell does not automatically enforce cell charge/discharge temperature limits. Candidate Keeppower P2150K official page charge +10..45C is incompatible with an unmodified direct NTC nominal TS window (~1.74/59.51C ideal-beta entry); actual parts/limits still unselected. /CE disables charging, not SYS/HV energy.
+1. **同じ負荷台帳:** digit/neon/bleeder/OVP-divider/driver-leakageを分離し、USB→SYS損失・Paux・signed IBAT（放電正）を記す。16mAがlamp-onlyかwhole-HV-busか未決。200〜205Vのnominal/windowも未決。仕様を変更しない。
+2. **放電不整合を修正:** single330kとdual300k×2を別案にする。ASSUMED eta=.675,205V,3mA/digit,.5mA/neonではdual Rmin285k×2/450mA USB例はdigit2だけでも不成立。floorを0へclipして可としない。300kは採用品でない。60V/5sは安全基準でない。
+3. **HV部品:** Q4434/35はメーカー1:1で205V適格ペアから除外。LT3757はcontroller-only比較候補、古いTDK DCT15EFD-U44S003参照は注文根拠でない。MAX668結合方式とLT8365 multiplier/direct-SYSは比較候補。ordinary boost限定却下を普遍化しない。
+4. **保護を分離:** charge inhibit、BAT-only load cutoff、HV hard-off/residual dischargeを別証明。CE=GNDは実draftのまま。MCU3V3-only pullup/floatではfail-inhibitを保証しない。TI EVM PDFの直接取得は今回失敗、内部pull-down保証にしない。
+5. **一次表の条件:** BQ500mA設定450/475/498mAはlimit threshold。VBSUP40/20mV、BUVLO3VはTYP。115/140mΩはVBAT4.5V/400mA条件。supplement非regulate・BAT-only TSなしをTI Rev.Bで今回確認。MAX66870µs=TYP、tail max不明。HV5524推奨220V、絶対230V。
 
-New [#9 THERM-001](https://github.com/mitsu32m/PROJECT-NIXIDORO/issues/9): define charge inhibit and separate battery-only monitor/enforcement with real R/T, total error/lag, hysteresis, sensor faults and MCU-off behavior. No schematic change authorized by this document.
+## System holds
 
-## Reviewed scope and correction
+205V×16mA=3.28W > 5V×500mA=2.5W。USB-only full target不成立。USB+BATは放電し得る。
+実磁性部品/dot/Llk/電流波形、FET/rectifier/clamp/core/銅損/熱、Cmin/Cmax/Etail/OVP/停止/共通return、TPS61023最低SYS/起動/熱、cell/PCM/NTC取付/熱遮断は未適格。P2150K/Rを混同せず、Rの15AをKへ移さない。
+Pico2/RTC/OLED/UIの提案baseline保持。OE/BLは絶縁ではない。reverse feed、RTC backup、3V3負荷、board EP/via/copper、HV connector/抵抗working voltage、PETG内cell温度/遅れ未検証。新verified hardware nodeなし、release gate locked。
 
-- [C-003](2026-11-18-1502-JST-C-REVIEW-003-sys001e-f-dcm-startup.md): mixed B DCM operating point CHANGES_REQUESTED; startup energy algebra accepted only as assumed sensitivity. Supports D-013 joint capacitor assessment.
-- [C-004](2026-11-18-2103-JST-C-REVIEW-004-hv004-lamp-sys001-direct-mode.md): mode/direct-SYS algebra and AC source classification reviewed; actual DC lamp/controller/magnetics selection blocked. Corrections in INT-003.
-- [C-005](2026-11-19-0302-JST-C-REVIEW-005-pwr002a-proto001bcd-batch.md): A static source/path calculations and B electrical sensor candidates reviewed within assumptions. High-current BATFET R and 27C OCP extrapolations are NOT continuous safe limits.
-- [C-006](2026-11-19-0905-JST-C-REVIEW-006-ts-entry-te-probe-primary-check.md): TS ideal math accepted; TE STM010 PDF body 20±1mm/1m, not 15mm. PDF/web environmental conflict and attachment/lag/fault safety unresolved. Correct TI source to §6.4/p19.
+## Next bounded outputs — no formal Claim
 
-TE nominal R/T is not exact ideal B3435. Work's new restricted proof that Rs+(Rp||NTC) cannot widen R10/R45 enough for candidate 10/45C entries is **PENDING C REVIEW**; no universal compensation rejection or part value adopted.
+- **A #6 + #9/#8:** 実比較器/ref/divider/cap/stop/discharge候補1式と保証表、Cmin/Cmax/Etail欠落、無給電/共通return fault matrix。CE/負荷cutの実候補と回路変更要求範囲を文書化。同じ仮定RC表のみを反復しない。
+- **B #7/#2/#10 + #4:** 現行HV磁性部品1個のcontrolled図面/電気/熱/working voltageと国内少量納期/着地価格、又は具体的全候補除外理由。lamp/PCM/holder/NTC assemblyと段階BOM、同一topologyの負荷台帳。
+- **C:** Work004とB21:03の限定再計算/一次条件/INFEASIBLE表現を確認。実回路保証/fault pathを優先。歴史的review backlog UNKNOWN。
+- **Work:** 新MPN/保証/見積/実回路判断がなければ大型再調査せず確認SHAを短く保存。
 
-## Unchanged system target and blockers
+## Prototype, budget and owner decisions
 
-Around 200–205V/16mA continuous target remains. 500mA-configured USB-only full load is impossible by input/output energy; battery assist may discharge cell. No qualified actual HV topology+magnetics pair, independent OVP/hard-stop/discharge, capacitor Cmin/Cmax, low-cell PWR startup/thermal or cell/NTC assembly is proven. MAX668 ordinary boost alone is rejected; coupled, 5V flyback and direct-SYS alternatives remain candidates. 70us shutdown is TYP, not bounded maximum. MCU BL and firmware stops are not isolation.
-
-Pico2/RTC/OLED/UI remain prior proposals; RTC backup, OE, reverse feed and thermal state interfaces unfinished. Board/enclosure thermal paths, cell-holder/probe geometry and temperature fault response remain open. No hardware node newly verified or release gate unlocked.
-
-## Next role contracts — GitHub handoff, no formal Claim
-
-- **A:** #9 thermal enforcement architecture/interface; #8 real cell/charger/5V quantitative model; continue actual HV #2 and OVP/energy #6. Explain exact proposed circuit-change scope before implementation.
-- **B:** #7 complete exact cell/PCM/probe/holder evidence and assembly cost; prioritize actual DC lamp and currently sourceable magnetic/controller pair alongside remaining sensor clarification. No more NTC-only qualitative restatements without new part/drawing/qualification evidence.
-- **C:** next important batch #2 oldest A tapped 23:59/03:55/07:56 + B 11/18 13:02 magnetics sourcing; independently challenge #9 Work ratio proof. Do not treat acceptance of equations as hardware qualification.
-- **Work:** batch new material judgments, preserve historical rejected branches and bounded review states; no blanket re-review of unchanged reports.
-
-## Prototype and budget preparation
-
-D-014 staged proposal: cell/HV-free PWR/CTRL evaluation planning with simulators first; qualified cell/NTC assembly next; standalone HV/dummy-load safety plan only after its gates; sealed integrated evaluation last. No purchase/test authorization implied.
-
-New hardware/integration/thermal-qualification-holds.csv records partial candidate holds and historical price provenance, NOT an order BOM. Full tax/shipping/PCB/rework-inclusive <=50k total /<=40k initial/>=10k reserve unproven. Protected cell may be ~75mm long; STM010 body20±1mm plus leads/strain relief needs actual CAD; fit/thermal lag unknown.
-
-Deadline 2027-01末. Proposed internal checkpoints remain 11/25 real-part evidence, 12/01 architecture/power/thermal decisions, 12/15 first-order decision package. Escalate long-lead evidence before these dates; dates are not supplier promises or purchase permissions.
-
-Next user decisions once concrete alternatives/costs exist: charger/cell maintenance with extra protection vs combination change; UI simultaneous display and USB net-charge requirements; staged prototype scope and explicit purchase/test authorization. No requirement changed in this run.
-
-## Automation observation 2026-11-19
-
-Lookup found four active project tasks: A6/day, B6/day, C3/9/15/21 JST, weekly separate review. No Work/self-owned task found. environments=null, Work quota/runtime inheritance unavailable; no new task or update. Proven alternative remains A/B/C GitHub accumulation plus manual Work batch integration. Twice/day is a future ceiling, not an enabled Work schedule.
+D-014 staged LV-first planning retained; no purchase/test authorization. 11/15価格/在庫は歴史値。初回≤40k/予備≥10k/総額≤50kは未立証、現着地額UNKNOWN。旧BOMは保持。11/25部品証拠、12/01方式/電力/熱、12/15初回購入判断packageは提案checkpoint。期限2027-01末前の判断を優先する。
+具体費用/代替を揃えてから、16mA境界/電圧window、USB時net-chargeと表示動作、段階試作範囲をユーザーへ提示。重要仕様変更、購入/PCB/HV/mainマージ/安全承認は禁止のまま。
 
 ## Historical evidence
 
-Earlier integrations are preserved: [INT-001](2026-11-17-work-integration-001.md), [INT-002](2026-11-18-work-integration-002.md), C-001/002, and their original reports. Previous handoff snapshot is versioned at [examined pre-update SHA](https://github.com/mitsu32m/PROJECT-NIXIDORO/blob/6ac0d8c966e2f76731997c0c5c45c220cf835bc3/docs/verification/handoff.md). Its unavailable-review statements are superseded by the current scoped review list above; no research report deleted.
+[INT-003](2026-11-19-work-integration-003.md), [INT-002](2026-11-18-work-integration-002.md), [INT-001](2026-11-17-work-integration-001.md) retained. INT-003限定Rs/Rp比証明はC-007で数学範囲レビュー済み。旧handoffはGit履歴に保持。旧schedule観測を現在の実行能力としない。本統合でautomation照会/変更なし。

@@ -1,7 +1,7 @@
 # PROJECT-NIXIDORO — Research Tech Tree
 
-Status snapshot: **2026-11-19 JST**. Canonical data: [tech-tree.yaml](tech-tree.yaml).
-Evidence: [WORK-INT-003](verification/2026-11-19-work-integration-003.md), [decisions](verification/decisions.md), [open issues](verification/open-issues.md).
+Status snapshot: **2026-11-23 JST**. Canonical data: [tech-tree.yaml](tech-tree.yaml).
+Evidence: [WORK-INT-004](verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md), [decisions](verification/decisions.md), [open issues](verification/open-issues.md).
 
 Views below partition the canonical dependency edges. Repeated IDs denote the same node; all incoming prerequisites apply together, including MILE-02 parts A and B. Alternative nodes are candidates, not adopted hardware. Locked release gates do not prohibit research. No node count implies percentage complete or permission to buy/test/fabricate.
 
@@ -189,12 +189,32 @@ flowchart TB
   class N_MILE_02,N_MILE_03 locked
 ```
 
+## 9. Flyback sourcing and scoped rejection
+
+```mermaid
+flowchart TB
+  N_HV_DR["HV-DR HV logic/interface draft (documented)"]
+  N_HV_FLYBACK["HV-FLYBACK LT3757 controller with qualified HV magnetics candidate (alternative)"]
+  N_HV_Q44["HV-Q44 Q4434 Q4435 qualified 205V pair claim rejected (rejected)"]
+  N_HV_DR --> N_HV_FLYBACK
+  N_HV_FLYBACK --> N_HV_Q44
+```
+
+## 10. Multiplier and ordinary boost distinction
+
+```mermaid
+flowchart TB
+  N_HV_DR["HV-DR HV logic/interface draft (documented)"]
+  N_HV_MULT["HV-MULT LT8365 multiplier adaptation candidate (alternative)"]
+  N_HV_LT8365_BOOST["HV-LT8365-BOOST LT8365 ordinary boost to 205V rejected (rejected)"]
+  N_HV_DR --> N_HV_MULT
+  N_HV_DR --> N_HV_LT8365_BOOST
+```
+
 ## Current integration notes
 
-[WORK-INT-003](verification/2026-11-19-work-integration-003.md) integrates C-REVIEW-003/004/005/006 within reviewed scopes. Mode/startup/DC algebra has additional review; no actual HV stage, cell or temperature-sensor assembly is qualified.
-
-THERM-001 (#9) makes charge inhibit and separate battery-only thermal enforcement an explicit BAT-001 prerequisite. The integrated PWR draft still has CE=GND; BQ TS is inactive battery-only. Direct NTC alone cannot enforce candidate P2150K +10..45C. Proposed circuitry is pending review, not implemented. New restricted Rs/Rp ratio screen in INT-003 is PENDING INDEPENDENT REVIEW.
-
-TE STM010 PDF body is 20±1mm, while its environmental ratings differ from the web page; actual attachment and thermal lag remain unqualified. PROTO-001 partial candidate evidence is in thermal-qualification-holds.csv, not a purchase BOM. HV actual topology/magnetics #2 and joint OVP/capacity #6 remain urgent.
-
-YAML nodes, statuses, evidence paths and full dependency edges are structurally validated against all Mermaid views; no missing dependency or cycle is accepted. Historical research/rejected branches are preserved; no hardware gate is unlocked. Physical tests, purchases, fabrication, main merge or important specification changes require the existing explicit approvals.
+[WORK-INT-004](verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md) integrates C-007〜024 and independently checks manufacturer conditions. No hardware node verified or release gate unlocked.
+D-017 canonical load accounting separates lamps/bleeder/OVP-divider/driver-leakage, consistent voltage nodes, overhead and signed BAT current. 16mA lamp/bus boundary remains undecided. Single330k and dual300k discharge are separate alternatives; negative budget means INFEASIBLE. Example dual bleeder/450mA cannot support two digits alone. No real lamp current, resistor, capacitor or mode adopted.
+D-018 retains passive/switched/hybrid discharge alternatives with same actual Cmin/Cmax, tail, startup, common-return and no-power fault proof. D-019 records manufacturer1:1 false-positive sourcing and LT8365 ordinary-boost exclusion while retaining multiplier/controller candidates.
+THERM-001 remains independent charge and battery-only load enforcement plus separate HV residual discharge. C-007 reviewed the restricted Rs/Rp ratio theorem only. B11/23 21:03 remains pending C review; Work recalculated its mathematics without claiming C completion.
+Current landed budget UNKNOWN; initial40k/reserve10k/total50k unproven. Real drawings/MPNs/thermal/fault/quotes take priority over repeated hypothetical tables. Historical reports and rejected branches preserved. YAML/Mermaid IDs, states and all dependency edges must be validated before and after commit.

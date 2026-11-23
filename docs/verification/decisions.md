@@ -1,6 +1,6 @@
 # Decision register — proposed vs verified
 
-Updated 2026-11-19 JST. This is a summary of prior project design documents, **not an engineering release approval**.
+Updated 2026-11-23 JST. This is a summary of prior project design documents, **not an engineering release approval**.
 
 | ID | Subject | Current state | Rationale / evidence | Reopen condition |
 |---|---|---|---|---|
@@ -54,3 +54,21 @@ D-003 remains rejected only for conventional non-coupled boost. D-005 16mA targe
 D-012 mode contract remains conditional; D-013 joint HV Cmin/Cmax analysis requirement is supported by C-003; D-014 staged prototype remains proposed. C-003 confirms rejection of the mixed B DCM operating point; C-004 accepts limited mode/direct-SYS algebra, not real controller/lamp selection. C-005 static power/OCP examples remain assumptions, not safe load thresholds.
 
 New Work proof for GND-only Rs+(Rp||NTC) cannot expand TE nominal R10/R45 ratio 3.64837 to BQ entry ratio 8.76087: **PENDING INDEPENDENT REVIEW**, a restricted analytical screen only. It does not reject all compensation circuits or adopt a new charger/NTC. No 16mA, HV voltage, USB current or cell temperature requirement changed.
+
+
+## 2026-11-23 — WORK-INT-004 current dispositions
+
+[WORK-INT-004](2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md) applies C-007〜024 within explicit scopes and independently checks manufacturer tables and the topology/load contradiction. No implementation or requirement adoption.
+
+| ID | Previous state | Current disposition | Evidence / adoption conditions / reason |
+|---|---|---|---|
+| D-004 | Comparative HV candidates | **CONDITIONAL candidates retained; no qualified pair** | MAX668 coupled, LT3757 controller-only, LT8365 multiplier and direct-SYS retained; Q4434/35 1:1 excluded from 205V-qualified pair count. Real controlled magnetics, currents/loss/thermal/OVP and sourcing required |
+| D-005 / D-006 | 16mA target / voltage meaning undecided | **UNCHANGED; current boundary also UNDECIDED** | Lamp-only vs whole-bus must be explicit. No reduced display/current/USB policy adopted |
+| D-013 | Joint capacitance requirement | **ADOPTED analysis requirement; implementation BLOCKED** | Same real Cmin/Cmax, guaranteed tail, startup and single/common-fault discharge; 60V/5s and 300k are examples, no safety thresholds/parts |
+| D-015 | Direct NTC + protected cell insufficient | **REJECTION retained; three distinct protection contracts** | charge inhibit, battery-only load cut, HV residual discharge. TI TS inactive battery-only; CE only charge. MCU3V3-only pullup/float not fail-inhibit |
+| D-017 | Separate reports use inconsistent bleeder load | **ADOPTED load-accounting analysis contract** | HV total=lamp+bleeder+OVP/divider+driver/leakage; voltage nodes, eta boundaries, Paux, signed IBAT. Negative remaining budget→INFEASIBLE, never clip to feasible zero. Actual modes BLOCKED |
+| D-018 | Passive/switched discharge not compared consistently | **CONDITIONAL alternatives P1/P2/S1/H1; none adopted** | P2 assumed300k×2 min corner adds0.294912W at205V, one-open4.91129s under assumed12µF/220→60V/5s. Shared-return/continued-drive/cap/thermal/ratings unqualified |
+| D-019 | No explicit actual-part false-positive gate | **REJECTED as qualified 205V pairs: Q4434/35; LT8365 ordinary boost** | Manufacturer1:1/5V example and SW150V limit. No universal transformer impossibility; multiplier retained. TDK old reference held for sourcing proof |
+| D-020 | Work Rs/Rp proof pending | **ACCEPTED mathematical scope, C-007 reviewed** | Fixed-bias positive Rs+(Rp||NTC) contracts nominal ratio; does not exclude all compensation/active/other charger or adopt values |
+
+Adoption conditions: primary min/max only under stated conditions; typical efficiency, threshold, resistance and manufacturer application examples cannot become guaranteed system performance. No real FET/diode/magnetics/cap/NTC/cell chosen. Budget and staged prototype D-014 remain proposals, not authorization. C-024/B21:03 "0 neon" presentation is refined to "digit2 itself infeasible" at the specified450mA dual-bleeder example; older artifacts retained.
