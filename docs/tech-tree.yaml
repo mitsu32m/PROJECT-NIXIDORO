@@ -1,5 +1,5 @@
 # PROJECT-NIXIDORO research tree; source of truth for node state.
-# Updated: 2026-11-23 JST. This is a curated baseline, not a complete validated engineering record.
+# Updated: 2026-11-24 JST. This is a curated baseline, not a complete validated engineering record.
 schema_version: 1
 project: PROJECT-NIXIDORO
 branch: codex/reva-integrated-prototype-review
@@ -60,14 +60,14 @@ nodes:
     depends_on: [HV-DR]
     issue_id: HV-001
     exit_criteria: "Manufacturer-grounded magnetics and worst-case efficiency, startup, thermal and current budget; if 16mA changed, explicit user approval"
-    evidence: [docs/hv-transformer-screen.md, docs/verification/2026-11-17-0930-JST-max668-coupled-inductor-precedents.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md]
+    evidence: [docs/hv-transformer-screen.md, docs/verification/2026-11-17-0930-JST-max668-coupled-inductor-precedents.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md]
   - id: HV-002
     title: HV regulation tolerance and OVP window
     status: in_progress
     depends_on: [HV-001]
     issue_id: HV-002
     exit_criteria: "Full temperature/tolerance/overshoot analysis with HV5524 recommended max respected"
-    evidence: [docs/hv-voltage-window.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md]
+    evidence: [docs/hv-voltage-window.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md]
   - id: HV-003
     title: Independent OVP hard-off and discharge
     status: locked
@@ -154,7 +154,7 @@ nodes:
     depends_on: [HV-002, HV-003, PWR-001]
     issue_id: SYS-002
     exit_criteria: "Same actual Cmin/Cmax with bounded tail energy, normal dynamic voltage, startup surplus and current, discharge faults and reviewed nonzero margins; no selected value from hypothetical pulse"
-    evidence: [docs/verification/2026-11-17-2258-JST-C-REVIEW-002-hv002b-ovp-energy-and-shutdown.md, docs/verification/2026-11-18-work-integration-002.md, docs/verification/2026-11-18-1502-JST-C-REVIEW-003-sys001e-f-dcm-startup.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md]
+    evidence: [docs/verification/2026-11-17-2258-JST-C-REVIEW-002-hv002b-ovp-energy-and-shutdown.md, docs/verification/2026-11-18-work-integration-002.md, docs/verification/2026-11-18-1502-JST-C-REVIEW-003-sys001e-f-dcm-startup.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md]
   - id: MECH-001
     title: Physical HV interfaces insulation and enclosure thermal evidence
     status: in_progress
@@ -169,7 +169,7 @@ nodes:
     issue_id: PROTO-001
     github_issue: 7
     exit_criteria: "Part-number and source-evidence matrix, current stock/tax/shipping/lead times or UNKNOWN, safety holds and LV-first vs standalone-HV BOM; no purchase authorization"
-    evidence: [docs/verification/2026-11-18-work-integration-002.md, hardware/integration/integrated-bom.csv, hardware/integration/thermal-qualification-holds.csv, docs/verification/2026-11-19-work-integration-003.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md]
+    evidence: [docs/verification/2026-11-18-work-integration-002.md, hardware/integration/integrated-bom.csv, hardware/integration/thermal-qualification-holds.csv, docs/verification/2026-11-19-work-integration-003.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md]
   - id: THERM-001
     title: Charge and battery-only thermal enforcement interface
     status: in_progress
@@ -184,7 +184,7 @@ nodes:
     depends_on: [HV-DR]
     issue_id: HV-001
     exit_criteria: "Controlled current-production HV winding and sourceable pair, current waveforms, low-input startup, losses, OVP and thermal; historical 350V reference is not adoption"
-    evidence: [docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md]
+    evidence: [docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md]
   - id: HV-MULT
     title: LT8365 multiplier adaptation candidate
     status: alternative
@@ -205,3 +205,27 @@ nodes:
     depends_on: [HV-FLYBACK]
     exit_criteria: "Manufacturer 1:1 and 5V typical application do not qualify proposed 205V stage; different design would need independent proof"
     evidence: [docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md]
+  - id: HV-OVP-TLV
+    title: TLV6700 precision OVP comparison candidate
+    status: alternative
+    depends_on: [HV-002]
+    issue_id: HV-002
+    github_issue: 6
+    exit_criteria: "Actual HV resistor chain and bias guarantee, dynamic normal voltage, startup/default-off latch, maximum tail and same Cmin/Cmax;29us nominal is not maximum stop time"
+    evidence: [docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md]
+  - id: HV-CJ5143
+    title: CJ5143 continuous flyback comparison candidate
+    status: alternative
+    depends_on: [HV-FLYBACK]
+    issue_id: HV-001
+    github_issue: 7
+    exit_criteria: "Actual controller/pin/dot match, high-current L(I,T), reset/current/frequency and continuous thermal proof, protected stop and landed source quote"
+    evidence: [docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md]
+  - id: HV-WE839
+    title: Wurth 750315839 continuous flyback comparison candidate
+    status: alternative
+    depends_on: [HV-FLYBACK]
+    issue_id: HV-001
+    github_issue: 7
+    exit_criteria: "Controlled drawing partial evidence only; qualify topology and controller frequency, L(I,T), continuous power and heat, protection and supply;3.2A typical is not guaranteed"
+    evidence: [docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md]

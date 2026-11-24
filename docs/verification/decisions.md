@@ -1,6 +1,6 @@
 # Decision register — proposed vs verified
 
-Updated 2026-11-23 JST. This is a summary of prior project design documents, **not an engineering release approval**.
+Updated 2026-11-24 JST. This is a summary of prior project design documents, **not an engineering release approval**.
 
 | ID | Subject | Current state | Rationale / evidence | Reopen condition |
 |---|---|---|---|---|
@@ -72,3 +72,17 @@ New Work proof for GND-only Rs+(Rp||NTC) cannot expand TE nominal R10/R45 ratio 
 | D-020 | Work Rs/Rp proof pending | **ACCEPTED mathematical scope, C-007 reviewed** | Fixed-bias positive Rs+(Rp||NTC) contracts nominal ratio; does not exclude all compensation/active/other charger or adopt values |
 
 Adoption conditions: primary min/max only under stated conditions; typical efficiency, threshold, resistance and manufacturer application examples cannot become guaranteed system performance. No real FET/diode/magnetics/cap/NTC/cell chosen. Budget and staged prototype D-014 remain proposals, not authorization. C-024/B21:03 "0 neon" presentation is refined to "digit2 itself infeasible" at the specified450mA dual-bleeder example; older artifacts retained.
+
+
+## 2026-11-24 — WORK-INT-005 OVP and magnetics
+
+[WORK-INT-005](2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md) integrates C-025/026 and partially checks pending B09:03. No hardware or specification adoption.
+
+| ID | Previous state | Current disposition | Reason / conditions |
+|---|---|---|---|
+| D-021 | Actual OVP candidate not indexed | **TLV6700 alternative; stated ±1% divider proxy REJECTED; precision variant BLOCKED** | TI Rev.B p6 footnote/Figure1: INB rising→OUTB falling=tPLH29µs NOM, not18µs; max delay UNKNOWN.450µs startup max under conditions, UVLO high-Z not fail-off. Real bias/chain/normal dynamic/C/tail/stop required |
+| D-022 | Magnetics energy and timing split across reports | **ADOPTED analysis requirement: simultaneous reset/current/frequency/control/thermal proof** | CJ5143 3V/100kHz fully-reset constant15µH/n15 model insufficient even ideal;5V nearly boundary and above1.2A characterization. Do not infer universal part/topology rejection or continuous rating |
+| D-023 | Würth actual working-voltage/drawing not freshly verified | **SOURCE-DOCUMENTED partial evidence; hardware BLOCKED** | Controlled003.001 p1 pins/dots confirmed;p2 functional insulation265Vrms/400Vpeak OVCII wording. Not system/basic/reinforced qualification. Isat3.2A TYP;50–200kHz typical application, not universal absolute range |
+| D-017 | B21:03 pending C | **Arithmetic reviewed C-025; bookkeeping retained** | Negative residual remains INFEASIBLE; no duplicate new mode decision. B11/24 09:03 still pending C |
+
+C-025/026 delay wording is corrected with primary-source evidence; originals retained.73.107µJ uses assumed1µF and normalized midpoint, not a capacitor/threshold selection. Fixed5.415M/10k plus400mV nominal is217.000V, not217.058766V. All previous release locks,200–205V/16mA target and budget constraints unchanged.

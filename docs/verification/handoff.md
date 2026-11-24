@@ -1,10 +1,19 @@
 # Handoff — PROJECT-NIXIDORO
 
-Current snapshot: **2026-11-23 JST**. Examined HEAD: **4752f388ba7e55a509a84cbdc8ad8c6d8a88ce87**. 正本は作業ブランチのlive HEAD。前回統合保存1e053400d2bcf70e57b63f7ba19dcbd8659a8582から72件のresearch/review追加。会話やこのSHAを永久最新としない。
+Current snapshot: **2026-11-24 JST**. Examined HEAD: **3453693f7595f015b23ae66a98647191a78b656b**. 正本は作業ブランチのlive HEAD。前回Work保存a91a4e7cfb0785e0ff58ba8cb6b18cc80019d7fbから8件のreport追加。会話やこのSHAを永久最新としない。
 
 ## Current Work decision package
 
-[WORK-INT-004](2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md) integrates C-007〜024; original reviews preserved. **Analysis requirements adopted; hardware/parts adoption BLOCKED / NOT ORDER-READY.** B 11/23 21:03 is still PENDING C REVIEW; Work independently checked only its arithmetic.
+[WORK-INT-005](2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md) integrates C-025/026. TLV6700 precision divider and CJ5143/Würth candidates remain **BLOCKED for hardware adoption**.
+- **Correction to C-025/026 timing:** TI TLV6700 p6 footnote/Figure1 refers to input transitions. INB rising→OUTB falling is tPLH=29µs NOM, not18µs. Neither has max bound. At UVLO OUTB high-Z; VDD>1.8V requires450µs MAX before correct output under stated conditions. No comparator-only fail-off claim.
+- **Static OVP:** ±0.1% ideal resistor proxy still leaves only0.657216V nominal interval and73.107µJ headroom per assumed1µF at its normalized midpoint. Actual divider/bias/TC/normal dynamic/tail/stop proof absent. ±1% proxy is limited rejected, TLV6700 itself remains alternative.
+- **Magnetics:** CJ5143 Lmin13.5µH at1.2A is characterization, not continuous/Isat.3V/100kHz ideal fully-reset model cannot supply3.28W. Würth750315839 controlled drawing rev003.001 confirms N1=3dot–5,N2=7dot–8,N3=8dot–9 and functional-insulation wording;3.2A is TYP,50–200kHz is typical application. No full stage qualified.
+- **Review status:** B11/23 21:03 and Work004 INFEASIBLE distinction reviewed arithmetically by C-025. B11/24 09:03 remains PENDING C REVIEW. Do not treat Work partial checks as C completion.
+- **Next concrete work:** A real default-off OVP/stop-latch and HV resistor/cap guarantee table (#6); B continuous L(I,T)/thermal/controller match and landed small-order quotes (#2/#7); C validate29µs polarity correction and Würth/newB batch. Preserve prior thermal/PWR/lamp/UI requirements below.
+
+## Previous integrated baseline (still applies except review-status supersession above)
+
+[WORK-INT-004](2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md) integrates C-007〜024; original reviews preserved. **Analysis requirements adopted; hardware/parts adoption BLOCKED / NOT ORDER-READY.** B 11/23 21:03 arithmetic was subsequently checked by C-025; actual mode adoption remains BLOCKED.
 
 1. **同じ負荷台帳:** digit/neon/bleeder/OVP-divider/driver-leakageを分離し、USB→SYS損失・Paux・signed IBAT（放電正）を記す。16mAがlamp-onlyかwhole-HV-busか未決。200〜205Vのnominal/windowも未決。仕様を変更しない。
 2. **放電不整合を修正:** single330kとdual300k×2を別案にする。ASSUMED eta=.675,205V,3mA/digit,.5mA/neonではdual Rmin285k×2/450mA USB例はdigit2だけでも不成立。floorを0へclipして可としない。300kは採用品でない。60V/5sは安全基準でない。
@@ -22,7 +31,7 @@ Pico2/RTC/OLED/UIの提案baseline保持。OE/BLは絶縁ではない。reverse 
 
 - **A #6 + #9/#8:** 実比較器/ref/divider/cap/stop/discharge候補1式と保証表、Cmin/Cmax/Etail欠落、無給電/共通return fault matrix。CE/負荷cutの実候補と回路変更要求範囲を文書化。同じ仮定RC表のみを反復しない。
 - **B #7/#2/#10 + #4:** 現行HV磁性部品1個のcontrolled図面/電気/熱/working voltageと国内少量納期/着地価格、又は具体的全候補除外理由。lamp/PCM/holder/NTC assemblyと段階BOM、同一topologyの負荷台帳。
-- **C:** Work004とB21:03の限定再計算/一次条件/INFEASIBLE表現を確認。実回路保証/fault pathを優先。歴史的review backlog UNKNOWN。
+- **C:** Work005の29µs入力/出力遷移訂正と新B09:03/Würth一次図面をbatch review。実回路保証/fault pathを優先。歴史的review backlog UNKNOWN。
 - **Work:** 新MPN/保証/見積/実回路判断がなければ大型再調査せず確認SHAを短く保存。
 
 ## Prototype, budget and owner decisions
