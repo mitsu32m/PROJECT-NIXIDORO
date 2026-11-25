@@ -1,6 +1,6 @@
 # Decision register — proposed vs verified
 
-Updated 2026-11-24 JST. This is a summary of prior project design documents, **not an engineering release approval**.
+Updated 2026-11-25 JST. This is a summary of prior project design documents, **not an engineering release approval**.
 
 | ID | Subject | Current state | Rationale / evidence | Reopen condition |
 |---|---|---|---|---|
@@ -86,3 +86,17 @@ Adoption conditions: primary min/max only under stated conditions; typical effic
 | D-017 | B21:03 pending C | **Arithmetic reviewed C-025; bookkeeping retained** | Negative residual remains INFEASIBLE; no duplicate new mode decision. B11/24 09:03 still pending C |
 
 C-025/026 delay wording is corrected with primary-source evidence; originals retained.73.107µJ uses assumed1µF and normalized midpoint, not a capacitor/threshold selection. Fixed5.415M/10k plus400mV nominal is217.000V, not217.058766V. All previous release locks,200–205V/16mA target and budget constraints unchanged.
+
+
+## 2026-11-25 — WORK-INT-007 current dispositions
+
+[WORK-INT-007](2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md): C-027 integrated; A04:01 remains PENDING C REVIEW after limited Work source/math check.
+
+| ID | Previous state | Current disposition | Evidence / adoption conditions / reason |
+|---|---|---|---|
+| D-021/D-023 | Work correction/partial Wurth evidence awaiting C | **C-027 scoped review accepted; hardware BLOCKED** |29us input-rise/output-fall correction and controlled Wurth scope confirmed; typical timing/current and functional insulation do not qualify real stage |
+| D-024 | Upstream stop energy contract did not explicitly inventory LV caps | **ADOPTED analysis requirement; implementation BLOCKED** | After upstream opening, downstream LV Ceff/max, magnetic energy, timing supply and alternate feeds remain; source-to-HV transfer unknown.10/22/47uF examples are assumptions, not C selections or actual Etail |
+| D-025 | LT8365 low-SYS proxy pending review | **C-027 reviewed necessary-condition arithmetic only** |1.5A steady boost guide is distinct from1.5/2/2.7A table and actual charge-pump peak.3V lamp-only+bleeder proxy fails; actual topology/efficiency/current/temp/startup required |
+| D-026 | No upstream switch candidate indexed | **TPS22918 CONDITIONAL research alternative, not adopted** | tOFF2us=TYP, no max; QOD weakens on VIN loss, not HV discharge.79mohmmax test at−200mA not1A. Actual latch/fault/reversefeed/full-load thermal needed |
+
+11/25 evidence checkpoint remains unfulfilled at09:56 snapshot, not a claim about the entire day. Full-HV release and initial40k/reserve10k/total50k remain unproven. No specification/current/capacitance or schematic change.

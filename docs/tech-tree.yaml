@@ -1,5 +1,5 @@
 # PROJECT-NIXIDORO research tree; source of truth for node state.
-# Updated: 2026-11-24 JST. This is a curated baseline, not a complete validated engineering record.
+# Updated: 2026-11-25 JST. This is a curated baseline, not a complete validated engineering record.
 schema_version: 1
 project: PROJECT-NIXIDORO
 branch: codex/reva-integrated-prototype-review
@@ -67,14 +67,14 @@ nodes:
     depends_on: [HV-001]
     issue_id: HV-002
     exit_criteria: "Full temperature/tolerance/overshoot analysis with HV5524 recommended max respected"
-    evidence: [docs/hv-voltage-window.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md]
+    evidence: [docs/hv-voltage-window.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md]
   - id: HV-003
     title: Independent OVP hard-off and discharge
     status: locked
     depends_on: [HV-002]
     issue_id: HV-003
     exit_criteria: "Independent fault shutdown and quantified safe discharge, with schematic and fault review"
-    evidence: [docs/verification/open-issues.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md]
+    evidence: [docs/verification/open-issues.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md]
   - id: HV-004
     title: IN-12B and neon lamp current budget
     status: in_progress
@@ -141,7 +141,7 @@ nodes:
     depends_on: [HV-001, HV-004, PWR-001, PWR-002, BAT-001]
     issue_id: SYS-001
     exit_criteria: "Reviewed continuous/peak/average demand and low-cell, USB-only, battery-assist, charging and audio/OLED modes; startup, thermal and fault bounds; no unilateral target change"
-    evidence: [docs/verification/2026-11-17-work-integration-001.md, docs/verification/decisions.md, docs/verification/2026-11-18-1502-JST-C-REVIEW-003-sys001e-f-dcm-startup.md, docs/verification/2026-11-18-2103-JST-C-REVIEW-004-hv004-lamp-sys001-direct-mode.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md]
+    evidence: [docs/verification/2026-11-17-work-integration-001.md, docs/verification/decisions.md, docs/verification/2026-11-18-1502-JST-C-REVIEW-003-sys001e-f-dcm-startup.md, docs/verification/2026-11-18-2103-JST-C-REVIEW-004-hv004-lamp-sys001-direct-mode.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md]
   - id: HV-DIRECT
     title: Direct SYS HV controller and magnetics alternative
     status: alternative
@@ -154,7 +154,7 @@ nodes:
     depends_on: [HV-002, HV-003, PWR-001]
     issue_id: SYS-002
     exit_criteria: "Same actual Cmin/Cmax with bounded tail energy, normal dynamic voltage, startup surplus and current, discharge faults and reviewed nonzero margins; no selected value from hypothetical pulse"
-    evidence: [docs/verification/2026-11-17-2258-JST-C-REVIEW-002-hv002b-ovp-energy-and-shutdown.md, docs/verification/2026-11-18-work-integration-002.md, docs/verification/2026-11-18-1502-JST-C-REVIEW-003-sys001e-f-dcm-startup.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md]
+    evidence: [docs/verification/2026-11-17-2258-JST-C-REVIEW-002-hv002b-ovp-energy-and-shutdown.md, docs/verification/2026-11-18-work-integration-002.md, docs/verification/2026-11-18-1502-JST-C-REVIEW-003-sys001e-f-dcm-startup.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md]
   - id: MECH-001
     title: Physical HV interfaces insulation and enclosure thermal evidence
     status: in_progress
@@ -169,7 +169,7 @@ nodes:
     issue_id: PROTO-001
     github_issue: 7
     exit_criteria: "Part-number and source-evidence matrix, current stock/tax/shipping/lead times or UNKNOWN, safety holds and LV-first vs standalone-HV BOM; no purchase authorization"
-    evidence: [docs/verification/2026-11-18-work-integration-002.md, hardware/integration/integrated-bom.csv, hardware/integration/thermal-qualification-holds.csv, docs/verification/2026-11-19-work-integration-003.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md]
+    evidence: [docs/verification/2026-11-18-work-integration-002.md, hardware/integration/integrated-bom.csv, hardware/integration/thermal-qualification-holds.csv, docs/verification/2026-11-19-work-integration-003.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md]
   - id: THERM-001
     title: Charge and battery-only thermal enforcement interface
     status: in_progress
@@ -192,7 +192,7 @@ nodes:
     issue_id: HV-001
     github_issue: 10
     exit_criteria: "Topology-correct 5V/205V/16mA switch, diode and flying-cap stresses, guaranteed limits, startup, protection, sourcing and thermal"
-    evidence: [docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md]
+    evidence: [docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md]
   - id: HV-LT8365-BOOST
     title: LT8365 ordinary boost to 205V rejected
     status: rejected
@@ -228,4 +228,12 @@ nodes:
     issue_id: HV-001
     github_issue: 7
     exit_criteria: "Controlled drawing partial evidence only; qualify topology and controller frequency, L(I,T), continuous power and heat, protection and supply;3.2A typical is not guaranteed"
-    evidence: [docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md]
+    evidence: [docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md]
+  - id: HV-CUT-TPS
+    title: TPS22918 upstream cutoff comparison candidate
+    status: alternative
+    depends_on: [HV-003]
+    issue_id: HV-003
+    github_issue: 6
+    exit_criteria: "Actual maximum stop/default-off latch, downstream Ceff and energy transfer, reverse-feed/short/power-loss faults and thermal;2us typical and QOD are not HV safety proof"
+    evidence: [docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md]

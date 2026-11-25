@@ -1,7 +1,7 @@
 # PROJECT-NIXIDORO — Research Tech Tree
 
-Status snapshot: **2026-11-24 JST**. Canonical data: [tech-tree.yaml](tech-tree.yaml).
-Evidence: [WORK-INT-005](verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md), [decisions](verification/decisions.md), [open issues](verification/open-issues.md).
+Status snapshot: **2026-11-25 JST**. Canonical data: [tech-tree.yaml](tech-tree.yaml).
+Evidence: [WORK-INT-007](verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md), [decisions](verification/decisions.md), [open issues](verification/open-issues.md).
 
 Views below partition the canonical dependency edges. Repeated IDs denote the same node; all incoming prerequisites apply together, including MILE-02 parts A and B. Alternative nodes are candidates, not adopted hardware. Locked release gates do not prohibit research. No node count implies percentage complete or permission to buy/test/fabricate.
 
@@ -92,8 +92,10 @@ flowchart TB
   N_HV_002["HV-002 HV regulation tolerance and OVP window (in_progress)"]
   N_HV_003["HV-003 Independent OVP hard-off and discharge (locked)"]
   N_PWR_001["PWR-001 5V regulator power and thermal feasibility (in_progress)"]
+  N_HV_CUT_TPS["HV-CUT-TPS TPS22918 upstream cutoff comparison candidate (alternative)"]
   N_SYS_002["SYS-002 Joint HV capacitance OVP startup and discharge contract (in_progress)"]
   N_HV_002 --> N_SYS_002
+  N_HV_003 --> N_HV_CUT_TPS
   N_HV_003 --> N_SYS_002
   N_PWR_001 --> N_SYS_002
   classDef in_progress fill:#a16207,color:#fff
@@ -231,9 +233,13 @@ flowchart TB
 
 ## Current integration notes
 
+[WORK-INT-007](verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md) integrates C-027 and partially checks still-pending A04:01. D-024 inventories downstream LV cap energy after upstream opening, magnetic storage, timing supply and alternate feeds with same actual HV Cmin/Cmax. TPS22918 candidate is alternative,2us is typical,no maximum, LV QOD weakens atVIN loss and is notHV discharge.
+C-027 confirms Work005 timing/Wurth scope and B09:03 arithmetic. D-025 keeps LT8365 lowSYS proxy distinct from actual charge-pump SW current. No real topology/parts or safety gate qualified.11/25 09:56 evidence and landed budget remain incomplete; no hardware/spec change.
+
+
 [WORK-INT-005](verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md) integrates C-025/026. TI p6 Figure1 correction: INB rising→OUTB falling=tPLH29us NOM, not18us;maximum stop unknown. Precision-divider arithmetic is not OVP proof; TLV candidate stays alternative.
 CJ5143 1.2A is L characterization, not continuous rating. Würth003.001 pins/dots and functional-insulation wording partially verified;typ3.2A and50–200kHz typical application do not guarantee target. New candidate nodes are alternatives, no hardware verification/gate unlock.
-B11/23 21:03 arithmetic subsequently reviewed by C-025. B11/24 09:03 remains PENDING C REVIEW. All whole-system, temperature/thermal, actual lamp and budget holds below still apply.
+B11/23 21:03 arithmetic subsequently reviewed by C-025. B11/24 09:03 subsequently reviewed by C-027 within arithmetic/source scope. All whole-system, temperature/thermal, actual lamp and budget holds below still apply.
 
 
 [WORK-INT-004](verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md) integrates C-007〜024 and independently checks manufacturer conditions. No hardware node verified or release gate unlocked.
