@@ -1,16 +1,19 @@
 # Handoff — PROJECT-NIXIDORO
 
-Current snapshot: **2026-11-25 JST**. Examined HEAD: **58976653bd8f41bdae82139f62199a30b9c549c0**. 正本は作業ブランチのlive HEAD。前回確認保存1b970784b6863f0f0c8a065863592b62e98234deから3件のreport追加。会話やこのSHAを永久最新としない。
+Current snapshot: **2026-11-25 21:59 JST**. Examined live HEAD: **c3bda46b3a1a63a6a77f6e0ba431fc32028a9522**. Prior Work save4b97c93eaff705fb58d710368262db6e1eed3aeaから1commit/新B21:02のみ。最新CはC-027のまま。正本は毎回live HEADで確認する。
 
 ## Current Work decision package
 
-[WORK-INT-007](2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md) integrates C-027 plus scoped Work checks of A04:01 (still PENDING C REVIEW). **Hardware adoption BLOCKED / NOT ORDER-READY.**
-- C-027 accepts Work00529us polarity correction and Würth drawing/functional-insulation scope; B11/24 09:03 now reviewed within stated arithmetic/source limits. No actual continuous pair qualified.
-- **D-024:** input capacitors downstream of upstream cutoff remain energy sources. ASSUMED5→3V/10,22,47uF gives80,176,376uJ available energy, compared to historical ASSUMED73.107uJ HV headroom. No guaranteed transfer/no hardware failure proof; do not shrink input C from this alone. Inventory all real Ceff/nodes/alternate feeds/magnetic energy and stop latency.
-- TPS22918 upstream switch is a new comparison candidate only. TI2us tOFF is TYP under specific steadyVIN/25C/load conditions; no max. QOD weakens as VIN collapses and does not discharge HV capacitor. No independent reverse-blocking or full-load RON guarantee established.
-- **D-025:** LT8365 boost-input proxy1.5A steady ceiling differs from1.5/2/2.7A current-limit table and actual pump branch current. At ASSUMED3V/.75 efficiency bus case only.08444A ripple budget; lamp-only+dual bleed negative. Actual topology/low-SYS qualification remains open.
-- **11/25 evidence checkpoint at09:56: NOT SATISFIED YET.** No qualified HV pair/protection BOM/cell assembly/current landed quote; old BOM price/stock still11/15. Initial40k/reserve10k/total50k unproven. This is not an end-of-day failure or authorization.
-- Next A: actual stop-latch/driver and downstream cap energy/fault table (#6/#8/#9). B: actual pump topology or concrete alternate pair, landed quote/staged BOM (#10/#7). C: A04:01 + Work007 energy/source scope. Prior system/thermal/UI holds apply.
+[WORK-INT-008](2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md) integrates the new B lamp-source batch with scoped primary checks. **Hardware adoption BLOCKED / NOT ORDER-READY.** NewB/Work008 findings PENDING C REVIEW; no formal Claim.
+- **D-027:** A1A manufacturer-authored03/17 Rev2 table nominal0.5mA/max breakdown95VDC versus undated manufacturer-hosted family design0.6mA/90VDC. Applicable revision/lot/DC current and life UNKNOWN. B's revision-unknown statement corrected; generic distributor voltage is not proven same quantity as max breakdown.
+- **D-028:** PCN333 issued/effective2014-01-21 explicitly lists A1A-T obsolete. Do not extend to bareA1A. Exact suffix lifecycle, actual DC data and current landed quote required; cached NRND/stock/price are not current guarantees.
+- C-027 accepts Work00529us correction/Würth drawing scope and B09:03 limited arithmetic; no continuous pair qualified. Work007 downstream LV cap/tail/alternate-feed energy and TPS22918 typical-timing/QOD limits remain; A04:01/Work007 still pending independent C review.
+- At this examined HEAD11/25 evidence checkpoint remains incomplete. Qualified HV pair/protection/cell assembly/current landed staged BOM missing. Initial40k/reserve10k/total50k UNPROVEN. Not an end-of-day verdict or authorization.
+- Next B:#4/#7 exact lot/revision/DC/lifecycle or one current alternate plus quote; actual HV/cell staged BOM. A:#6/#8/#9 actual stop/latch/caps/fault and thermal. C: newB21:02+Work008 source/PCN batch and pending Work007/A04:01. No broad repeat research.
+
+## Previous Work007 package (still applies within scope)
+
+[WORK-INT-007](2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md): D-024 inventories downstream LV Ceff/magnetic/timing/alternatefeed in same HV Cmin/Cmax; D-025 separates LT8365 steady-input guide from actual pump SW peak; D-026 TPS22918 remains research alternative. No actual hardware qualified.
 
 ## Previous integrated baseline (review status superseded above)
 
@@ -52,3 +55,4 @@ D-014 staged LV-first planning retained; no purchase/test authorization. 11/15�
 ## Historical evidence
 
 [INT-003](2026-11-19-work-integration-003.md), [INT-002](2026-11-18-work-integration-002.md), [INT-001](2026-11-17-work-integration-001.md) retained. INT-003限定Rs/Rp比証明はC-007で数学範囲レビュー済み。旧handoffはGit履歴に保持。旧schedule観測を現在の実行能力としない。本統合でautomation照会/変更なし。
+

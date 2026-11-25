@@ -100,3 +100,16 @@ C-025/026 delay wording is corrected with primary-source evidence; originals ret
 | D-026 | No upstream switch candidate indexed | **TPS22918 CONDITIONAL research alternative, not adopted** | tOFF2us=TYP, no max; QOD weakens on VIN loss, not HV discharge.79mohmmax test at−200mA not1A. Actual latch/fault/reversefeed/full-load thermal needed |
 
 11/25 evidence checkpoint remains unfulfilled at09:56 snapshot, not a claim about the entire day. Full-HV release and initial40k/reserve10k/total50k remain unproven. No specification/current/capacitance or schematic change.
+
+
+
+## 2026-11-25 evening — WORK-INT-008 lamp revision/lifecycle gates
+
+[WORK-INT-008](2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md): new B21:02 and Work primary checks PENDING C REVIEW. Original sources/reports retained; no hardware adoption.
+
+| ID | Previous state | Current disposition | Evidence / reason / adoption conditions |
+|---|---|---|---|
+| D-027 | A1A nominal0.5mA/95VDC versus listing90VDC; revision unknown | **ADOPTED evidence requirement; lamp selection HOLD** | S1 actually03/17 Rev2; S2 manufacturer-hosted undated table design0.6mA/maxbreakdown90VDC. Establish applicable lot/revision/DC behavior/life. Distributor generic voltage not established as same electrical quantity; no0.5/0.6mA guaranteed load adopted |
+| D-028 | NRND/cached sourcing only | **A1A-T OBS documented; bareA1A lifecycle UNKNOWN / sourcing HOLD** | Manufacturer PCN333 p1/p25 issued/effective2014-01-21 lists A1A-T; no transfer to bareA1A. Require exact suffix state, sourceable alternative and dated landed quote before BOM selection |
+
+D-004 candidates/D-00516mA target/D-006 voltage interpretation and all stop/thermal/energy holds unchanged. New independent C review required for Work008; no claim C-027 reviewed newB. Budget40k+10k/50k remains unproven.

@@ -1,0 +1,7 @@
+source,mpn,revision_or_date,parameter,value,unit,classification,scope
+S1,A1A,03/17 Rev2,rated nominal current,0.5,mA,TYPICAL nominal,delivered-lot applicability UNKNOWN
+S1,A1A,03/17 Rev2,maximum DC breakdown,95,V,source maximum,not sustaining voltage;lot applicability UNKNOWN
+S2,A1A,UNKNOWN,design current,0.6,mA,TYPICAL design,not maximum current
+S2,A1A,UNKNOWN,maximum DC breakdown,90,V,source maximum,revision applicability UNKNOWN
+S3,A1A-T,2014-01-21,lifecycle,OBS,,documented PCN,not bare A1A;not notice date2024
+B cached listing,A1A,not live quote,landed price,UNKNOWN,JPY,UNKNOWN,direct page403;tax shipping leadtime missing

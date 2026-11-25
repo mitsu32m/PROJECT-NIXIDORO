@@ -80,8 +80,8 @@ nodes:
     status: in_progress
     depends_on: [HV-DR]
     issue_id: HV-004
-    exit_criteria: "Manufacturer ratings and current-limiting values plus a supervised measurement plan"
-    evidence: [docs/verification/open-issues.md, docs/verification/2026-11-18-2103-JST-C-REVIEW-004-hv004-lamp-sys001-direct-mode.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md]
+    exit_criteria: "Applicable manufacturer revision and exact lot/suffix lifecycle, DC operating current and life; Manufacturer ratings and current-limiting values plus a supervised measurement plan"
+    evidence: [docs/verification/open-issues.md, docs/verification/2026-11-18-2103-JST-C-REVIEW-004-hv004-lamp-sys001-direct-mode.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md]
   - id: PWR-001
     title: 5V regulator power and thermal feasibility
     status: in_progress
@@ -109,7 +109,7 @@ nodes:
     depends_on: [NET-001, PROTO-001]
     issue_id: BOM-001
     exit_criteria: "Tax/shipping/PCB-inclusive estimate ≤JPY50k with ≤JPY40k initial and ≥JPY10k reserve"
-    evidence: [docs/verification/open-issues.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md]
+    evidence: [docs/verification/open-issues.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md]
   - id: MILE-01
     title: HV bench prototype safety review
     status: locked
@@ -141,7 +141,7 @@ nodes:
     depends_on: [HV-001, HV-004, PWR-001, PWR-002, BAT-001]
     issue_id: SYS-001
     exit_criteria: "Reviewed continuous/peak/average demand and low-cell, USB-only, battery-assist, charging and audio/OLED modes; startup, thermal and fault bounds; no unilateral target change"
-    evidence: [docs/verification/2026-11-17-work-integration-001.md, docs/verification/decisions.md, docs/verification/2026-11-18-1502-JST-C-REVIEW-003-sys001e-f-dcm-startup.md, docs/verification/2026-11-18-2103-JST-C-REVIEW-004-hv004-lamp-sys001-direct-mode.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md]
+    evidence: [docs/verification/2026-11-17-work-integration-001.md, docs/verification/decisions.md, docs/verification/2026-11-18-1502-JST-C-REVIEW-003-sys001e-f-dcm-startup.md, docs/verification/2026-11-18-2103-JST-C-REVIEW-004-hv004-lamp-sys001-direct-mode.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md, docs/verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md]
   - id: HV-DIRECT
     title: Direct SYS HV controller and magnetics alternative
     status: alternative
@@ -169,7 +169,7 @@ nodes:
     issue_id: PROTO-001
     github_issue: 7
     exit_criteria: "Part-number and source-evidence matrix, current stock/tax/shipping/lead times or UNKNOWN, safety holds and LV-first vs standalone-HV BOM; no purchase authorization"
-    evidence: [docs/verification/2026-11-18-work-integration-002.md, hardware/integration/integrated-bom.csv, hardware/integration/thermal-qualification-holds.csv, docs/verification/2026-11-19-work-integration-003.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md]
+    evidence: [docs/verification/2026-11-18-work-integration-002.md, hardware/integration/integrated-bom.csv, hardware/integration/thermal-qualification-holds.csv, docs/verification/2026-11-19-work-integration-003.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md, docs/verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md]
   - id: THERM-001
     title: Charge and battery-only thermal enforcement interface
     status: in_progress
@@ -237,3 +237,4 @@ nodes:
     github_issue: 6
     exit_criteria: "Actual maximum stop/default-off latch, downstream Ceff and energy transfer, reverse-feed/short/power-loss faults and thermal;2us typical and QOD are not HV safety proof"
     evidence: [docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md]
+

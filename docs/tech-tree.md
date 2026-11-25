@@ -1,7 +1,7 @@
 # PROJECT-NIXIDORO — Research Tech Tree
 
 Status snapshot: **2026-11-25 JST**. Canonical data: [tech-tree.yaml](tech-tree.yaml).
-Evidence: [WORK-INT-007](verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md), [decisions](verification/decisions.md), [open issues](verification/open-issues.md).
+Evidence: [WORK-INT-008](verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md), [WORK-INT-007](verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md), [decisions](verification/decisions.md), [open issues](verification/open-issues.md).
 
 Views below partition the canonical dependency edges. Repeated IDs denote the same node; all incoming prerequisites apply together, including MILE-02 parts A and B. Alternative nodes are candidates, not adopted hardware. Locked release gates do not prohibit research. No node count implies percentage complete or permission to buy/test/fabricate.
 
@@ -233,6 +233,8 @@ flowchart TB
 
 ## Current integration notes
 
+[WORK-INT-008](verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md) adds A1A revision/DC current and exact-suffix lifecycle gates (D-027/D-028).03/17 Rev2 nominal0.5mA/95VDC differs from undated manufacturer design0.6mA/90VDC; no applicable lot established. PCN333 lists A1A-T obsolete2014, not bareA1A. New B/Work evidence pending C; all node states/dependencies unchanged. Landed budget/11/25 evidence incomplete at examined HEAD; no adoption/release.
+
 [WORK-INT-007](verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md) integrates C-027 and partially checks still-pending A04:01. D-024 inventories downstream LV cap energy after upstream opening, magnetic storage, timing supply and alternate feeds with same actual HV Cmin/Cmax. TPS22918 candidate is alternative,2us is typical,no maximum, LV QOD weakens atVIN loss and is notHV discharge.
 C-027 confirms Work005 timing/Wurth scope and B09:03 arithmetic. D-025 keeps LT8365 lowSYS proxy distinct from actual charge-pump SW current. No real topology/parts or safety gate qualified.11/25 09:56 evidence and landed budget remain incomplete; no hardware/spec change.
 
@@ -247,3 +249,4 @@ D-017 canonical load accounting separates lamps/bleeder/OVP-divider/driver-leaka
 D-018 retains passive/switched/hybrid discharge alternatives with same actual Cmin/Cmax, tail, startup, common-return and no-power fault proof. D-019 records manufacturer1:1 false-positive sourcing and LT8365 ordinary-boost exclusion while retaining multiplier/controller candidates.
 THERM-001 remains independent charge and battery-only load enforcement plus separate HV residual discharge. C-007 reviewed the restricted Rs/Rp ratio theorem only. B11/23 21:03 arithmetic was subsequently reviewed by C-025; no physical mode qualified.
 Current landed budget UNKNOWN; initial40k/reserve10k/total50k unproven. Real drawings/MPNs/thermal/fault/quotes take priority over repeated hypothetical tables. Historical reports and rejected branches preserved. YAML/Mermaid IDs, states and all dependency edges must be validated before and after commit.
+
