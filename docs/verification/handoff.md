@@ -1,8 +1,18 @@
 # Handoff — PROJECT-NIXIDORO
 
-Current snapshot: **2026-11-25 21:59 JST**. Examined live HEAD: **c3bda46b3a1a63a6a77f6e0ba431fc32028a9522**. Prior Work save4b97c93eaff705fb58d710368262db6e1eed3aeaから1commit/新B21:02のみ。最新CはC-027のまま。正本は毎回live HEADで確認する。
+Current snapshot: **2026-11-27 22:02 JST**. Examined live HEAD: **4cf29b4284dc5cf297ae2d068c1c8807d726daf1**. 朝のWork保存ebea7c02e6ce43914d7e089c72410270c104cdc6から2commit/新B13:02+C-028。毎回live HEADを正本として確認する。
 
 ## Current Work decision package
+
+[WORK-INT-012](2026-11-27-2202-JST-WORK-INT-012-cutoff-review-and-rs-source-conflict.md) integrates C-028 and scoped new RS primary evidence. **Hardware BLOCKED / NOT ORDER-READY. No formal Claim.**
+- C-028 scopes A04:01/Work007 TPS22918 table/arithmetic/D-024 as reviewed. Conditional transfer model; real stop/latch/timing/energy/fault/thermal remain blocked. Work008/A1A/PCN and both lamp B reports still pending C.
+- D-029 extends energy inventory with voltage-dependent Cdiff or conservative bounds, consistent trip/cut nodes and no double-counting; equality is zero margin. Actual energy transfer UNKNOWN. Compare upstream cut/direct inhibit/independent combined stop on same circuit; none qualified.
+- Work independently rechecked TI Rev.C p6 typical2us/max blank, p13–14 QOD conditions. Internal-QOD200uF constraint and VIN-loss weakening do not prove HV discharge/energy partition/reverse blocking.
+- **D-030 RS655-9413 HOLD:** linked brand PDF p1 says operating current(max)0.15mA and DC striking max95V versus listing250uA. New Work evidence pending C; B DC-striking-unknown statement incomplete. Applicable lot/current/DC sustaining/life still unknown; no formal part adoption/node verification.
+- RS Japanese page currently retrieved shows reference1126ex/1239incl per10, stock inaccessible (web content may be cached); two packs2478incl before shipping is not landed quote. Prior stock counts historical only. Full initial40k/reserve10k/total50k unproven.
+- Next A:#6/#8/#9 actual latch/cut/cap per-node energy/timing/fault and thermal. B:#4/#7 resolve RS150vs250uA/lot/DC and landed staged BOM/qualifiedpair. C: batch lamp B21:02/B13:02+Work008/newRS evidence.12/01/12/15 proposed checkpoints retained.
+
+## Previous Work008 package (review scope superseded above)
 
 [WORK-INT-008](2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md) integrates the new B lamp-source batch with scoped primary checks. **Hardware adoption BLOCKED / NOT ORDER-READY.** NewB/Work008 findings PENDING C REVIEW; no formal Claim.
 - **D-027:** A1A manufacturer-authored03/17 Rev2 table nominal0.5mA/max breakdown95VDC versus undated manufacturer-hosted family design0.6mA/90VDC. Applicable revision/lot/DC current and life UNKNOWN. B's revision-unknown statement corrected; generic distributor voltage is not proven same quantity as max breakdown.
@@ -44,7 +54,7 @@ Pico2/RTC/OLED/UIの提案baseline保持。OE/BLは絶縁ではない。reverse 
 
 - **A #6 + #9/#8:** 実比較器/ref/divider/cap/stop/discharge候補1式と保証表、Cmin/Cmax/Etail欠落、無給電/共通return fault matrix。CE/負荷cutの実候補と回路変更要求範囲を文書化。同じ仮定RC表のみを反復しない。
 - **B #7/#2/#10 + #4:** 現行HV磁性部品1個のcontrolled図面/電気/熱/working voltageと国内少量納期/着地価格、又は具体的全候補除外理由。lamp/PCM/holder/NTC assemblyと段階BOM、同一topologyの負荷台帳。
-- **C:** C-027がWork005訂正/B09:03を限定確認済み。次は未レビューA04:01とWork007のTPS/energy-fault batch。歴史的review backlog UNKNOWN。
+- **C:** C-028でA04:01/Work007の表/算術/energy inventoryを限定確認済み。次はB21:02/B13:02、Work008とWork012のRS資料差/PCN。歴史的review backlog UNKNOWN。
 - **Work:** 新MPN/保証/見積/実回路判断がなければ大型再調査せず確認SHAを短く保存。
 
 ## Prototype, budget and owner decisions
@@ -55,4 +65,5 @@ D-014 staged LV-first planning retained; no purchase/test authorization. 11/15�
 ## Historical evidence
 
 [INT-003](2026-11-19-work-integration-003.md), [INT-002](2026-11-18-work-integration-002.md), [INT-001](2026-11-17-work-integration-001.md) retained. INT-003限定Rs/Rp比証明はC-007で数学範囲レビュー済み。旧handoffはGit履歴に保持。旧schedule観測を現在の実行能力としない。本統合でautomation照会/変更なし。
+
 

@@ -113,3 +113,17 @@ C-025/026 delay wording is corrected with primary-source evidence; originals ret
 | D-028 | NRND/cached sourcing only | **A1A-T OBS documented; bareA1A lifecycle UNKNOWN / sourcing HOLD** | Manufacturer PCN333 p1/p25 issued/effective2014-01-21 lists A1A-T; no transfer to bareA1A. Require exact suffix state, sourceable alternative and dated landed quote before BOM selection |
 
 D-004 candidates/D-00516mA target/D-006 voltage interpretation and all stop/thermal/energy holds unchanged. New independent C review required for Work008; no claim C-027 reviewed newB. Budget40k+10k/50k remains unproven.
+
+
+
+## 2026-11-27 — WORK-INT-012 C-028 and RS source difference
+
+[WORK-INT-012](2026-11-27-2202-JST-WORK-INT-012-cutoff-review-and-rs-source-conflict.md) preserves old reports. No hardware/specification adoption.
+
+| ID | Previous state | Current disposition | Evidence / conditions |
+|---|---|---|---|
+| D-024/D-026 | A04:01/Work007 pending C | **C-028 scoped review complete; TPS22918 alternative only** | Source/arithmetic and inventory accepted; transfer conditional. Real circuit/timing/default-off/reversefeed/thermal/discharge blocked.2us TYP notmax,79mohm at−200mA not1A guarantee |
+| D-029 | Nominal/constant-C energy screen | **ADOPTED analysis requirement; hardware BLOCKED** | Voltage-dependent capacitance needs Cdiff energy integral or conservative bounds; align nodes/trip/cut time, no pre-trip/storage double counting, strict margin. C-028 supports requirement, Work refinements pending independent C; no actual cap selection |
+| D-030 | New B655-9413 listing250uA; DC striking unknown | **SOURCE CONFLICT / DC AND PROCUREMENT HOLD; no part adoption** | Linked RS PDF p1 gives maxcurrent0.15mA/DC strikingmax95V; listing250uA, applicable revision/lot unknown. B evidence completeness correction pending C. Price/stock retrieval not landedquote. Need actual DC operating/life/current/lot and source revision |
+
+D-027/028 A1A source/PCN batch still pending C. Existing HV candidates/rejected branches,200–205V/16mA target and all charge/BAT-only/thermal/UI/insulation gates retained. Budget remains unproven.
