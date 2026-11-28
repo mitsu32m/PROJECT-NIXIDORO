@@ -60,7 +60,7 @@ nodes:
     depends_on: [HV-DR]
     issue_id: HV-001
     exit_criteria: "Manufacturer-grounded magnetics and worst-case efficiency, startup, thermal and current budget; if 16mA changed, explicit user approval"
-    evidence: [docs/hv-transformer-screen.md, docs/verification/2026-11-17-0930-JST-max668-coupled-inductor-precedents.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md, docs/verification/2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md]
+    evidence: [docs/hv-transformer-screen.md, docs/verification/2026-11-17-0930-JST-max668-coupled-inductor-precedents.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md, docs/verification/2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md, docs/verification/2026-11-28-2203-JST-WORK-INT-014-dual-supply-and-low-vin-gates.md]
   - id: HV-002
     title: HV regulation tolerance and OVP window
     status: in_progress
@@ -87,8 +87,8 @@ nodes:
     status: in_progress
     depends_on: [PWR-DR]
     issue_id: PWR-001
-    exit_criteria: "Worst-case power and startup including L1, effective capacitance and thermal margin"
-    evidence: [docs/pwr-reva-power-thermal-review.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md]
+    exit_criteria: "For LT3751 alternative bound both VCC/VTRANS >=4.75V including tolerance/ripple/drop/startup/transients; Worst-case power and startup including L1, effective capacitance and thermal margin"
+    evidence: [docs/pwr-reva-power-thermal-review.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md, docs/verification/2026-11-28-2203-JST-WORK-INT-014-dual-supply-and-low-vin-gates.md]
   - id: BAT-001
     title: Protected cell and NTC specification
     status: in_progress
@@ -109,7 +109,7 @@ nodes:
     depends_on: [NET-001, PROTO-001]
     issue_id: BOM-001
     exit_criteria: "Tax/shipping/PCB-inclusive estimate ≤JPY50k with ≤JPY40k initial and ≥JPY10k reserve"
-    evidence: [docs/verification/open-issues.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md, docs/verification/2026-11-27-2202-JST-WORK-INT-012-cutoff-review-and-rs-source-conflict.md, docs/verification/2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md]
+    evidence: [docs/verification/open-issues.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md, docs/verification/2026-11-27-2202-JST-WORK-INT-012-cutoff-review-and-rs-source-conflict.md, docs/verification/2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md, docs/verification/2026-11-28-2203-JST-WORK-INT-014-dual-supply-and-low-vin-gates.md]
   - id: MILE-01
     title: HV bench prototype safety review
     status: locked
@@ -141,7 +141,7 @@ nodes:
     depends_on: [HV-001, HV-004, PWR-001, PWR-002, BAT-001]
     issue_id: SYS-001
     exit_criteria: "Reviewed continuous/peak/average demand and low-cell, USB-only, battery-assist, charging and audio/OLED modes; startup, thermal and fault bounds; no unilateral target change"
-    evidence: [docs/verification/2026-11-17-work-integration-001.md, docs/verification/decisions.md, docs/verification/2026-11-18-1502-JST-C-REVIEW-003-sys001e-f-dcm-startup.md, docs/verification/2026-11-18-2103-JST-C-REVIEW-004-hv004-lamp-sys001-direct-mode.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md, docs/verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md, docs/verification/2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md]
+    evidence: [docs/verification/2026-11-17-work-integration-001.md, docs/verification/decisions.md, docs/verification/2026-11-18-1502-JST-C-REVIEW-003-sys001e-f-dcm-startup.md, docs/verification/2026-11-18-2103-JST-C-REVIEW-004-hv004-lamp-sys001-direct-mode.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md, docs/verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md, docs/verification/2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md, docs/verification/2026-11-28-2203-JST-WORK-INT-014-dual-supply-and-low-vin-gates.md]
   - id: HV-DIRECT
     title: Direct SYS HV controller and magnetics alternative
     status: alternative
@@ -169,7 +169,7 @@ nodes:
     issue_id: PROTO-001
     github_issue: 7
     exit_criteria: "Part-number and source-evidence matrix, current stock/tax/shipping/lead times or UNKNOWN, safety holds and LV-first vs standalone-HV BOM; no purchase authorization"
-    evidence: [docs/verification/2026-11-18-work-integration-002.md, hardware/integration/integrated-bom.csv, hardware/integration/thermal-qualification-holds.csv, docs/verification/2026-11-19-work-integration-003.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md, docs/verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md, docs/verification/2026-11-27-2202-JST-WORK-INT-012-cutoff-review-and-rs-source-conflict.md, docs/verification/2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md]
+    evidence: [docs/verification/2026-11-18-work-integration-002.md, hardware/integration/integrated-bom.csv, hardware/integration/thermal-qualification-holds.csv, docs/verification/2026-11-19-work-integration-003.md, docs/verification/2026-11-23-2201-JST-WORK-INT-004-power-discharge-topology-integration.md, docs/verification/2026-11-24-1003-JST-WORK-INT-005-ovp-timing-and-magnetics-gates.md, docs/verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md, docs/verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md, docs/verification/2026-11-27-2202-JST-WORK-INT-012-cutoff-review-and-rs-source-conflict.md, docs/verification/2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md, docs/verification/2026-11-28-2203-JST-WORK-INT-014-dual-supply-and-low-vin-gates.md]
   - id: THERM-001
     title: Charge and battery-only thermal enforcement interface
     status: in_progress
@@ -240,3 +240,12 @@ nodes:
 
 
 
+
+  - id: HV-LT3751
+    title: LT3751 with DA2033 reviewed comparison candidate
+    status: alternative
+    depends_on: [HV-DR]
+    issue_id: HV-001
+    github_issue: 2
+    exit_criteria: "Both VCC and VTRANS >=4.75V with startup/transient bounds; actual FET/rectifier/clamp, continuous magnetics RMS/core heat and working voltage, independent OVP/stop/discharge and landed quote; direct1S plus VCC-only bias unsupported"
+    evidence: [docs/verification/2026-11-28-1500-JST-C-REVIEW-030-lt3751-da2033.md, docs/verification/2026-11-28-2203-JST-WORK-INT-014-dual-supply-and-low-vin-gates.md]

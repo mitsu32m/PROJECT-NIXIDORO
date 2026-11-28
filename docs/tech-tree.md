@@ -1,7 +1,7 @@
 # PROJECT-NIXIDORO — Research Tech Tree
 
 Status snapshot: **2026-11-28 JST**. Canonical data: [tech-tree.yaml](tech-tree.yaml).
-Evidence: [WORK-INT-013](verification/2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md), [WORK-INT-012](verification/2026-11-27-2202-JST-WORK-INT-012-cutoff-review-and-rs-source-conflict.md), [WORK-INT-008](verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md), [WORK-INT-007](verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md), [decisions](verification/decisions.md), [open issues](verification/open-issues.md).
+Evidence: [WORK-INT-014](verification/2026-11-28-2203-JST-WORK-INT-014-dual-supply-and-low-vin-gates.md), [WORK-INT-013](verification/2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md), [WORK-INT-012](verification/2026-11-27-2202-JST-WORK-INT-012-cutoff-review-and-rs-source-conflict.md), [WORK-INT-008](verification/2026-11-25-2159-JST-WORK-INT-008-neon-revision-and-lifecycle-gate.md), [WORK-INT-007](verification/2026-11-25-0956-JST-WORK-INT-007-cutoff-energy-and-current-gates.md), [decisions](verification/decisions.md), [open issues](verification/open-issues.md).
 
 Views below partition the canonical dependency edges. Repeated IDs denote the same node; all incoming prerequisites apply together, including MILE-02 parts A and B. Alternative nodes are candidates, not adopted hardware. Locked release gates do not prohibit research. No node count implies percentage complete or permission to buy/test/fabricate.
 
@@ -197,7 +197,9 @@ flowchart TB
 flowchart TB
   N_HV_DR["HV-DR HV logic/interface draft (documented)"]
   N_HV_FLYBACK["HV-FLYBACK LT3757 controller with qualified HV magnetics candidate (alternative)"]
+  N_HV_LT3751["HV-LT3751 LT3751 with DA2033 reviewed comparison candidate (alternative)"]
   N_HV_Q44["HV-Q44 Q4434 Q4435 qualified 205V pair claim rejected (rejected)"]
+  N_HV_DR --> N_HV_LT3751
   N_HV_DR --> N_HV_FLYBACK
   N_HV_FLYBACK --> N_HV_Q44
 ```
@@ -233,6 +235,8 @@ flowchart TB
 
 ## Current integration notes
 
+[WORK-INT-014](verification/2026-11-28-2203-JST-WORK-INT-014-dual-supply-and-low-vin-gates.md) integrates C-030: LT3751/DA2033 becomes reviewed comparison alternative; bothVCC/VTRANS require4.75V minimum. Direct1S+separateVCCbias unsupported, regulatedrail minimum/startup/transient/continuousheat still unqualified. NewLM5155/LT830x exploration pendingC, nohardwareadoption; D-029/RSrawhash review deferred.34nodes/53edges, release locks retained andbudget unproven.
+
 [WORK-INT-013](verification/2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md) supersedes Work012 confirmed RS150uA/95V wording: rawPDF hash/localrender shows250uA±10%,matching C-029; retrieval path mismatch/controlled revision and DC/lot HOLD. D-027/028 source scopes and lampB arithmetic now C-029 reviewed; no hardware approval. LT3751/DA2033 newB and Work VCCtable4.75V/grade correction pending C, no formal part/node adoption. All33 nodes/52 dependencies/states preserved, release locked; landed budget unknown. Older notes below retain historical scope.
 
 [WORK-INT-012](verification/2026-11-27-2202-JST-WORK-INT-012-cutoff-review-and-rs-source-conflict.md) integrates C-028 scoped review of A04:01/Work007 and conditional energy bookkeeping. Actual stop/default-off/timing/Cdiff-node/transfer/fault proof missing; TPS22918 remains alternative. New RS655-9413 linkedPDF max0.15mA/DCstrike95V versus listing250uA creates an applicability HOLD; Work008/lamp B/newRS evidence pending C. No hardware candidate adopted/new node, all33 nodes/52 dependencies and release locks preserved; budget unproven.
@@ -253,6 +257,7 @@ D-017 canonical load accounting separates lamps/bleeder/OVP-divider/driver-leaka
 D-018 retains passive/switched/hybrid discharge alternatives with same actual Cmin/Cmax, tail, startup, common-return and no-power fault proof. D-019 records manufacturer1:1 false-positive sourcing and LT8365 ordinary-boost exclusion while retaining multiplier/controller candidates.
 THERM-001 remains independent charge and battery-only load enforcement plus separate HV residual discharge. C-007 reviewed the restricted Rs/Rp ratio theorem only. B11/23 21:03 arithmetic was subsequently reviewed by C-025; no physical mode qualified.
 Current landed budget UNKNOWN; initial40k/reserve10k/total50k unproven. Real drawings/MPNs/thermal/fault/quotes take priority over repeated hypothetical tables. Historical reports and rejected branches preserved. YAML/Mermaid IDs, states and all dependency edges must be validated before and after commit.
+
 
 
 

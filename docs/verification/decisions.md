@@ -141,3 +141,16 @@ D-027/028 A1A source/PCN batch still pending C. Existing HV candidates/rejected 
 | D-031 | New B LT3751/DA2033 pending C | **PENDING REVIEW investigation only, no hardware adoption** | Work ADI3751fd p3 VCC4.75–24V table/Note2 E-I guarantees and CoilcraftDoc510-1 compatibility partially checked; not merelygate-driver4.75V. Actualbias/5Vstartup/FET/rectifier/continuous L(I,T)/RMS/coreheat/workingvoltage/quote required |
 
 B21:02/B13:02 scoped-reviewed by C-029, newB08:56 deferred. D-029 complete review not established. All existing target/thermal/stop/insulation and budget gates retained. New Work VCC/raw-evidence interpretation pending C.
+
+
+
+## 2026-11-28 evening — WORK-INT-014 supply boundaries
+
+[WORK-INT-014](2026-11-28-2203-JST-WORK-INT-014-dual-supply-and-low-vin-gates.md) accepts C-030 within scope. No hardware/specification approval.
+
+| ID | Previous state | Current disposition | Reason / conditions |
+|---|---|---|---|
+| D-031 | LT3751/DA2033 pendingC investigation | **C-030 scoped-reviewed comparison candidate / alternative** | VCCtable/grade andmanufacturerpaircompatibility reviewed; realFET/rectifier/continuousloss/heat/workingvoltage/startup/protection/quote missing |
+| D-032 | Work013 directSYS+separateVCCbias comparison lacked VTRANS lower bound | **ADOPTED supply-boundary analysis requirement; ordinary direct1S+VCC-onlybias unsupported** | ADI3751fd p7 explicitlyVTRANS>=4.75V, alsoVCC>=4.75V. WorkrawPDFp7 independentlyconfirmed; actual5Vtolerance/ripple/drop/transient/startup must meetboth. Separatecoldstart/running/bias/transformersupply, no target change |
+
+NewB21:03 lowVIN screen andWork LM5155 source interpretation remain PENDING C REVIEW. TIRevE Aug2023 BIAS=VCC2.97–16V is distinct from internalregulator3.5–45V; noqualifiedflyback/FET/magnetics. LT8301 catalog1.2A notguaranteed currentlimit; no formalpart rejection/adoption. D-030 correction retained, C-030 directRSrawhash verification deferred; D-029 complete review pending. All safety andbudget holds remain.

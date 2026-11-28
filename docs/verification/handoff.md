@@ -1,8 +1,18 @@
 # Handoff — PROJECT-NIXIDORO
 
-Current snapshot: **2026-11-28 10:04 JST**. Examined live HEAD: **19660a2a5d2298e384aad49883b95b862fd27fa9**. 前回Work保存bc805d6f9334172dc5423e2c0de41d79221bf094から2commit/新B08:56+C-029。毎回live HEADを確認する。
+Current snapshot: **2026-11-28 22:03 JST**. Examined live HEAD: **430e259e55fae51aacdc7b8663077f1da73fdc76**. 前回Work保存21a794a5a9353e2a837fc9c3eeb111876b209b98から2commit/C-030+B21:03。毎回live HEADを正本として確認。
 
 ## Current Work decision package
+
+[WORK-INT-014](2026-11-28-2203-JST-WORK-INT-014-dual-supply-and-low-vin-gates.md) integrates C-030 supply correction; hardware remains **NOT ORDER-READY**, no formal Claim.
+- **D-031:** LT3751+DA2033 now C-030 scoped-reviewed comparison candidate only. Manufacturer compatibility/peak L test/one-minute isolation not continuous thermal/working-voltage proof. Alternative node added, not adopted hardware.
+- **D-032:** VTRANS minimum4.75V as well asVCC. Work directly downloaded sameADI PDF hash and renderedp7. Ordinary direct1S transformer supply+separateVCCbias unsupported; Work013 comparison wording superseded. Nominal5V leaves only assumed0.25V before tolerance/ripple/drop/transient;actualTPS61023 rail startup/loadstep unqualified.
+- NewB21:03 LM5155/LT8301/LT8302 screen PENDING C REVIEW, no formal candidate adoption. Work TIRevE Aug2023 confirms BIAS=VCC2.97–16V versus internalregulatorBIAS3.5–45V; separate cold/run/bias/topology conditions. Catalogswitch1.2A is not guaranteedpeak/currentlimit or universalLT8301 rejection.
+- RS old150uA/95V confirmedclaim remains withdrawn. C-030 conditionally accepts documentedWork013 correction but did notdownload/hash verify; D-029 fullreview andRSrawhash still pending. NewWork LM5155 source scope also pending C.
+- A:#6/#8/#9 actual stop/cap/fault/thermal and minimum5V/startup/transition. B:#2/#4/#7 actualcontroller/FET/rectifier/magnetics pair withloss/continuousheat/workingvoltage/landedquote. C:newB21:03+LMsource/D-029/RSrawhash. Samehypotheticalefficiency repeats not progress.
+- Initial40k/reserve10k/total50k UNPROVEN;12/01/12/15 proposed checkpoints beforeJan2027deadline unchanged. No purchase/test authorization.
+
+## Previous Work013 package (supply/review scope superseded above)
 
 [WORK-INT-013](2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md) integrates C-029 and direct-source correction. **NOT ORDER-READY / no hardware adoption / no formal Claim.**
 - **D-030 corrected:** withdraw confirmed150uA-max/95VDC claim from Work012. Direct downloaded RS655-9413 PDF p1 locally rendered0.25mA±10%,matching C-029. SHA25653508b834a6e82888b7b4fa323ce237517582e8ec4a6666a72698896c0af99d7. Web screenshot still differed; prior raw bytes absent, no proven manufacturer revision. Preserve observations as retrieval reproducibility/controlled-lot/DC HOLD. Do not demand resolution of a proven150vs250 part-spec conflict.
@@ -63,7 +73,7 @@ Pico2/RTC/OLED/UIの提案baseline保持。OE/BLは絶縁ではない。reverse 
 
 - **A #6 + #9/#8:** 実比較器/ref/divider/cap/stop/discharge候補1式と保証表、Cmin/Cmax/Etail欠落、無給電/共通return fault matrix。CE/負荷cutの実候補と回路変更要求範囲を文書化。同じ仮定RC表のみを反復しない。
 - **B #7/#2/#10 + #4:** 現行HV磁性部品1個のcontrolled図面/電気/熱/working voltageと国内少量納期/着地価格、又は具体的全候補除外理由。lamp/PCM/holder/NTC assemblyと段階BOM、同一topologyの負荷台帳。
-- **C:** C-029でB21:02/B13:02出典/仮定算術とA1A/PCN範囲を確認。次はB08:56 LT3751/DA2033とWork013のVCC表/RS本体hash。D-029完全レビュー未了、歴史的backlog UNKNOWN。
+- **C:** C-030でB08:56/Work013のLT3751/DA2033を限定レビュー済み。次は新B21:03低VINとWork014 LM5155 source scope、D-029/RSrawhash。歴史的backlog UNKNOWN。
 - **Work:** 新MPN/保証/見積/実回路判断がなければ大型再調査せず確認SHAを短く保存。
 
 ## Prototype, budget and owner decisions
@@ -74,6 +84,7 @@ D-014 staged LV-first planning retained; no purchase/test authorization. 11/15�
 ## Historical evidence
 
 [INT-003](2026-11-19-work-integration-003.md), [INT-002](2026-11-18-work-integration-002.md), [INT-001](2026-11-17-work-integration-001.md) retained. INT-003限定Rs/Rp比証明はC-007で数学範囲レビュー済み。旧handoffはGit履歴に保持。旧schedule観測を現在の実行能力としない。本統合でautomation照会/変更なし。
+
 
 
 
