@@ -1,8 +1,17 @@
 # Handoff — PROJECT-NIXIDORO
 
-Current snapshot: **2026-11-27 22:02 JST**. Examined live HEAD: **4cf29b4284dc5cf297ae2d068c1c8807d726daf1**. 朝のWork保存ebea7c02e6ce43914d7e089c72410270c104cdc6から2commit/新B13:02+C-028。毎回live HEADを正本として確認する。
+Current snapshot: **2026-11-28 10:04 JST**. Examined live HEAD: **19660a2a5d2298e384aad49883b95b862fd27fa9**. 前回Work保存bc805d6f9334172dc5423e2c0de41d79221bf094から2commit/新B08:56+C-029。毎回live HEADを確認する。
 
 ## Current Work decision package
+
+[WORK-INT-013](2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md) integrates C-029 and direct-source correction. **NOT ORDER-READY / no hardware adoption / no formal Claim.**
+- **D-030 corrected:** withdraw confirmed150uA-max/95VDC claim from Work012. Direct downloaded RS655-9413 PDF p1 locally rendered0.25mA±10%,matching C-029. SHA25653508b834a6e82888b7b4fa323ce237517582e8ec4a6666a72698896c0af99d7. Web screenshot still differed; prior raw bytes absent, no proven manufacturer revision. Preserve observations as retrieval reproducibility/controlled-lot/DC HOLD. Do not demand resolution of a proven150vs250 part-spec conflict.
+- C-029 scopes B21:02/B13:02 source/arithmetic and D-027/028 A1A source difference/A1A-T-only PCN as reviewed; no blanket Work008/full hardware review. DC current/life/lot and landed quote still UNKNOWN. D-029 fully independent review still pending.
+- **D-031 pending investigation:** new B LT3751/DA2033 deferred by C. Work p3 electrical table shows VCC4.75–24V,not gate-driver wording alone; E/I grade Note2 matters. Manufacturer Doc510-1 confirms DA2033/LT3751 compatibility, not continuous3.28W/thermal/working-voltage qualification. No new formal hardware candidate/node adopted.
+- Next B:#2/#7 actual VCC/VTRANS bias/startup/FET/rectifier/continuousmagnetics/thermal and quotes; RS controlled raw/hash/lot/DC. A:#6/#8/#9 actual stop/cap energy/timing/fault and thermal. C:newB08:56+Work013 VCC/rawPDF batch. Existing HV/PWR/cell/UI/PCB/PETG locks remain.
+- Initial40k/reserve10k/total50k UNPROVEN;12/01 design/12/15 initial-order decision package remain proposed checkpoints beforeJan2027 deadline. No purchase/test authorization.
+
+## Previous Work012 package (RS/review claims superseded above)
 
 [WORK-INT-012](2026-11-27-2202-JST-WORK-INT-012-cutoff-review-and-rs-source-conflict.md) integrates C-028 and scoped new RS primary evidence. **Hardware BLOCKED / NOT ORDER-READY. No formal Claim.**
 - C-028 scopes A04:01/Work007 TPS22918 table/arithmetic/D-024 as reviewed. Conditional transfer model; real stop/latch/timing/energy/fault/thermal remain blocked. Work008/A1A/PCN and both lamp B reports still pending C.
@@ -54,7 +63,7 @@ Pico2/RTC/OLED/UIの提案baseline保持。OE/BLは絶縁ではない。reverse 
 
 - **A #6 + #9/#8:** 実比較器/ref/divider/cap/stop/discharge候補1式と保証表、Cmin/Cmax/Etail欠落、無給電/共通return fault matrix。CE/負荷cutの実候補と回路変更要求範囲を文書化。同じ仮定RC表のみを反復しない。
 - **B #7/#2/#10 + #4:** 現行HV磁性部品1個のcontrolled図面/電気/熱/working voltageと国内少量納期/着地価格、又は具体的全候補除外理由。lamp/PCM/holder/NTC assemblyと段階BOM、同一topologyの負荷台帳。
-- **C:** C-028でA04:01/Work007の表/算術/energy inventoryを限定確認済み。次はB21:02/B13:02、Work008とWork012のRS資料差/PCN。歴史的review backlog UNKNOWN。
+- **C:** C-029でB21:02/B13:02出典/仮定算術とA1A/PCN範囲を確認。次はB08:56 LT3751/DA2033とWork013のVCC表/RS本体hash。D-029完全レビュー未了、歴史的backlog UNKNOWN。
 - **Work:** 新MPN/保証/見積/実回路判断がなければ大型再調査せず確認SHAを短く保存。
 
 ## Prototype, budget and owner decisions
@@ -65,5 +74,6 @@ D-014 staged LV-first planning retained; no purchase/test authorization. 11/15�
 ## Historical evidence
 
 [INT-003](2026-11-19-work-integration-003.md), [INT-002](2026-11-18-work-integration-002.md), [INT-001](2026-11-17-work-integration-001.md) retained. INT-003限定Rs/Rp比証明はC-007で数学範囲レビュー済み。旧handoffはGit履歴に保持。旧schedule観測を現在の実行能力としない。本統合でautomation照会/変更なし。
+
 
 

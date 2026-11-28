@@ -1,6 +1,6 @@
 # Decision register — proposed vs verified
 
-Updated 2026-11-25 JST. This is a summary of prior project design documents, **not an engineering release approval**.
+Updated 2026-11-28 JST. This is a summary of prior project design documents, **not an engineering release approval**.
 
 | ID | Subject | Current state | Rationale / evidence | Reopen condition |
 |---|---|---|---|---|
@@ -127,3 +127,17 @@ D-004 candidates/D-00516mA target/D-006 voltage interpretation and all stop/ther
 | D-030 | New B655-9413 listing250uA; DC striking unknown | **SOURCE CONFLICT / DC AND PROCUREMENT HOLD; no part adoption** | Linked RS PDF p1 gives maxcurrent0.15mA/DC strikingmax95V; listing250uA, applicable revision/lot unknown. B evidence completeness correction pending C. Price/stock retrieval not landedquote. Need actual DC operating/life/current/lot and source revision |
 
 D-027/028 A1A source/PCN batch still pending C. Existing HV candidates/rejected branches,200–205V/16mA target and all charge/BAT-only/thermal/UI/insulation gates retained. Budget remains unproven.
+
+
+
+## 2026-11-28 — WORK-INT-013 evidence reproducibility correction
+
+[WORK-INT-013](2026-11-28-1004-JST-WORK-INT-013-rs-reproducibility-and-lt3751-boundary.md) supersedes earlier D-030 confirmed-source wording. Old observations/reports retained.
+
+| ID | Previous state | Current disposition | Evidence / reason / conditions |
+|---|---|---|---|
+| D-027/D-028 | Work primary evidence pending C | **C-029 scoped source review accepted; lamp hardware HOLD** | A1A0.5/0.6mA family-doc difference and A1A-T-only2014PCN confirmed; bareA1A lifecycle and deliveredlot/DC applicability unknown. Not a full Work008 review |
+| D-030 | Confirmed150uA-max/DCstrike95V versus250uA conflict | **WITHDRAW confirmed150uA/95V claim; REPRODUCIBILITY / CONTROLLED DC-LOT HOLD** | Direct rawPDF398686bytes SHA25653508b834a6e82888b7b4fa323ce237517582e8ec4a6666a72698896c0af99d7 renders0.25mA±10%,matching C-029. Web screenshot differs;prior raw missing;manufacturer revision not established. DCstrike/sustain/life UNKNOWN, no part adoption |
+| D-031 | New B LT3751/DA2033 pending C | **PENDING REVIEW investigation only, no hardware adoption** | Work ADI3751fd p3 VCC4.75–24V table/Note2 E-I guarantees and CoilcraftDoc510-1 compatibility partially checked; not merelygate-driver4.75V. Actualbias/5Vstartup/FET/rectifier/continuous L(I,T)/RMS/coreheat/workingvoltage/quote required |
+
+B21:02/B13:02 scoped-reviewed by C-029, newB08:56 deferred. D-029 complete review not established. All existing target/thermal/stop/insulation and budget gates retained. New Work VCC/raw-evidence interpretation pending C.
